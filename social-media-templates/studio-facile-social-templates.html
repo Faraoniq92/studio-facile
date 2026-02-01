@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Studio Facile — Social Media Templates</title>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
+    <style>
+        :root{--yellow:#FFE600;--black:#1D1D1B;--white:#FFFFFF;--cream:#FFFDF7;--gray-100:#F5F5F5;--gray-200:#E8E8E8;--gray-400:#A3A3A3;--gray-600:#6A6A6A}
+        *{margin:0;padding:0;box-sizing:border-box}
+        body{font-family:'Manrope',sans-serif;background:var(--cream);color:var(--black);padding:40px;min-height:100vh}
+        .serif-accent{font-family:'Playfair Display',serif;font-style:italic;font-weight:700}
+        .header{max-width:1400px;margin:0 auto 40px}
+        h1{font-size:clamp(32px,5vw,48px);font-weight:800;line-height:1.1;letter-spacing:-0.03em;margin-bottom:8px}
+        .subtitle{color:var(--gray-600);font-size:16px}
+        .section{max-width:1400px;margin:0 auto 64px}
+        .section-header{margin-bottom:32px;padding-bottom:16px;border-bottom:2px solid var(--black)}
+        .section-title{font-size:24px;font-weight:800;margin-bottom:4px}
+        .section-subtitle{font-size:14px;color:var(--gray-600)}
+        .templates-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(380px,1fr));gap:32px}
+        .template-card{background:white;border-radius:24px;padding:24px;box-shadow:0 4px 24px rgba(0,0,0,0.06)}
+        .template-label{font-size:12px;font-weight:700;color:var(--gray-400);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:16px}
+        .template{border-radius:16px;overflow:hidden;position:relative;box-shadow:0 8px 32px rgba(0,0,0,0.12);cursor:pointer;transition:transform 0.2s ease}
+        .template:hover{transform:scale(1.02)}
+        .lightbox{display:none;position:fixed;inset:0;z-index:1000;background:rgba(0,0,0,0.85);backdrop-filter:blur(10px);justify-content:center;align-items:center;padding:40px;cursor:pointer}
+        .lightbox.active{display:flex}
+        .lightbox .template-clone{transform:scale(1);max-width:90vw;max-height:90vh;border-radius:20px;overflow:hidden;box-shadow:0 20px 80px rgba(0,0,0,0.5);cursor:default}
+        .lightbox-close{position:fixed;top:24px;right:24px;width:44px;height:44px;border-radius:50%;background:rgba(255,255,255,0.15);border:none;color:white;font-size:24px;cursor:pointer;display:flex;align-items:center;justify-content:center;z-index:1001;transition:background 0.2s}
+        .lightbox-close:hover{background:rgba(255,255,255,0.3)}
+        .insta-v1{width:100%;aspect-ratio:1;max-width:420px}
+        .insta-v1 .bg{position:absolute;inset:0;background-size:cover;background-position:center}
+        .insta-v1 .overlay{position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,0.1) 0%,rgba(0,0,0,0.75) 100%)}
+        .insta-v1 .content{position:relative;height:100%;padding:28px;display:flex;flex-direction:column;justify-content:flex-end}
+        .insta-v3{width:100%;aspect-ratio:1;max-width:420px;background:var(--black)}
+        .insta-v3 .bg{position:absolute;inset:0;background-size:cover;background-position:center;opacity:0.35}
+        .insta-v3 .content{position:relative;height:100%;padding:36px;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center}
+        .story{width:100%;aspect-ratio:9/16;max-width:260px}
+        .story .bg{position:absolute;inset:0;background-size:cover;background-position:center}
+        .story .overlay{position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,0.4) 0%,rgba(0,0,0,0.1) 40%,rgba(0,0,0,0.85) 100%)}
+        .story .content{position:relative;height:100%;padding:20px;display:flex;flex-direction:column;justify-content:space-between}
+        .carousel-grid{display:flex;gap:16px;overflow-x:auto;padding-bottom:8px}
+        .carousel-cover{width:260px;aspect-ratio:4/5;flex-shrink:0;background:var(--black);position:relative}
+        .carousel-cover .yellow-bar{position:absolute;top:0;left:0;right:0;height:6px;background:var(--yellow)}
+        .carousel-cover .content{height:100%;padding:28px 20px;display:flex;flex-direction:column;justify-content:space-between}
+        .carousel-slide{width:260px;aspect-ratio:4/5;flex-shrink:0;background:var(--white)}
+        .carousel-slide .content{height:100%;padding:28px 20px;display:flex;flex-direction:column}
+        .badge{display:inline-block;padding:6px 14px;border-radius:9999px;font-size:10px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase}
+        .badge-yellow{background:var(--yellow);color:var(--black)}
+        .badge-black{background:var(--black);color:var(--white)}
+        .cta-btn{display:inline-block;padding:12px 24px;border-radius:9999px;font-size:14px;font-weight:700;text-decoration:none}
+        .cta-white{background:var(--white);color:var(--black)}
+        .cta-yellow{background:var(--yellow);color:var(--black)}
+        .headline-xl{font-size:32px;font-weight:800;line-height:1.05;letter-spacing:-0.03em}
+        .headline-lg{font-size:26px;font-weight:800;line-height:1.1;letter-spacing:-0.02em}
+        .headline-md{font-size:22px;font-weight:800;line-height:1.1;letter-spacing:-0.02em}
+        .text-white{color:var(--white)}.text-black{color:var(--black)}.text-yellow{color:var(--yellow)}
+        .mb-3{margin-bottom:12px}.mb-4{margin-bottom:16px}.mb-5{margin-bottom:20px}.mb-6{margin-bottom:24px}
+        .text-shadow{text-shadow:0 2px 20px rgba(0,0,0,0.4)}
+        .copy-table{width:100%;font-size:13px;border-collapse:collapse}
+        .copy-table th{text-align:left;font-weight:600;padding:8px 0;border-bottom:1px solid var(--gray-200);color:var(--gray-600)}
+        .copy-table td{padding:8px 0;border-bottom:1px solid var(--gray-100)}
+        .copy-table td:first-child{font-weight:600;width:100px}
+    </style>
+</head>
+<body>
+
+<div class="header">
+    <img src="https://raw.githubusercontent.com/simple-icons/simple-icons/develop/icons/stripe.svg" alt="" style="display:none">
+    <div style="margin-bottom:16px;background:#1D1D1B;display:inline-block;padding:12px 16px;border-radius:8px;">
+        <span style="color:#FFE600;font-weight:800;font-size:18px;">STUDIO</span>
+        <span style="color:white;font-weight:800;font-size:18px;margin-left:4px;">FACILE</span>
+    </div>
+    <h1>Brand <span class="serif-accent">Applications</span></h1>
+    <p class="subtitle">Social Media Templates — Variantes de copywriting</p>
+</div>
+
+<!-- INSTAGRAM V1 -->
+<div class="section">
+    <div class="section-header">
+        <h2 class="section-title">Instagram Post — Format V1</h2>
+        <p class="section-subtitle">1080×1080 · Photo full bleed + headline overlay</p>
+    </div>
+    <div class="templates-grid">
+
+        <div class="template-card">
+            <div class="template-label">V1.1 — Pain Point</div>
+            <div class="template insta-v1">
+                <div class="bg" style="background-image:url('./manette-abandonnée.png')"></div>
+                <div class="overlay"></div>
+                <div class="content">
+                    <div>
+                        <h2 class="headline-xl text-white text-shadow mb-5">Ton site fait fuir<br>tes clients ?<br><span class="serif-accent text-yellow">Next.</span></h2>
+                        <a href="#" class="cta-btn cta-white">Booker un call</a>
+                    </div>
+                </div>
+            </div>
+            <p style="font-size:11px;color:var(--gray-400);margin-top:12px">📷 Personne qui court — Urgence</p>
+        </div>
+
+        <div class="template-card">
+            <div class="template-label">V1.2 — Speed</div>
+            <div class="template insta-v1">
+                <div class="bg" style="background-image:url('https://images.unsplash.com/photo-1517976487492-5750f3195933?w=800&q=80')"></div>
+                <div class="overlay"></div>
+                <div class="content">
+                    <div>
+                        <h2 class="headline-xl text-white text-shadow mb-5">5 jours.<br>1 landing.<br><span class="serif-accent text-yellow">Zéro excuse.</span></h2>
+                        <a href="#" class="cta-btn cta-white">C'est parti</a>
+                    </div>
+                </div>
+            </div>
+            <p style="font-size:11px;color:var(--gray-400);margin-top:12px">📷 Rocket launch — Vitesse</p>
+        </div>
+
+        <div class="template-card">
+            <div class="template-label">V1.3 — Audace</div>
+            <div class="template insta-v1">
+                <div class="bg" style="background-image:url('https://images.unsplash.com/photo-1452022582947-b521d8779ab6?w=800&q=80')"></div>
+                <div class="overlay"></div>
+                <div class="content">
+                    <div>
+                        <h2 class="headline-xl text-white text-shadow mb-5">Tu veux des leads ?<br><span class="serif-accent text-yellow">Pas du Lorem Ipsum.</span></h2>
+                        <a href="#" class="cta-btn cta-white">On en parle</a>
+                    </div>
+                </div>
+            </div>
+            <p style="font-size:11px;color:var(--gray-400);margin-top:12px">📷 Cliff jumping — Audace</p>
+        </div>
+
+        <div class="template-card">
+            <div class="template-label">V1.4 — Provocation</div>
+            <div class="template insta-v1">
+                <div class="bg" style="background-image:url('https://images.unsplash.com/photo-1504805572947-34fad45aed93?w=800&h=800&fit=crop&q=80')"></div>
+                <div class="overlay"></div>
+                <div class="content">
+                    <div>
+                        <h2 class="headline-xl text-white text-shadow mb-5">Stop au surdesign.<br><span class="serif-accent text-yellow">Start shipping.</span></h2>
+                        <a href="#" class="cta-btn cta-white">Booker un call</a>
+                    </div>
+                </div>
+            </div>
+            <p style="font-size:11px;color:var(--gray-400);margin-top:12px">📷 "Do more" néon — Motivation</p>
+        </div>
+
+    </div>
+</div>
+
+<!-- INSTAGRAM V3 -->
+<div class="section">
+    <div class="section-header">
+        <h2 class="section-title">Instagram Post — Format V3</h2>
+        <p class="section-subtitle">1080×1080 · Dark mode centré + stats</p>
+    </div>
+    <div class="templates-grid">
+
+        <div class="template-card">
+            <div class="template-label">V3.1 — Résultats</div>
+            <div class="template insta-v3">
+                <div class="bg" style="background-image:url('https://images.unsplash.com/photo-1486325212027-8081e485255e?w=800&q=80')"></div>
+                <div class="content">
+                    <h2 class="headline-xl text-white mb-5"><span class="serif-accent text-yellow">Convertis</span><br>pendant que<br>tu dors.</h2>
+                    <div style="display:flex;gap:28px;margin-bottom:20px">
+                        <div style="text-align:center">
+                            <div style="font-size:26px;font-weight:800;color:var(--yellow)">+127%</div>
+                            <div style="font-size:10px;color:rgba(255,255,255,0.5);text-transform:uppercase">Conversion</div>
+                        </div>
+                        <div style="text-align:center">
+                            <div style="font-size:26px;font-weight:800;color:var(--yellow)">5j</div>
+                            <div style="font-size:10px;color:rgba(255,255,255,0.5);text-transform:uppercase">Livraison</div>
+                        </div>
+                    </div>
+                    <a href="#" class="cta-btn cta-yellow">Voir le portfolio</a>
+                </div>
+            </div>
+            <p style="font-size:11px;color:var(--gray-400);margin-top:12px">📷 Gratte-ciels nuit — Ambition</p>
+        </div>
+
+        <div class="template-card">
+            <div class="template-label">V3.2 — Process</div>
+            <div class="template insta-v3">
+                <div class="bg" style="background-image:url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=800&q=80')"></div>
+                <div class="content">
+                    <h2 class="headline-xl text-white mb-5">Brief lundi.<br>Live vendredi.<br><span class="serif-accent text-yellow">Point.</span></h2>
+                    <div style="display:flex;gap:20px;margin-bottom:20px">
+                        <div style="text-align:center">
+                            <div style="font-size:26px;font-weight:800;color:var(--yellow)">1</div>
+                            <div style="font-size:10px;color:rgba(255,255,255,0.5);text-transform:uppercase">Call</div>
+                        </div>
+                        <div style="text-align:center">
+                            <div style="font-size:26px;font-weight:800;color:var(--yellow)">2</div>
+                            <div style="font-size:10px;color:rgba(255,255,255,0.5);text-transform:uppercase">Design</div>
+                        </div>
+                        <div style="text-align:center">
+                            <div style="font-size:26px;font-weight:800;color:var(--yellow)">3</div>
+                            <div style="font-size:10px;color:rgba(255,255,255,0.5);text-transform:uppercase">Ship</div>
+                        </div>
+                    </div>
+                    <a href="#" class="cta-btn cta-yellow">Comment ça marche</a>
+                </div>
+            </div>
+            <p style="font-size:11px;color:var(--gray-400);margin-top:12px">📷 Globe digital — Tech</p>
+        </div>
+
+        <div class="template-card">
+            <div class="template-label">V3.3 — Anti-agence</div>
+            <div class="template insta-v3">
+                <div class="bg" style="background-image:url('https://images.unsplash.com/photo-1557804506-669a67965ba0?w=800&q=80')"></div>
+                <div class="content">
+                    <h2 class="headline-xl text-white mb-5" style="font-size:30px">Pas de process.<br>Pas de jargon.<br><span class="serif-accent text-yellow">Que du résultat.</span></h2>
+                    <div style="display:flex;gap:28px;margin-bottom:20px">
+                        <div style="text-align:center">
+                            <div style="font-size:26px;font-weight:800;color:var(--yellow)">0</div>
+                            <div style="font-size:10px;color:rgba(255,255,255,0.5);text-transform:uppercase">Bullshit</div>
+                        </div>
+                        <div style="text-align:center">
+                            <div style="font-size:26px;font-weight:800;color:var(--yellow)">100%</div>
+                            <div style="font-size:10px;color:rgba(255,255,255,0.5);text-transform:uppercase">Focus</div>
+                        </div>
+                    </div>
+                    <a href="#" class="cta-btn cta-yellow">Découvrir</a>
+                </div>
+            </div>
+            <p style="font-size:11px;color:var(--gray-400);margin-top:12px">📷 Meeting corporate — Ironie</p>
+        </div>
+
+        <div class="template-card">
+            <div class="template-label">V3.4 — Offre</div>
+            <div class="template insta-v3">
+                <div class="bg" style="background-image:url('https://images.unsplash.com/photo-1526628953301-3e589a6a8b74?w=800&q=80')"></div>
+                <div class="content">
+                    <h2 class="headline-xl text-white mb-5">Une landing.<br>Un prix fixe.<br><span class="serif-accent text-yellow">Zéro surprise.</span></h2>
+                    <div style="display:flex;gap:28px;margin-bottom:20px">
+                        <div style="text-align:center">
+                            <div style="font-size:26px;font-weight:800;color:var(--yellow)">1490€</div>
+                            <div style="font-size:10px;color:rgba(255,255,255,0.5);text-transform:uppercase">Tout compris</div>
+                        </div>
+                    </div>
+                    <a href="#" class="cta-btn cta-yellow">Voir les offres</a>
+                </div>
+            </div>
+            <p style="font-size:11px;color:var(--gray-400);margin-top:12px">📷 Code/écran — Transparence</p>
+        </div>
+
+    </div>
+</div>
+
+<!-- STORIES -->
+<div class="section">
+    <div class="section-header">
+        <h2 class="section-title">Stories Instagram</h2>
+        <p class="section-subtitle">1080×1920 · Format vertical swipe up</p>
+    </div>
+    <div style="display:flex;gap:24px;flex-wrap:wrap">
+
+        <div class="template-card" style="width:auto">
+            <div class="template-label">Story — Speed</div>
+            <div class="template story">
+                <div class="bg" style="background-image:url('https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=600&q=80')"></div>
+                <div class="overlay"></div>
+                <div class="content">
+                    <div style="background:#FFE600;padding:8px 12px;border-radius:6px;display:inline-block">
+                        <span style="font-weight:800;font-size:12px;color:#1D1D1B">STUDIO FACILE</span>
+                    </div>
+                    <div style="text-align:center">
+                        <h2 class="headline-md text-white text-shadow">Brief lundi.<br>Live vendredi.<br><span class="serif-accent text-yellow">Point.</span></h2>
+                    </div>
+                    <div style="text-align:center;color:white">
+                        <div style="font-size:20px;margin-bottom:4px">↑</div>
+                        <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em">Swipe up</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="template-card" style="width:auto">
+            <div class="template-label">Story — Teaser</div>
+            <div class="template story">
+                <div class="bg" style="background-image:url('https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&q=80')"></div>
+                <div class="overlay"></div>
+                <div class="content">
+                    <div style="background:#FFE600;padding:8px 12px;border-radius:6px;display:inline-block">
+                        <span style="font-weight:800;font-size:12px;color:#1D1D1B">STUDIO FACILE</span>
+                    </div>
+                    <div style="text-align:center">
+                        <h2 class="headline-md text-white text-shadow">Ton site<br>mérite mieux<br><span class="serif-accent text-yellow">que ça.</span></h2>
+                    </div>
+                    <div style="text-align:center;color:white">
+                        <div style="font-size:20px;margin-bottom:4px">↑</div>
+                        <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em">Voir comment</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="template-card" style="width:auto">
+            <div class="template-label">Story — Case Study</div>
+            <div class="template story">
+                <div class="bg" style="background-image:url('https://images.unsplash.com/photo-1560179707-f14e90ef3623?w=600&q=80')"></div>
+                <div class="overlay"></div>
+                <div class="content">
+                    <div style="background:#FFE600;padding:8px 12px;border-radius:6px;display:inline-block">
+                        <span style="font-weight:800;font-size:12px;color:#1D1D1B">STUDIO FACILE</span>
+                    </div>
+                    <div style="text-align:center">
+                        <h2 class="headline-md text-white text-shadow">+340%<br>de conversion<br><span class="serif-accent text-yellow">en 2 semaines.</span></h2>
+                    </div>
+                    <div style="text-align:center;color:white">
+                        <div style="font-size:20px;margin-bottom:4px">↑</div>
+                        <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em">Lire le case</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="template-card" style="width:auto">
+            <div class="template-label">Story — Question</div>
+            <div class="template story">
+                <div class="bg" style="background-image:url('https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=600&q=80')"></div>
+                <div class="overlay"></div>
+                <div class="content">
+                    <div style="background:#FFE600;padding:8px 12px;border-radius:6px;display:inline-block">
+                        <span style="font-weight:800;font-size:12px;color:#1D1D1B">STUDIO FACILE</span>
+                    </div>
+                    <div style="text-align:center">
+                        <h2 class="headline-md text-white text-shadow">C'est quoi<br>ton excuse<br><span class="serif-accent text-yellow">pour pas lancer ?</span></h2>
+                    </div>
+                    <div style="text-align:center;color:white">
+                        <div style="font-size:20px;margin-bottom:4px">↑</div>
+                        <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em">On en parle</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<!-- CARROUSELS -->
+<div class="section">
+    <div class="section-header">
+        <h2 class="section-title">Carrousels Instagram</h2>
+        <p class="section-subtitle">1080×1350 · Format tips/éducatif</p>
+    </div>
+
+    <div class="template-card" style="margin-bottom:32px">
+        <div class="template-label">Carrousel — 5 erreurs landing page</div>
+        <div class="carousel-grid">
+            <div class="template carousel-cover">
+                <div class="yellow-bar"></div>
+                <div class="content">
+                    <div>
+                        <h2 class="headline-lg text-white mb-3">5 erreurs<br>qui tuent ta<br><span class="serif-accent text-yellow">landing page</span></h2>
+                        <p style="font-size:12px;color:rgba(255,255,255,0.5)">(et comment les fixer)</p>
+                    </div>
+                    <div style="display:flex;justify-content:space-between;align-items:center">
+                        <div style="background:#FFE600;padding:6px 10px;border-radius:4px">
+                            <span style="font-weight:800;font-size:10px;color:#1D1D1B">STUDIO FACILE</span>
+                        </div>
+                        <span style="font-size:10px;color:rgba(255,255,255,0.4)">Swipe →</span>
+                    </div>
+                </div>
+            </div>
+            <div class="template carousel-slide">
+                <div class="content">
+                    <div style="width:36px;height:36px;background:var(--yellow);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:800;margin-bottom:16px">1</div>
+                    <h3 style="font-size:20px;font-weight:800;line-height:1.15;margin-bottom:10px">Trop de texte<br><span class="serif-accent">au-dessus du fold</span></h3>
+                    <p style="font-size:13px;color:var(--gray-600);line-height:1.5;flex:1">Les visiteurs scrollent pas. Ton message doit claquer en 3 secondes max.</p>
+                    <div style="display:flex;justify-content:space-between;align-items:center;padding-top:14px;border-top:1px solid var(--gray-100)">
+                        <span style="font-size:10px;color:var(--gray-400);font-weight:600">1/5</span>
+                        <div style="display:flex;gap:4px"><div style="width:5px;height:5px;border-radius:50%;background:var(--black)"></div><div style="width:5px;height:5px;border-radius:50%;background:var(--gray-200)"></div><div style="width:5px;height:5px;border-radius:50%;background:var(--gray-200)"></div><div style="width:5px;height:5px;border-radius:50%;background:var(--gray-200)"></div><div style="width:5px;height:5px;border-radius:50%;background:var(--gray-200)"></div></div>
+                    </div>
+                </div>
+            </div>
+            <div class="template carousel-slide">
+                <div class="content">
+                    <div style="width:36px;height:36px;background:var(--yellow);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:800;margin-bottom:16px">2</div>
+                    <h3 style="font-size:20px;font-weight:800;line-height:1.15;margin-bottom:10px">CTA pas clair<br><span class="serif-accent">ou invisible</span></h3>
+                    <p style="font-size:13px;color:var(--gray-600);line-height:1.5;flex:1">"En savoir plus" ça veut rien dire. Dis ce qui se passe quand on clique.</p>
+                    <div style="display:flex;justify-content:space-between;align-items:center;padding-top:14px;border-top:1px solid var(--gray-100)">
+                        <span style="font-size:10px;color:var(--gray-400);font-weight:600">2/5</span>
+                        <div style="display:flex;gap:4px"><div style="width:5px;height:5px;border-radius:50%;background:var(--gray-200)"></div><div style="width:5px;height:5px;border-radius:50%;background:var(--black)"></div><div style="width:5px;height:5px;border-radius:50%;background:var(--gray-200)"></div><div style="width:5px;height:5px;border-radius:50%;background:var(--gray-200)"></div><div style="width:5px;height:5px;border-radius:50%;background:var(--gray-200)"></div></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="template-card">
+        <div class="template-label">Carrousel — Le process Studio Facile</div>
+        <div class="carousel-grid">
+            <div class="template carousel-cover" style="background:var(--yellow)">
+                <div class="content">
+                    <div>
+                        <h2 class="headline-lg text-black mb-3">Comment on<br><span class="serif-accent">ship en 5 jours</span></h2>
+                        <p style="font-size:12px;color:rgba(29,29,27,0.6)">Le process Studio Facile</p>
+                    </div>
+                    <div style="display:flex;justify-content:space-between;align-items:center">
+                        <div style="background:#1D1D1B;padding:6px 10px;border-radius:4px">
+                            <span style="font-weight:800;font-size:10px;color:#FFE600">STUDIO FACILE</span>
+                        </div>
+                        <span style="font-size:10px;color:rgba(29,29,27,0.4)">Swipe →</span>
+                    </div>
+                </div>
+            </div>
+            <div class="template carousel-slide">
+                <div class="content">
+                    <div style="width:36px;height:36px;background:var(--yellow);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:800;margin-bottom:16px">1</div>
+                    <h3 style="font-size:20px;font-weight:800;line-height:1.15;margin-bottom:10px">Call de 30min<br><span class="serif-accent">pour capter ton truc</span></h3>
+                    <p style="font-size:13px;color:var(--gray-600);line-height:1.5;flex:1">On parle de ton business, ta cible, tes objectifs. Pas de brief de 47 pages.</p>
+                    <div style="display:flex;justify-content:space-between;align-items:center;padding-top:14px;border-top:1px solid var(--gray-100)">
+                        <span style="font-size:10px;color:var(--gray-400);font-weight:600">1/4</span>
+                        <div style="display:flex;gap:4px"><div style="width:5px;height:5px;border-radius:50%;background:var(--black)"></div><div style="width:5px;height:5px;border-radius:50%;background:var(--gray-200)"></div><div style="width:5px;height:5px;border-radius:50%;background:var(--gray-200)"></div><div style="width:5px;height:5px;border-radius:50%;background:var(--gray-200)"></div></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- RECAP -->
+<div class="section">
+    <div class="section-header">
+        <h2 class="section-title">Récap Copywriting</h2>
+        <p class="section-subtitle">Toutes les variantes par format</p>
+    </div>
+    <div style="background:white;border-radius:16px;padding:32px;box-shadow:0 4px 24px rgba(0,0,0,0.06)">
+        
+        <h3 style="font-size:15px;font-weight:700;margin-bottom:14px">📸 Instagram V1 — Headlines</h3>
+        <table class="copy-table" style="margin-bottom:28px">
+            <tr><th>Angle</th><th>Headline</th><th>CTA</th><th>Image</th></tr>
+            <tr><td>Pain point</td><td>Ton site fait fuir tes clients ? <em>Next.</em></td><td>Booker un call</td><td>Course/fuite</td></tr>
+            <tr><td>Speed</td><td>5 jours. 1 landing. <em>Zéro excuse.</em></td><td>C'est parti</td><td>Rocket launch</td></tr>
+            <tr><td>Audace</td><td>Tu veux des leads ? <em>Pas du Lorem Ipsum.</em></td><td>On en parle</td><td>Cliff jumping</td></tr>
+            <tr><td>Provoc</td><td>Stop au surdesign. <em>Start shipping.</em></td><td>Booker un call</td><td>Néon motivant</td></tr>
+            <tr><td>Urgence</td><td>Pendant que tu hésites, <em>ils lancent.</em></td><td>Lancer maintenant</td><td>Ligne de départ</td></tr>
+            <tr><td>Qualité</td><td>Une landing qui convertit. <em>Pas qui fait joli.</em></td><td>Voir le portfolio</td><td>Before/after</td></tr>
+        </table>
+
+        <h3 style="font-size:15px;font-weight:700;margin-bottom:14px">🌙 Instagram V3 — Headlines + Stats</h3>
+        <table class="copy-table" style="margin-bottom:28px">
+            <tr><th>Angle</th><th>Headline</th><th>Stats</th><th>Image</th></tr>
+            <tr><td>Résultats</td><td><em>Convertis</em> pendant que tu dors.</td><td>+127% · 5j</td><td>Skyline nuit</td></tr>
+            <tr><td>Process</td><td>Brief lundi. Live vendredi. <em>Point.</em></td><td>1-2-3</td><td>Globe digital</td></tr>
+            <tr><td>Anti-agence</td><td>Pas de process. Pas de jargon. <em>Que du résultat.</em></td><td>0 Bullshit</td><td>Meeting</td></tr>
+            <tr><td>Offre</td><td>Une landing. Un prix fixe. <em>Zéro surprise.</em></td><td>1490€</td><td>Code/écran</td></tr>
+            <tr><td>Social proof</td><td>+50 landings. <em>0 regret client.</em></td><td>50+ · 100%</td><td>Testimonials</td></tr>
+        </table>
+
+        <h3 style="font-size:15px;font-weight:700;margin-bottom:14px">📱 Stories — Headlines</h3>
+        <table class="copy-table">
+            <tr><th>Angle</th><th>Headline</th><th>Swipe CTA</th></tr>
+            <tr><td>Speed</td><td>Brief lundi. Live vendredi. <em>Point.</em></td><td>Swipe up</td></tr>
+            <tr><td>Teaser</td><td>Ton site mérite mieux <em>que ça.</em></td><td>Voir comment</td></tr>
+            <tr><td>Case study</td><td>+340% de conversion <em>en 2 semaines.</em></td><td>Lire le case</td></tr>
+            <tr><td>Question</td><td>C'est quoi ton excuse <em>pour pas lancer ?</em></td><td>On en parle</td></tr>
+            <tr><td>Offre</td><td>-20% cette semaine. <em>Seulement.</em></td><td>Profiter</td></tr>
+        </table>
+    </div>
+</div>
+
+<div class="lightbox" id="lightbox">
+    <button class="lightbox-close" id="lightbox-close">✕</button>
+    <div id="lightbox-content"></div>
+</div>
+
+<script>
+    const lightbox = document.getElementById('lightbox');
+    const lightboxContent = document.getElementById('lightbox-content');
+    const lightboxClose = document.getElementById('lightbox-close');
+
+    document.querySelectorAll('.template').forEach(tpl => {
+        tpl.addEventListener('click', (e) => {
+            e.stopPropagation();
+            const clone = tpl.cloneNode(true);
+            clone.classList.add('template-clone');
+            // Remove size constraints for zoom
+            clone.style.maxWidth = '90vw';
+            clone.style.maxHeight = '90vh';
+            clone.style.width = '';
+            clone.style.aspectRatio = tpl.style.aspectRatio || getComputedStyle(tpl).aspectRatio;
+            // Scale up based on type
+            if (tpl.classList.contains('insta-v1') || tpl.classList.contains('insta-v3')) {
+                clone.style.width = '540px';
+                clone.style.height = '540px';
+            } else if (tpl.classList.contains('story')) {
+                clone.style.width = '360px';
+                clone.style.height = '640px';
+            } else if (tpl.classList.contains('carousel-cover') || tpl.classList.contains('carousel-slide')) {
+                clone.style.width = '405px';
+                clone.style.height = '506px';
+            }
+            lightboxContent.innerHTML = '';
+            lightboxContent.appendChild(clone);
+            lightbox.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        });
+    });
+
+    lightbox.addEventListener('click', () => {
+        lightbox.classList.remove('active');
+        document.body.style.overflow = '';
+    });
+
+    lightboxClose.addEventListener('click', () => {
+        lightbox.classList.remove('active');
+        document.body.style.overflow = '';
+    });
+
+    lightboxContent.addEventListener('click', (e) => e.stopPropagation());
+</script>
+
+</body>
+</html>
