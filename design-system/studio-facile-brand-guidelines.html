@@ -168,7 +168,7 @@
 
         .cover-header {
             display: flex;
-            justify-content: space-between;
+            justify-content: flex-end;
             align-items: flex-start;
         }
 
@@ -426,7 +426,14 @@
         .concept-right {
             font-size: 18px;
             line-height: 1.8;
-            color: var(--gray-400);
+        }
+
+        .concept-right p {
+            color: rgba(255, 255, 255, 0.95);
+        }
+
+        .concept-right p:nth-child(even) {
+            color: rgba(255, 255, 255, 0.6);
         }
 
         .concept-right p + p {
@@ -519,10 +526,12 @@
             background: var(--white);
             color: var(--black);
             padding: 60px 80px;
+            display: flex;
+            flex-direction: column;
         }
 
         .how-header {
-            margin-bottom: 48px;
+            margin-bottom: 32px;
         }
 
         .how-label {
@@ -543,7 +552,9 @@
         .how-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
+            grid-template-rows: 1fr 1fr;
             gap: 24px;
+            flex: 1;
         }
 
         .how-card {
@@ -592,7 +603,7 @@
         }
 
         .principles-header {
-            margin-bottom: 48px;
+            margin-bottom: 32px;
         }
 
         .principles-label {
@@ -605,41 +616,47 @@
 
         .principles-grid {
             display: grid;
-            grid-template-columns: 1fr 1fr;
+            grid-template-columns: 1fr 1fr 1fr 1fr;
             grid-template-rows: 1fr 1fr;
-            gap: 48px 80px;
+            gap: 0;
             flex: 1;
         }
 
         .principle-col {
             display: flex;
             flex-direction: column;
+            padding: 32px;
         }
+
+        .principle-col:nth-child(1) { grid-column: 1; grid-row: 1; align-self: start; }
+        .principle-col:nth-child(2) { grid-column: 2; grid-row: 2; align-self: end; }
+        .principle-col:nth-child(3) { grid-column: 3; grid-row: 1; align-self: start; }
+        .principle-col:nth-child(4) { grid-column: 4; grid-row: 2; align-self: end; }
 
         .principle-number {
             font-family: var(--font-serif);
             font-style: italic;
             font-weight: 200;
-            font-size: 80px;
-            line-height: 1;
+            font-size: 230px;
+            line-height: 0.85;
             color: var(--yellow);
-            margin-bottom: 32px;
+            margin-bottom: 20px;
         }
 
         .principle-content {
             display: flex;
             flex-direction: column;
-            gap: 12px;
+            gap: 8px;
         }
 
         .principle-title {
-            font-size: 24px;
+            font-size: 22px;
             font-weight: 700;
             line-height: 1.3;
         }
 
         .principle-desc {
-            font-size: 16px;
+            font-size: 15px;
             line-height: 1.5;
             color: var(--gray-400);
         }
@@ -742,15 +759,16 @@
         .slide-logo {
             background: var(--white);
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 80px;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 64px;
             padding: 60px 80px;
+            align-items: stretch;
         }
 
         .logo-left {
             display: flex;
             flex-direction: column;
-            gap: 32px;
+            gap: 24px;
         }
 
         .logo-main-display {
@@ -759,44 +777,21 @@
             align-items: center;
             justify-content: center;
             background: var(--gray-100);
-            border-radius: var(--radius-2xl);
-            padding: 48px;
-        }
-
-        .logo-placeholder {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 16px;
-        }
-
-        .logo-placeholder-icon {
-            width: 80px;
-            height: 80px;
-            background: var(--yellow);
-            border-radius: var(--radius-xl);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .logo-placeholder-text {
-            font-size: 12px;
-            color: var(--gray-400);
-            text-align: center;
-            line-height: 1.5;
+            border-radius: var(--radius-3xl);
+            padding: 64px;
         }
 
         .logo-right {
             display: flex;
             flex-direction: column;
-            gap: 32px;
+            gap: 20px;
         }
 
         .logo-variants {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 16px;
+            flex: 1;
         }
 
         .logo-variant {
@@ -806,48 +801,59 @@
         }
 
         .logo-variant-display {
-            height: 100px;
+            flex: 1;
             display: flex;
             align-items: center;
             justify-content: center;
-            border-radius: var(--radius-xl);
+            border-radius: var(--radius-2xl);
+            padding: 24px;
         }
 
-        .logo-variant-display.light {
+        .logo-variant-display.bg-light {
             background: var(--gray-100);
         }
 
-        .logo-variant-display.dark {
+        .logo-variant-display.bg-dark {
             background: var(--black);
         }
 
-        .logo-variant-display.yellow {
+        .logo-variant-display.bg-yellow {
             background: var(--yellow);
         }
 
+        .logo-variant-display.bg-white {
+            background: var(--white);
+            box-shadow: inset 0 0 0 2px var(--gray-200);
+        }
+
         .logo-variant-label {
-            font-size: 12px;
+            font-size: 11px;
+            font-weight: 600;
             color: var(--gray-400);
             text-align: center;
+            letter-spacing: 0.03em;
         }
 
         .logo-spacing {
             background: var(--gray-100);
-            border-radius: var(--radius-xl);
-            padding: 24px;
+            border-radius: var(--radius-2xl);
+            padding: 20px 24px;
         }
 
         .logo-spacing-title {
-            font-size: 12px;
-            font-weight: 600;
+            font-size: 11px;
+            font-weight: 700;
             color: var(--gray-400);
-            margin-bottom: 16px;
+            margin-bottom: 8px;
             display: block;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
         }
 
         .logo-spacing-visual {
             font-size: 14px;
             color: var(--gray-600);
+            line-height: 1.5;
         }
 
         /* ====== COLORS SLIDE - BENTO ====== */
@@ -919,12 +925,14 @@
             grid-template-columns: 1fr 1fr;
             gap: 60px;
             padding: 60px 80px;
+            align-items: stretch;
         }
 
         .typo-section {
             display: flex;
             flex-direction: column;
             gap: 24px;
+            flex: 1;
         }
 
         .typo-header {
@@ -942,7 +950,7 @@
         }
 
         .typo-name {
-            font-size: 32px;
+            font-size: 42px;
             font-weight: 700;
             letter-spacing: -0.02em;
         }
@@ -954,10 +962,11 @@
         }
 
         .typo-alphabet {
-            font-size: 28px;
-            line-height: 1.6;
+            font-size: 36px;
+            line-height: 1.5;
             letter-spacing: 0.02em;
             color: var(--black);
+            flex: 1;
         }
 
         .typo-alphabet.serif {
@@ -986,7 +995,7 @@
         }
 
         .typo-weight-sample {
-            font-size: 20px;
+            font-size: 28px;
             flex: 1;
         }
 
@@ -1344,11 +1353,27 @@
         /* ====== SOCIAL MEDIA BENTO ====== */
         .slide-social {
             background: var(--cream);
-            padding: 60px 80px;
+            padding: 48px 48px 0;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .slide-social::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 120px;
+            background: linear-gradient(180deg, transparent, var(--cream));
+            z-index: 2;
+            pointer-events: none;
         }
 
         .social-header {
-            margin-bottom: 40px;
+            margin-bottom: 20px;
         }
 
         .social-header h2 {
@@ -1357,75 +1382,79 @@
 
         .social-bento {
             display: grid;
-            grid-template-columns: 1fr 1fr 1fr 0.6fr;
-            grid-template-rows: 1fr 1fr;
-            gap: 20px;
-            flex: 1;
+            grid-template-columns: 1fr 1fr 1fr;
+            grid-template-rows: auto auto;
+            gap: 16px;
+            min-height: 0;
+        }
+
+        .social-wrapper {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            min-height: 0;
+        }
+
+        .social-wrapper.social-story {
+            grid-row: 1 / 3;
+            grid-column: 2;
         }
 
         .social-item {
-            background: var(--white);
             border-radius: var(--radius-2xl);
             overflow: hidden;
-            display: flex;
-            flex-direction: column;
+            position: relative;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.12);
         }
 
-        .social-item.story {
-            grid-row: span 2;
-        }
-
-        .social-preview {
-            flex: 1;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 16px;
-            background: var(--gray-100);
-        }
-
-        .social-mock {
+        .social-item.si-post {
             width: 100%;
             height: 100%;
-            background: var(--black);
-            border-radius: var(--radius-lg);
+            aspect-ratio: 1 / 1;
+        }
+
+        .social-item.si-story {
+            height: 100%;
+        }
+
+        .social-item .si-bg {
+            position: absolute;
+            inset: 0;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .social-item .si-overlay {
+            position: absolute;
+            inset: 0;
+        }
+
+        .social-item .si-content {
+            position: relative;
+            width: 100%;
+            height: 100%;
             display: flex;
             flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            color: var(--white);
-            padding: 16px;
-            text-align: center;
         }
 
-        .social-mock .highlight {
-            background: var(--yellow);
-            color: var(--black);
-            padding: 4px 12px;
-            border-radius: var(--radius-full);
+        .social-meta {
+            display: flex;
+            align-items: baseline;
+            gap: 8px;
+        }
+
+        .social-meta-title {
             font-weight: 700;
-            font-size: 12px;
-            margin-bottom: 8px;
+            font-size: 13px;
         }
 
-        .social-mock .title {
-            font-weight: 700;
-            font-size: 14px;
-        }
-
-        .social-label {
-            padding: 16px 20px;
-        }
-
-        .social-label-platform {
-            font-weight: 600;
-            font-size: 14px;
-        }
-
-        .social-label-size {
-            font-size: 12px;
+        .social-meta-size {
+            font-size: 11px;
             color: var(--gray-400);
         }
+
+        .si-serif { font-family: var(--font-serif); font-style: italic; font-weight: 800; letter-spacing: -0.03em; }
+        .si-headline { font-weight: 800; line-height: 1; letter-spacing: -0.03em; }
 
         /* ====== DO'S AND DON'TS - GRAPHIQUE ====== */
         .slide-dos-donts {
@@ -1604,48 +1633,38 @@
     <!-- SLIDE 1: COVER -->
     <section class="slide slide-cover">
         <div class="cover-header">
-            <div class="cover-logo">
-                <div class="cover-logo-icon">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="#1D1D1B" stroke-width="2">
-                        <path d="M12 2L2 7l10 5 10-5-10-5z"/>
-                        <path d="M2 17l10 5 10-5"/>
-                        <path d="M2 12l10 5 10-5"/>
-                    </svg>
-                </div>
-                <span class="cover-logo-text">Studio Facile</span>
-            </div>
             <span class="cover-date">Février 2026</span>
         </div>
-        
+
         <div class="cover-main">
+            <div style="font-size: 11px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gray-400); margin-bottom: 24px;">Studio Facile</div>
             <h1 class="cover-title">
                 Brand<br>
                 <span class="serif-accent">Guidelines.</span>
             </h1>
             <p class="cover-subtitle">
-                Tout ce qu'il faut pour créer des assets Studio Facile cohérents et percutants.
+                Document interne — Référentiel de notre identité visuelle et de marque.
             </p>
         </div>
         
         <div class="cover-footer">
             <span class="cover-version">V2.0</span>
+            <img src="../logos/favicon.svg" alt="Studio Facile" style="width: 32px; height: auto; filter: invert(1);">
             <div class="cover-scroll">
                 SCROLL
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M5 12h14M12 5l7 7-7 7"/>
-                </svg>
+                <img src="../icons/Arrows/IconArrowRight.svg" alt="Scroll" style="width: 20px; height: 20px; filter: invert(1) brightness(2) opacity(0.5);">
             </div>
         </div>
     </section>
 
     <!-- SLIDE 2: CHAPTER 01 - PLATEFORME DE MARQUE -->
     <section class="slide slide-chapter">
-        <div class="chapter-line"></div>
+
         <div class="chapter-content">
             <div class="chapter-number">01</div>
             <h2 class="chapter-title">Notre plateforme<br>de marque</h2>
         </div>
-        <span class="slide-number" style="color: var(--black);">02 / 20</span>
+        <span class="slide-number" style="color: var(--black);">02 / 22</span>
     </section>
 
     <!-- SLIDE 3: CONCEPT -->
@@ -1667,7 +1686,7 @@
                 Le "super facile", c'est notre promesse. Pas de jargon, pas de process interminables, pas de surprises. Juste des landing pages qui convertissent, livrées en quelques jours.
             </p>
         </div>
-        <span class="slide-number">03 / 20</span>
+        <span class="slide-number">03 / 22</span>
     </section>
 
     <!-- SLIDE 4: VISION -->
@@ -1676,7 +1695,7 @@
         <h2 class="vision-statement">
             Un monde où chaque entrepreneur peut lancer son business avec une présence web <span class="serif-accent">professionnelle</span> en quelques jours, pas en quelques mois.
         </h2>
-        <span class="slide-number">04 / 20</span>
+        <span class="slide-number">04 / 22</span>
     </section>
 
     <!-- SLIDE 5: WHY -->
@@ -1693,7 +1712,7 @@
                 Parce que 90% des entrepreneurs perdent des semaines (et des clients) avec des sites qui ne convertissent pas. Parce que le temps passé sur le site, c'est du temps pas passé sur le produit. Parce qu'une belle page qui ne vend pas, c'est juste une décoration coûteuse.
             </p>
         </div>
-        <span class="slide-number">05 / 20</span>
+        <span class="slide-number">05 / 22</span>
     </section>
 
     <!-- SLIDE 6: HOW -->
@@ -1705,68 +1724,48 @@
         <div class="how-grid">
             <div class="how-card">
                 <div class="how-card-icon">
-                    <svg viewBox="0 0 24 24" fill="none" stroke-width="2">
-                        <circle cx="12" cy="12" r="10"/>
-                        <polyline points="12,6 12,12 16,14"/>
-                    </svg>
+                    <img src="../icons/Time & Date/IconClock.svg" alt="Clock" style="width: 24px; height: 24px;">
                 </div>
                 <h4 class="how-card-title">Livraison express</h4>
                 <p class="how-card-desc">De l'idée au live en 5 jours max. Pas de délais qui s'étirent, pas d'excuses.</p>
             </div>
             <div class="how-card">
                 <div class="how-card-icon">
-                    <svg viewBox="0 0 24 24" fill="none" stroke-width="2">
-                        <circle cx="12" cy="12" r="4"/>
-                        <path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/>
-                    </svg>
+                    <img src="../icons/Interface General/IconTarget.svg" alt="Target" style="width: 24px; height: 24px;">
                 </div>
                 <h4 class="how-card-title">Focus conversion</h4>
                 <p class="how-card-desc">Chaque élément est pensé pour convertir. On ne fait pas du beau pour faire du beau.</p>
             </div>
             <div class="how-card">
                 <div class="how-card-icon">
-                    <svg viewBox="0 0 24 24" fill="none" stroke-width="2">
-                        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
-                        <circle cx="12" cy="12" r="3"/>
-                    </svg>
+                    <img src="../icons/Accessibility/IconEyeOpen.svg" alt="Eye" style="width: 24px; height: 24px;">
                 </div>
                 <h4 class="how-card-title">Process transparent</h4>
                 <p class="how-card-desc">Tu sais exactement où on en est, à chaque étape. Zéro mauvaise surprise.</p>
             </div>
             <div class="how-card">
                 <div class="how-card-icon">
-                    <svg viewBox="0 0 24 24" fill="none" stroke-width="2">
-                        <rect x="5" y="2" width="14" height="20" rx="2" ry="2"/>
-                        <line x1="12" y1="18" x2="12" y2="18"/>
-                    </svg>
+                    <img src="../icons/Devices & Signals/IconPhone.svg" alt="Phone" style="width: 24px; height: 24px;">
                 </div>
                 <h4 class="how-card-title">Mobile-first</h4>
                 <p class="how-card-desc">60% du trafic est mobile. On design d'abord pour le smartphone.</p>
             </div>
             <div class="how-card">
                 <div class="how-card-icon">
-                    <svg viewBox="0 0 24 24" fill="none" stroke-width="2">
-                        <polyline points="16,18 22,12 16,6"/>
-                        <polyline points="8,6 2,12 8,18"/>
-                    </svg>
+                    <img src="../icons/Code/IconCode.svg" alt="Code" style="width: 24px; height: 24px;">
                 </div>
                 <h4 class="how-card-title">Tech solide</h4>
                 <p class="how-card-desc">Webflow, Framer, les meilleurs outils. Rapide, SEO-friendly, maintenable.</p>
             </div>
             <div class="how-card">
                 <div class="how-card-icon">
-                    <svg viewBox="0 0 24 24" fill="none" stroke-width="2">
-                        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
-                        <circle cx="9" cy="7" r="4"/>
-                        <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
-                        <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
-                    </svg>
+                    <img src="../icons/People/IconGroup1.svg" alt="People" style="width: 24px; height: 24px;">
                 </div>
                 <h4 class="how-card-title">Support humain</h4>
                 <p class="how-card-desc">Un vrai contact, pas un chatbot. On répond en moins de 24h.</p>
             </div>
         </div>
-        <span class="slide-number">06 / 20</span>
+        <span class="slide-number">06 / 22</span>
     </section>
 
     <!-- SLIDE 7: PRINCIPLES - GRID 2x2 -->
@@ -1804,13 +1803,11 @@
                 </div>
             </div>
         </div>
-        <span class="slide-number">07 / 20</span>
+        <span class="slide-number">07 / 22</span>
     </section>
 
     <!-- SLIDE 8: TAGLINE -->
     <section class="slide slide-tagline">
-        <span class="tagline-visual-left">«</span>
-        <span class="tagline-visual-right">»</span>
         <div class="tagline-label">Tagline</div>
         <h1 class="tagline-main">
             Landing pages<br>
@@ -1818,79 +1815,105 @@
             pour business<br>
             <span class="serif-accent">super chauds.</span>
         </h1>
-        <span class="slide-number" style="color: var(--black);">08 / 20</span>
+        <span class="slide-number" style="color: var(--black);">08 / 22</span>
     </section>
 
-    <!-- SLIDE 9: CHAPTER 02 - CHARTE GRAPHIQUE -->
+    <!-- SLIDE: FULL IMAGE — SWIMMING -->
+    <section class="slide" style="padding: 0; position: relative;">
+        <div style="position: absolute; inset: 0; background-image: url('images/studio-facile-swimming.png'); background-size: cover; background-position: center;"></div>
+        <div style="position: absolute; inset: 0; background: linear-gradient(180deg, rgba(0,0,0,0.15) 0%, rgba(0,0,0,0.7) 100%);"></div>
+        <div style="position: relative; z-index: 1; width: 100%; height: 100%; display: flex; flex-direction: column; justify-content: flex-end; padding: 80px;">
+            <h1 style="font-size: clamp(56px, 8vw, 100px); font-weight: 800; line-height: 0.95; letter-spacing: -0.04em; color: white;">
+                Plonge.<br>
+                <span class="serif-accent" style="color: var(--yellow);">On s'occupe<br>du reste.</span>
+            </h1>
+            <p style="font-size: 20px; color: rgba(255,255,255,0.7); margin-top: 24px; max-width: 500px;">
+                Landing pages livrées en 5 jours. Pas de blabla, que du résultat.
+            </p>
+        </div>
+    </section>
+
+    <!-- SLIDE: CHAPTER 02 - CHARTE GRAPHIQUE -->
     <section class="slide slide-chapter">
-        <div class="chapter-line"></div>
+
         <div class="chapter-content">
             <div class="chapter-number">02</div>
             <h2 class="chapter-title">Notre charte<br>graphique</h2>
         </div>
-        <span class="slide-number" style="color: var(--black);">09 / 20</span>
+        <span class="slide-number" style="color: var(--black);">10 / 22</span>
     </section>
 
-    <!-- SLIDE 10: LOGO -->
+    <!-- SLIDE 11: LOGO — PRIMARY -->
+    <section class="slide" style="background: var(--white); display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; gap: 40px;">
+        <img src="../logos/primary logo.svg" alt="Studio Facile — Logo principal" style="max-width: 420px; height: auto;">
+        <div style="max-width: 480px;">
+            <p style="font-size: 16px; line-height: 1.7; color: var(--gray-600);">
+                Le logotype Studio Facile associe une typographie pixel-art custom au cadre oblique signature. L'ensemble traduit la dualité de la marque : <strong style="color: var(--black);">rigueur technique</strong> et <strong style="color: var(--black);">énergie créative</strong>.
+            </p>
+        </div>
+        <span class="slide-number">11 / 22</span>
+    </section>
+
+    <!-- SLIDE 12: LOGO — VARIANTS -->
     <section class="slide slide-logo">
         <div class="logo-left">
-            <span class="label">Identité</span>
-            <h2>Logo</h2>
-            
+            <div>
+                <span class="label">Identité</span>
+                <h2 style="margin-top: 12px;">Logo</h2>
+            </div>
+
             <div class="logo-main-display">
-                <div class="logo-placeholder">
-                    <div class="logo-placeholder-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="32" height="32">
-                            <path d="M12 2L2 7l10 5 10-5-10-5z"/>
-                            <path d="M2 17l10 5 10-5"/>
-                            <path d="M2 12l10 5 10-5"/>
-                        </svg>
-                    </div>
-                    <span class="logo-placeholder-text">LOGO PRINCIPAL<br>Studio Facile</span>
-                </div>
+                <img src="../logos/primary logo.svg" alt="Studio Facile — Logo principal" style="max-width: 280px; height: auto;">
             </div>
         </div>
-        
+
         <div class="logo-right">
             <div class="logo-variants">
                 <div class="logo-variant">
-                    <div class="logo-variant-display light">
-                        <span style="font-weight: 700; font-size: 18px;">Studio Facile</span>
+                    <div class="logo-variant-display bg-yellow">
+                        <img src="../logos/variant 1.svg" alt="Variante sur jaune" style="width: 80%; height: auto;">
                     </div>
-                    <div class="logo-variant-label">Sur fond clair</div>
+                    <div class="logo-variant-label">Sur fond jaune</div>
                 </div>
                 <div class="logo-variant">
-                    <div class="logo-variant-display dark">
-                        <span style="font-weight: 700; font-size: 18px; color: white;">Studio Facile</span>
+                    <div class="logo-variant-display bg-dark">
+                        <img src="../logos/variant 2.svg" alt="Variante sur noir" style="width: 80%; height: auto;">
                     </div>
                     <div class="logo-variant-label">Sur fond sombre</div>
                 </div>
                 <div class="logo-variant">
-                    <div class="logo-variant-display yellow">
-                        <span style="font-weight: 700; font-size: 18px;">Studio Facile</span>
+                    <div class="logo-variant-display bg-white">
+                        <img src="../logos/variant w&b-1.svg" alt="Monochrome noir" style="width: 80%; height: auto;">
                     </div>
-                    <div class="logo-variant-label">Sur jaune</div>
+                    <div class="logo-variant-label">Monochrome — clair</div>
                 </div>
                 <div class="logo-variant">
-                    <div class="logo-variant-display light">
-                        <span style="font-weight: 700; font-size: 18px;">SF</span>
+                    <div class="logo-variant-display bg-dark">
+                        <img src="../logos/variant w&b.svg" alt="Monochrome blanc" style="width: 80%; height: auto;">
                     </div>
-                    <div class="logo-variant-label">Version compacte</div>
+                    <div class="logo-variant-label">Monochrome — sombre</div>
                 </div>
-            </div>
-            
-            <div class="logo-spacing">
-                <span class="logo-spacing-title">Zone de protection</span>
-                <div class="logo-spacing-visual">
-                    Espace minimum = hauteur du "S"
+                <div class="logo-variant">
+                    <div class="logo-variant-display bg-light" style="padding: 32px;">
+                        <img src="../logos/Frame 3.svg" alt="Favicon / Icône" style="width: 64px; height: auto;">
+                    </div>
+                    <div class="logo-variant-label">Favicon / Icône</div>
+                </div>
+                <div class="logo-variant">
+                    <div class="logo-spacing" style="flex: 1; display: flex; flex-direction: column; justify-content: center;">
+                        <span class="logo-spacing-title">Zone de protection</span>
+                        <div class="logo-spacing-visual">
+                            Espace minimum autour du logo = hauteur du « S » de Studio.
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-        
-        <span class="slide-number">10 / 20</span>
+
+        <span class="slide-number">12 / 22</span>
     </section>
 
-    <!-- SLIDE 11: COLORS - BENTO -->
+    <!-- SLIDE 13: COLORS - BENTO -->
     <section class="slide slide-colors">
         <div class="colors-header">
             <span class="label">Couleurs</span>
@@ -1924,10 +1947,10 @@
             </div>
         </div>
         
-        <span class="slide-number">11 / 20</span>
+        <span class="slide-number">13 / 22</span>
     </section>
 
-    <!-- SLIDE 12: TYPOGRAPHY - ALPHABET ONLY -->
+    <!-- SLIDE 14: TYPOGRAPHY - ALPHABET ONLY -->
     <section class="slide slide-typography">
         <div class="typo-section">
             <div class="typo-header">
@@ -1941,20 +1964,20 @@
             </div>
             <div class="typo-weights">
                 <div class="typo-weight">
-                    <span class="typo-weight-sample w400">Alphabet</span>
-                    <span class="typo-weight-name">Regular 400</span>
+                    <span class="typo-weight-sample w400">Livraison en 5 jours, sans compromis sur la qualité.</span>
+                    <span class="typo-weight-name">Regular 400 — Body text</span>
                 </div>
                 <div class="typo-weight">
-                    <span class="typo-weight-sample w600">Alphabet</span>
-                    <span class="typo-weight-name">SemiBold 600</span>
+                    <span class="typo-weight-sample w600">Créer une landing page pro</span>
+                    <span class="typo-weight-name">SemiBold 600 — Sous-titres</span>
                 </div>
                 <div class="typo-weight">
-                    <span class="typo-weight-sample w700">Alphabet</span>
-                    <span class="typo-weight-name">Bold 700</span>
+                    <span class="typo-weight-sample w700">Notre méthode</span>
+                    <span class="typo-weight-name">Bold 700 — Titres de section</span>
                 </div>
                 <div class="typo-weight">
-                    <span class="typo-weight-sample w800">Alphabet</span>
-                    <span class="typo-weight-name">ExtraBold 800</span>
+                    <span class="typo-weight-sample w800">Le super facile.</span>
+                    <span class="typo-weight-name">ExtraBold 800 — Headlines</span>
                 </div>
             </div>
         </div>
@@ -1969,112 +1992,12 @@
                 Nn Oo Pp Qq Rr Ss Tt Uu Vv Ww Xx Yy Zz<br>
                 0123456789
             </div>
-            <div class="typo-usage">
-                <div class="typo-usage-title">Usage</div>
-                <p class="typo-usage-text">
-                    Uniquement en <strong>Ultrabold Italic</strong> pour mettre en valeur 3-4 mots maximum dans un titre. Jamais en body text.
-                </p>
-            </div>
         </div>
         
-        <span class="slide-number">12 / 20</span>
+        <span class="slide-number">14 / 22</span>
     </section>
 
-    <!-- SLIDE 13: DESIGN SYSTEM - COMBINED -->
-    <section class="slide slide-design-system">
-        <div class="ds-header">
-            <span class="label">Système</span>
-            <h2>Design System</h2>
-        </div>
-        
-        <div class="ds-grid">
-            <div class="ds-section">
-                <div class="ds-section-title">Spacing (base 8px)</div>
-                <div class="ds-spacing-grid">
-                    <div class="ds-spacing-item">
-                        <div class="ds-spacing-visual" style="width: 8px; height: 8px;"></div>
-                        <span class="ds-spacing-label">8</span>
-                    </div>
-                    <div class="ds-spacing-item">
-                        <div class="ds-spacing-visual" style="width: 16px; height: 16px;"></div>
-                        <span class="ds-spacing-label">16</span>
-                    </div>
-                    <div class="ds-spacing-item">
-                        <div class="ds-spacing-visual" style="width: 24px; height: 24px;"></div>
-                        <span class="ds-spacing-label">24</span>
-                    </div>
-                    <div class="ds-spacing-item">
-                        <div class="ds-spacing-visual" style="width: 32px; height: 32px;"></div>
-                        <span class="ds-spacing-label">32</span>
-                    </div>
-                    <div class="ds-spacing-item">
-                        <div class="ds-spacing-visual" style="width: 40px; height: 40px;"></div>
-                        <span class="ds-spacing-label">40</span>
-                    </div>
-                    <div class="ds-spacing-item">
-                        <div class="ds-spacing-visual" style="width: 48px; height: 48px;"></div>
-                        <span class="ds-spacing-label">48</span>
-                    </div>
-                    <div class="ds-spacing-item">
-                        <div class="ds-spacing-visual" style="width: 64px; height: 64px;"></div>
-                        <span class="ds-spacing-label">64</span>
-                    </div>
-                    <div class="ds-spacing-item">
-                        <div class="ds-spacing-visual" style="width: 80px; height: 80px;"></div>
-                        <span class="ds-spacing-label">80</span>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="ds-section">
-                <div class="ds-section-title">Radius</div>
-                <div class="ds-radius-grid">
-                    <div class="ds-radius-item">
-                        <div class="ds-radius-visual" style="border-radius: 4px;"></div>
-                        <span class="ds-radius-label">4px</span>
-                    </div>
-                    <div class="ds-radius-item">
-                        <div class="ds-radius-visual" style="border-radius: 8px;"></div>
-                        <span class="ds-radius-label">8px</span>
-                    </div>
-                    <div class="ds-radius-item">
-                        <div class="ds-radius-visual" style="border-radius: 16px;"></div>
-                        <span class="ds-radius-label">16px</span>
-                    </div>
-                    <div class="ds-radius-item">
-                        <div class="ds-radius-visual" style="border-radius: 24px;"></div>
-                        <span class="ds-radius-label">24px</span>
-                    </div>
-                    <div class="ds-radius-item">
-                        <div class="ds-radius-visual" style="border-radius: 32px;"></div>
-                        <span class="ds-radius-label">32px</span>
-                    </div>
-                    <div class="ds-radius-item">
-                        <div class="ds-radius-visual" style="border-radius: 9999px;"></div>
-                        <span class="ds-radius-label">full</span>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="ds-section">
-                <div class="ds-section-title">Composants</div>
-                <div class="ds-components">
-                    <button class="ds-btn primary">Bouton primaire</button>
-                    <button class="ds-btn secondary">Bouton secondaire</button>
-                    <button class="ds-btn outline">Bouton outline</button>
-                    <input class="ds-input" placeholder="Input text..." />
-                    <div class="ds-card">
-                        <div class="ds-card-title">Card title</div>
-                        <div class="ds-card-text">Card description text goes here.</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        
-        <span class="slide-number">13 / 20</span>
-    </section>
-
-    <!-- SLIDE 14: VOICE & TONE -->
+    <!-- SLIDE 15: VOICE & TONE -->
     <section class="slide slide-voice">
         <div class="voice-header">
             <span class="label">Communication</span>
@@ -2119,17 +2042,16 @@
             </div>
         </div>
         
-        <span class="slide-number">14 / 20</span>
+        <span class="slide-number">15 / 22</span>
     </section>
 
     <!-- SLIDE 15: CHAPTER 03 - APPLICATIONS -->
     <section class="slide slide-chapter" style="background: var(--black);">
-        <div class="chapter-line" style="background: var(--yellow);"></div>
         <div class="chapter-content">
             <div class="chapter-number" style="color: var(--yellow);">03</div>
             <h2 class="chapter-title" style="color: var(--white);">En<br>action</h2>
         </div>
-        <span class="slide-number" style="color: var(--gray-400);">15 / 20</span>
+        <span class="slide-number" style="color: var(--gray-400);">16 / 22</span>
     </section>
 
     <!-- SLIDE 16: APPLICATIONS BENTO -->
@@ -2169,11 +2091,7 @@
             <div class="bento-item">
                 <div class="bento-preview">
                     <div class="bento-preview-content" style="background: var(--black); color: var(--yellow);">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="32" height="32">
-                            <path d="M12 2L2 7l10 5 10-5-10-5z"/>
-                            <path d="M2 17l10 5 10-5"/>
-                            <path d="M2 12l10 5 10-5"/>
-                        </svg>
+                        <img src="../logos/Frame 3.svg" alt="Favicon" style="width: 48px; height: 48px; object-fit: contain;">
                     </div>
                 </div>
                 <div class="bento-label">
@@ -2195,104 +2113,113 @@
             </div>
         </div>
         
-        <span class="slide-number">16 / 20</span>
+        <span class="slide-number">17 / 22</span>
     </section>
 
     <!-- SLIDE 17: SOCIAL MEDIA BENTO -->
     <section class="slide slide-social">
         <div class="social-header">
-            <span class="label">Réseaux sociaux</span>
-            <h2>Social Media</h2>
+            <span class="label">Brand Applications</span>
+            <h2>Social Media Templates</h2>
         </div>
-        
+
         <div class="social-bento">
-            <div class="social-item">
-                <div class="social-preview">
-                    <div class="social-mock">
-                        <span class="highlight">Nouveau</span>
-                        <span class="title">Landing page en 5 jours</span>
+
+            <!-- Row 1, Col 1 — Insta V1 Pain Point -->
+            <div class="social-wrapper">
+                <div class="social-item si-post" style="background:var(--black);">
+                    <div class="si-content" style="justify-content:flex-end;padding:32px;">
+                        <h3 class="si-headline" style="font-size:58px;color:var(--white);">Ton site fait fuir<br>tes clients ?<br><span class="si-serif" style="color:var(--yellow)">Next.</span></h3>
                     </div>
                 </div>
-                <div class="social-label">
-                    <div class="social-label-platform">Instagram Post</div>
-                    <div class="social-label-size">1080 × 1080px</div>
-                </div>
             </div>
-            
-            <div class="social-item">
-                <div class="social-preview">
-                    <div class="social-mock">
-                        <span class="highlight">Tips</span>
-                        <span class="title">5 erreurs landing</span>
+
+            <!-- Row 1-2, Col 2 — Story (spans 2 rows) -->
+            <div class="social-wrapper social-story">
+                <div class="social-item si-story" style="background:var(--black);">
+                    <div class="si-bg" style="background-image:url('images/studio-facile-time-machine.png')"></div>
+                    <div class="si-overlay" style="background:linear-gradient(180deg,rgba(0,0,0,0.4) 0%,rgba(0,0,0,0.05) 40%,rgba(0,0,0,0.85) 100%)"></div>
+                    <div class="si-content" style="justify-content:space-between;padding:32px;">
+                        <div style="background:var(--yellow);padding:8px 14px;border-radius:var(--radius-md);display:inline-block;align-self:flex-start;">
+                            <span style="font-weight:800;font-size:10px;color:var(--black);letter-spacing:0.05em;">STUDIO FACILE</span>
+                        </div>
+                        <div style="text-align:center;">
+                            <h3 class="si-headline" style="font-size:58px;color:var(--white);text-shadow:0 2px 16px rgba(0,0,0,0.4);">Brief lundi.<br>Live vendredi.<br><span class="si-serif" style="color:var(--yellow)">Point.</span></h3>
+                        </div>
+                        <div style="text-align:center;color:white;">
+                            <div style="font-size:18px;margin-bottom:4px;">↑</div>
+                            <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;">Swipe up</div>
+                        </div>
                     </div>
                 </div>
-                <div class="social-label">
-                    <div class="social-label-platform">LinkedIn</div>
-                    <div class="social-label-size">1200 × 1200px</div>
-                </div>
             </div>
-            
-            <div class="social-item">
-                <div class="social-preview">
-                    <div class="social-mock" style="background: var(--yellow); color: var(--black);">
-                        <span class="title" style="font-size: 12px;">X / Twitter</span>
+
+            <!-- Row 1, Col 3 — Insta V3 Résultats -->
+            <div class="social-wrapper">
+                <div class="social-item si-post" style="background:var(--black);">
+                    <div class="si-bg" style="background-image:url('images/studio-facile-skyline.png');"></div>
+                    <div class="si-content" style="justify-content:center;align-items:center;text-align:center;padding:32px;">
+                        <h3 class="si-headline" style="font-size:58px;color:var(--white);margin-bottom:16px;"><span class="si-serif" style="color:var(--yellow)">Convertis</span><br>pendant que<br>tu dors.</h3>
+                        <div style="display:flex;gap:24px;">
+                            <div style="text-align:center;">
+                                <div style="font-size:22px;font-weight:800;color:var(--yellow);">+127%</div>
+                                <div style="font-size:9px;color:rgba(255,255,255,0.5);text-transform:uppercase;letter-spacing:0.05em;">Conversion</div>
+                            </div>
+                            <div style="text-align:center;">
+                                <div style="font-size:22px;font-weight:800;color:var(--yellow);">5j</div>
+                                <div style="font-size:9px;color:rgba(255,255,255,0.5);text-transform:uppercase;letter-spacing:0.05em;">Livraison</div>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div class="social-label">
-                    <div class="social-label-platform">X / Twitter</div>
-                    <div class="social-label-size">1200 × 675px</div>
-                </div>
             </div>
-            
-            <div class="social-item story">
-                <div class="social-preview" style="min-height: 280px;">
-                    <div class="social-mock" style="height: 100%;">
-                        <span class="highlight">Story</span>
-                        <span class="title">Swipe up</span>
+
+            <!-- Row 2, Col 1 — Insta V1 Speed -->
+            <div class="social-wrapper">
+                <div class="social-item si-post" style="background:var(--black);">
+                    <div class="si-bg" style="background-image:url('images/studio-facile-rocket.png')"></div>
+                    <div class="si-overlay" style="background:linear-gradient(180deg,rgba(0,0,0,0.05) 0%,rgba(0,0,0,0.85) 100%)"></div>
+                    <div class="si-content" style="justify-content:flex-end;padding:32px;">
+                        <h3 class="si-headline" style="font-size:58px;color:var(--white);">5 jours.<br>1 landing.<br><span class="si-serif" style="color:var(--yellow)">Zéro excuse.</span></h3>
                     </div>
                 </div>
-                <div class="social-label">
-                    <div class="social-label-platform">Story</div>
-                    <div class="social-label-size">1080 × 1920px</div>
-                </div>
             </div>
-            
-            <div class="social-item">
-                <div class="social-preview">
-                    <div class="social-mock">
-                        <span class="title" style="font-size: 11px;">Carrousel 1/5</span>
+
+            <!-- Row 2, Col 3 — Insta V2 Autorité -->
+            <div class="social-wrapper">
+                <div class="social-item si-post" style="background:var(--yellow);">
+                    <div class="si-content" style="justify-content:center;align-items:center;text-align:center;padding:32px;">
+                        <h3 class="si-headline" style="font-size:58px;color:var(--black);">+200 landing<br>pages livrées.<br><span class="si-serif">Et toi ?</span></h3>
                     </div>
                 </div>
-                <div class="social-label">
-                    <div class="social-label-platform">Carrousel</div>
-                    <div class="social-label-size">1080 × 1350px</div>
-                </div>
             </div>
-            
-            <div class="social-item">
-                <div class="social-preview">
-                    <div class="social-mock" style="background: var(--yellow); color: var(--black);">
-                        <span class="title" style="font-size: 11px;">Thumbnail</span>
-                    </div>
-                </div>
-                <div class="social-label">
-                    <div class="social-label-platform">YouTube</div>
-                    <div class="social-label-size">1280 × 720px</div>
-                </div>
-            </div>
+
         </div>
-        
-        <span class="slide-number">17 / 20</span>
+
+        <span class="slide-number">18 / 22</span>
     </section>
 
-    <!-- SLIDE 18: DO'S AND DON'TS - GRAPHIQUE -->
+    <!-- SLIDE: FULL IMAGE — DIVING -->
+    <section class="slide" style="padding: 0; position: relative;">
+        <div style="position: absolute; inset: 0; background-image: url('images/studio-faicle-diving.png'); background-size: cover; background-position: center;"></div>
+        <div style="position: absolute; inset: 0; background: linear-gradient(180deg, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.65) 100%);"></div>
+        <div style="position: relative; z-index: 1; width: 100%; height: 100%; display: flex; flex-direction: column; justify-content: flex-end; padding: 80px;">
+            <h1 style="font-size: clamp(56px, 8vw, 100px); font-weight: 800; line-height: 0.95; letter-spacing: -0.04em; color: white;">
+                Lance-toi.<br>
+                <span class="serif-accent" style="color: var(--yellow);">On assure<br>l'atterrissage.</span>
+            </h1>
+            <p style="font-size: 20px; color: rgba(255,255,255,0.7); margin-top: 24px; max-width: 500px;">
+                Des landing pages qui convertissent, livrées en 5 jours.
+            </p>
+        </div>
+    </section>
+
+    <!-- SLIDE: DO'S AND DON'TS - GRAPHIQUE -->
     <section class="slide slide-dos-donts">
         <div class="dos-section">
             <div class="dos-header">
                 <div class="dos-icon">
-                    <svg viewBox="0 0 24 24" fill="none">
-                        <polyline points="20,6 9,17 4,12"/>
-                    </svg>
+                    <img src="../icons/Interface General/IconCheckmark1.svg" alt="Check" style="width: 24px; height: 24px; filter: brightness(0) invert(1);">
                 </div>
                 <h3 class="dos-title">Do's</h3>
             </div>
@@ -2327,10 +2254,7 @@
         <div class="donts-section">
             <div class="donts-header">
                 <div class="donts-icon">
-                    <svg viewBox="0 0 24 24" fill="none">
-                        <line x1="18" y1="6" x2="6" y2="18"/>
-                        <line x1="6" y1="6" x2="18" y2="18"/>
-                    </svg>
+                    <img src="../icons/Interface General/IconCrossLarge.svg" alt="Cross" style="width: 24px; height: 24px; filter: brightness(0) invert(1);">
                 </div>
                 <h3 class="donts-title">Don'ts</h3>
             </div>
@@ -2362,10 +2286,10 @@
             </div>
         </div>
         
-        <span class="slide-number">18 / 20</span>
+        <span class="slide-number">20 / 22</span>
     </section>
 
-    <!-- SLIDE 19: FINAL INTERCALAIRE -->
+    <!-- SLIDE 21: FINAL INTERCALAIRE -->
     <section class="slide slide-intercalaire yellow-bg">
         <div class="intercalaire-content">
             <h2 class="intercalaire-title">
@@ -2377,7 +2301,7 @@
             </p>
         </div>
         <div class="intercalaire-bottom-line"></div>
-        <span class="slide-number" style="color: var(--black);">19 / 20</span>
+        <span class="slide-number" style="color: var(--black);">21 / 22</span>
     </section>
 
     <!-- SLIDE 20: OUTRO -->
@@ -2393,27 +2317,21 @@
             </p>
             <div class="outro-cta">
                 Booker un call
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M5 12h14M12 5l7 7-7 7"/>
-                </svg>
+                <img src="../icons/Arrows/IconArrowRight.svg" alt="Arrow" style="width: 20px; height: 20px; filter: brightness(0) invert(1);">
             </div>
         </div>
         
         <div class="outro-footer">
             <div class="outro-logo">
                 <div class="outro-logo-icon">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="#FFE600" stroke-width="2.5">
-                        <path d="M12 2L2 7l10 5 10-5-10-5z"/>
-                        <path d="M2 17l10 5 10-5"/>
-                        <path d="M2 12l10 5 10-5"/>
-                    </svg>
+                    <img src="../logos/Frame 3.svg" alt="Studio Facile" style="width: 24px; height: 24px; object-fit: contain;">
                 </div>
                 <span class="outro-logo-text">Studio Facile</span>
             </div>
             <span class="outro-year">© 2026</span>
         </div>
         
-        <span class="slide-number" style="color: var(--black); opacity: 0.4;">20 / 20</span>
+        <span class="slide-number" style="color: var(--black); opacity: 0.4;">22 / 22</span>
     </section>
 
     <script>
