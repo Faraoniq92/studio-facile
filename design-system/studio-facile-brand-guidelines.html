@@ -1404,7 +1404,7 @@
             border-radius: var(--radius-2xl);
             overflow: hidden;
             position: relative;
-            box-shadow: 0 8px 32px rgba(0,0,0,0.12);
+            box-shadow: none;
         }
 
         .social-item.si-post {
@@ -2063,9 +2063,11 @@
         
         <div class="bento-grid">
             <div class="bento-item large">
-                <div class="bento-preview">
-                    <div class="bento-preview-content">
-                        <div class="mock-title">Landing Page Hero</div>
+                <div class="bento-preview" style="position:relative;overflow:hidden;">
+                    <div style="position:absolute;inset:0;background-image:url('images/studio-facile-fuite.png');background-size:cover;background-position:center;"></div>
+                    <div style="position:absolute;inset:0;background:rgba(0,0,0,0.45);"></div>
+                    <div class="bento-preview-content" style="position:relative;z-index:1;background:transparent;">
+                        <div class="mock-title" style="color:var(--white);">Landing Page Hero</div>
                         <div class="mock-btn">Get Started</div>
                     </div>
                 </div>
@@ -2128,6 +2130,8 @@
             <!-- Row 1, Col 1 — Insta V1 Pain Point -->
             <div class="social-wrapper">
                 <div class="social-item si-post" style="background:var(--black);">
+                    <div class="si-bg" style="background-image:url('images/studio-facile-fuite.png')"></div>
+                    <div class="si-overlay" style="background:rgba(0,0,0,0.55);"></div>
                     <div class="si-content" style="justify-content:flex-end;padding:32px;">
                         <h3 class="si-headline" style="font-size:58px;color:var(--white);">Ton site fait fuir<br>tes clients ?<br><span class="si-serif" style="color:var(--yellow)">Next.</span></h3>
                     </div>
@@ -2138,17 +2142,10 @@
             <div class="social-wrapper social-story">
                 <div class="social-item si-story" style="background:var(--black);">
                     <div class="si-bg" style="background-image:url('images/studio-facile-time-machine.png')"></div>
-                    <div class="si-overlay" style="background:linear-gradient(180deg,rgba(0,0,0,0.4) 0%,rgba(0,0,0,0.05) 40%,rgba(0,0,0,0.85) 100%)"></div>
-                    <div class="si-content" style="justify-content:space-between;padding:32px;">
-                        <div style="background:var(--yellow);padding:8px 14px;border-radius:var(--radius-md);display:inline-block;align-self:flex-start;">
-                            <span style="font-weight:800;font-size:10px;color:var(--black);letter-spacing:0.05em;">STUDIO FACILE</span>
-                        </div>
+                    <div class="si-overlay" style="background:rgba(0,0,0,0.45);"></div>
+                    <div class="si-content" style="justify-content:center;align-items:center;padding:32px;">
                         <div style="text-align:center;">
-                            <h3 class="si-headline" style="font-size:58px;color:var(--white);text-shadow:0 2px 16px rgba(0,0,0,0.4);">Brief lundi.<br>Live vendredi.<br><span class="si-serif" style="color:var(--yellow)">Point.</span></h3>
-                        </div>
-                        <div style="text-align:center;color:white;">
-                            <div style="font-size:18px;margin-bottom:4px;">↑</div>
-                            <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;">Swipe up</div>
+                            <h3 class="si-headline" style="font-size:58px;color:var(--white);">Brief lundi.<br>Live vendredi.<br><span class="si-serif" style="color:var(--yellow)">Point.</span></h3>
                         </div>
                     </div>
                 </div>
