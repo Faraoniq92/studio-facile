@@ -1,0 +1,1694 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Studio Facile — Landing pages super faciles pour business super chauds</title>
+    <meta name="description" content="On conçoit et code des landing pages simples, rapides et pensées conversion. Livré en quelques jours, pas en quelques mois.">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- PP Editorial Old: self-hosted -->
+    <style>
+        @font-face {
+            font-family: 'PP Editorial Old';
+            src: url('./fonts/PPEditorialOld-Italic.otf') format('opentype');
+            font-weight: 400;
+            font-style: italic;
+            font-display: swap;
+        }
+        @font-face {
+            font-family: 'PP Editorial Old';
+            src: url('./fonts/PPEditorialOld-UltraboldItalic.otf') format('opentype');
+            font-weight: 700;
+            font-style: italic;
+            font-display: swap;
+        }
+    </style>
+    
+    <style>
+        /* ═══════════════════════════════════════════════════════════════
+           DESIGN TOKENS
+           ═══════════════════════════════════════════════════════════════ */
+        :root {
+            /* Colors */
+            --color-yellow: #FFE600;
+            --color-yellow-light: #FFE600;
+            --color-yellow-dark: #E6CF00;
+            --color-black: #1D1D1B;
+            --color-white: #FFFFFF;
+            --color-cream: #FFFDF7;
+            
+            --color-gray-900: #1D1D1B;
+            --color-gray-800: #2D2D2B;
+            --color-gray-700: #4A4A4A;
+            --color-gray-600: #6A6A6A;
+            --color-gray-500: #8A8A8A;
+            --color-gray-400: #ABABAB;
+            --color-gray-300: #D4D4D4;
+            --color-gray-200: #E8E8E8;
+            --color-gray-100: #F5F5F5;
+            --color-gray-50: #FAFAFA;
+            
+            --color-success: #22C55E;
+            --color-error: #EF4444;
+            
+            /* Typography */
+            --font-sans: 'Manrope', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            --font-serif: 'PP Editorial Old', Georgia, serif;
+            
+            /* Spacing — Base 8px */
+            --space-0: 0;
+            --space-1: 0.25rem;
+            --space-2: 0.5rem;
+            --space-3: 0.75rem;
+            --space-4: 1rem;
+            --space-5: 1.25rem;
+            --space-6: 1.5rem;
+            --space-7: 1.75rem;
+            --space-8: 2rem;
+            --space-9: 2.5rem;
+            --space-10: 3rem;
+            --space-11: 3.5rem;
+            --space-12: 4rem;
+            --space-13: 5rem;
+            --space-14: 6rem;
+            --space-15: 8rem;
+            --space-16: 10rem;
+            
+            /* Radius */
+            --radius-sm: 4px;
+            --radius-md: 8px;
+            --radius-lg: 12px;
+            --radius-xl: 16px;
+            --radius-2xl: 24px;
+            --radius-3xl: 32px;
+            --radius-full: 9999px;
+            
+            /* Shadows */
+            --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.04);
+            --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.06);
+            --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.08);
+            --shadow-xl: 0 16px 48px rgba(0, 0, 0, 0.12);
+            
+            /* Transitions */
+            --duration-fast: 150ms;
+            --duration-normal: 250ms;
+            --duration-slow: 400ms;
+            --ease-out: cubic-bezier(0.33, 1, 0.68, 1);
+            
+            /* Bento */
+            --bento-gap: var(--space-6);
+            --bento-padding: var(--space-9);
+            --bento-radius: var(--radius-3xl);
+        }
+        
+        /* ═══════════════════════════════════════════════════════════════
+           RESET
+           ═══════════════════════════════════════════════════════════════ */
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        
+        body {
+            font-family: var(--font-sans);
+            font-size: 16px;
+            line-height: 1.6;
+            color: var(--color-gray-900);
+            background: var(--color-white);
+        }
+        
+        img, svg {
+            display: block;
+            max-width: 100%;
+            height: auto;
+        }
+        
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+        
+        button {
+            font-family: inherit;
+            cursor: pointer;
+            border: none;
+            background: none;
+        }
+        
+        /* ═══════════════════════════════════════════════════════════════
+           LAYOUT
+           ═══════════════════════════════════════════════════════════════ */
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 var(--space-6);
+        }
+        
+        .container--narrow {
+            max-width: 800px;
+        }
+        
+        /* ═══════════════════════════════════════════════════════════════
+           TYPOGRAPHY
+           ═══════════════════════════════════════════════════════════════ */
+        .serif-accent {
+            font-family: var(--font-serif);
+            font-style: italic;
+            font-weight: 700;
+            letter-spacing: -0.03em;
+        }
+        
+        h1 {
+            font-size: clamp(2.5rem, 5vw, 3.5rem);
+            font-weight: 700;
+            line-height: 1.1;
+            letter-spacing: -0.03em;
+        }
+        
+        h2 {
+            font-size: clamp(2rem, 4vw, 2.75rem);
+            font-weight: 700;
+            line-height: 1.15;
+            letter-spacing: -0.02em;
+        }
+        
+        h3 {
+            font-size: 1.25rem;
+            font-weight: 700;
+            line-height: 1.3;
+        }
+        
+        .lead {
+            font-size: 1.125rem;
+            line-height: 1.6;
+            color: var(--color-gray-600);
+        }
+        
+        .text-sm {
+            font-size: 0.875rem;
+        }
+        
+        .text-xs {
+            font-size: 0.75rem;
+        }
+        
+        /* ═══════════════════════════════════════════════════════════════
+           BUTTONS
+           ═══════════════════════════════════════════════════════════════ */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: var(--space-2);
+            padding: var(--space-4) var(--space-7);
+            font-size: 0.9375rem;
+            font-weight: 600;
+            line-height: 1;
+            border-radius: var(--radius-full);
+            transition: all var(--duration-fast) var(--ease-out);
+        }
+        
+        .btn--primary {
+            background: var(--color-black);
+            color: var(--color-white);
+        }
+        
+        .btn--primary:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+        
+        .btn--secondary {
+            background: var(--color-white);
+            color: var(--color-black);
+            box-shadow: inset 0 0 0 2px var(--color-gray-200);
+        }
+        
+        .btn--secondary:hover {
+            box-shadow: inset 0 0 0 2px var(--color-black);
+        }
+        
+        .btn--yellow {
+            background: var(--color-yellow);
+            color: var(--color-black);
+        }
+        
+        .btn--yellow:hover {
+            background: var(--color-yellow-dark);
+            transform: translateY(-2px);
+        }
+        
+        .btn--ghost {
+            background: transparent;
+            color: var(--color-black);
+        }
+        
+        .btn--ghost:hover {
+            background: var(--color-gray-100);
+        }
+        
+        .btn--sm {
+            padding: var(--space-3) var(--space-5);
+            font-size: 0.8125rem;
+        }
+        
+        /* ═══════════════════════════════════════════════════════════════
+           NAVIGATION
+           ═══════════════════════════════════════════════════════════════ */
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            padding: var(--space-5) 0;
+            transition: all var(--duration-normal) var(--ease-out);
+        }
+        
+        .nav.is-scrolled {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--color-gray-100);
+            padding: var(--space-4) 0;
+        }
+        
+        .nav__inner {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        .nav__logo svg {
+            height: 42px;
+            width: auto;
+        }
+
+        .nav__menu {
+            display: flex;
+            align-items: center;
+            gap: var(--space-2);
+        }
+        
+        .nav__link {
+            padding: var(--space-2) var(--space-4);
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: var(--color-gray-700);
+            border-radius: var(--radius-full);
+            transition: all var(--duration-fast);
+        }
+        
+        .nav__link:hover {
+            color: var(--color-black);
+            background: var(--color-gray-100);
+        }
+        
+        .nav__cta {
+            margin-left: var(--space-4);
+        }
+        
+        .nav__mobile {
+            display: none;
+        }
+        
+        @media (max-width: 768px) {
+            .nav__menu { display: none; }
+            .nav__mobile {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                width: 40px;
+                height: 40px;
+                background: var(--color-gray-100);
+                border-radius: var(--radius-md);
+            }
+        }
+        
+        /* ═══════════════════════════════════════════════════════════════
+           HERO
+           ═══════════════════════════════════════════════════════════════ */
+        .hero {
+            padding: calc(var(--space-16) + 40px) 0 var(--space-14);
+            background: var(--color-yellow);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero__content {
+            text-align: center;
+            max-width: 720px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .hero__logo {
+            margin-bottom: var(--space-10);
+        }
+        
+        .hero__logo svg {
+            height: 150px;
+            width: auto;
+            margin: 0 auto;
+        }
+        
+        .hero__title {
+            margin-bottom: var(--space-6);
+        }
+        
+        .hero__subtitle {
+            font-size: 1.25rem;
+            color: var(--color-gray-800);
+            margin-bottom: var(--space-8);
+            max-width: 540px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .hero__actions {
+            display: flex;
+            justify-content: center;
+            gap: var(--space-4);
+            flex-wrap: wrap;
+        }
+        
+        /* ═══════════════════════════════════════════════════════════════
+           TRUST BADGES
+           ═══════════════════════════════════════════════════════════════ */
+        .trust-badges {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: var(--space-8);
+            margin-top: var(--space-12);
+            flex-wrap: wrap;
+        }
+        
+        .trust-badge {
+            display: flex;
+            align-items: center;
+            gap: var(--space-3);
+            padding: var(--space-3) var(--space-5);
+            background: rgba(255, 255, 255, 0.6);
+            border-radius: var(--radius-full);
+            backdrop-filter: blur(8px);
+        }
+        
+        .trust-badge__icon {
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .trust-badge__icon svg {
+            width: 20px;
+            height: 20px;
+        }
+        
+        .trust-badge__text {
+            font-size: 0.8125rem;
+            font-weight: 600;
+            color: var(--color-gray-800);
+        }
+        
+        /* ═══════════════════════════════════════════════════════════════
+           STATS
+           ═══════════════════════════════════════════════════════════════ */
+        .stats {
+            padding: var(--space-12) 0;
+            background: var(--color-white);
+            border-bottom: 1px solid var(--color-gray-100);
+        }
+        
+        .stats__grid {
+            display: flex;
+            justify-content: center;
+            gap: var(--space-14);
+            flex-wrap: wrap;
+        }
+        
+        .stat {
+            text-align: center;
+        }
+        
+        .stat__number {
+            font-size: clamp(2.5rem, 5vw, 3.5rem);
+            font-weight: 800;
+            line-height: 1;
+            letter-spacing: -0.03em;
+            color: var(--color-black);
+            margin-bottom: var(--space-2);
+        }
+        
+        .stat__label {
+            font-size: 0.9375rem;
+            color: var(--color-gray-500);
+            font-weight: 500;
+        }
+        
+        /* ═══════════════════════════════════════════════════════════════
+           SECTION
+           ═══════════════════════════════════════════════════════════════ */
+        .section {
+            padding: var(--space-15) 0;
+        }
+        
+        .section--gray {
+            background: var(--color-gray-50);
+        }
+        
+        .section--cream {
+            background: var(--color-cream);
+        }
+        
+        .section--dark {
+            background: var(--color-black);
+            color: var(--color-white);
+        }
+        
+        .section__header {
+            text-align: center;
+            max-width: 600px;
+            margin: 0 auto var(--space-12);
+        }
+        
+        .section__eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--space-2);
+            padding: var(--space-2) var(--space-4);
+            background: var(--color-yellow-light);
+            border-radius: var(--radius-full);
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--color-gray-800);
+            margin-bottom: var(--space-5);
+        }
+        
+        .section__title {
+            margin-bottom: var(--space-4);
+        }
+        
+        .section__desc {
+            color: var(--color-gray-600);
+            font-size: 1.125rem;
+        }
+        
+        .section--dark .section__desc {
+            color: var(--color-gray-400);
+        }
+        
+        /* ═══════════════════════════════════════════════════════════════
+           BENTO GRID
+           ═══════════════════════════════════════════════════════════════ */
+        .bento {
+            display: flex;
+            padding: var(--bento-padding);
+            gap: var(--bento-gap);
+            background: var(--color-gray-100);
+            border-radius: var(--bento-radius);
+        }
+        
+        .bento-card {
+            flex: 1;
+            background: var(--color-white);
+            border-radius: var(--radius-2xl);
+            padding: var(--space-9) var(--space-8);
+            display: flex;
+            flex-direction: column;
+            transition: all var(--duration-normal) var(--ease-out);
+        }
+        
+        .bento-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-lg);
+        }
+        
+        .bento-card__icon {
+            width: 48px;
+            height: 48px;
+            background: var(--color-black);
+            border-radius: var(--radius-lg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: var(--space-6);
+        }
+        
+        .bento-card__icon svg {
+            width: 24px;
+            height: 24px;
+            stroke: var(--color-white);
+            fill: none;
+            stroke-width: 2;
+        }
+        
+        .bento-card__illustration {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 180px;
+            margin-bottom: var(--space-6);
+        }
+        
+        .bento-card__illustration img {
+            max-height: 200px;
+            object-fit: contain;
+            filter: drop-shadow(0 8px 24px rgba(0,0,0,0.1));
+        }
+        
+        .bento-card__text {
+            font-size: 1rem;
+            color: var(--color-gray-600);
+            line-height: 1.5;
+        }
+        
+        @media (max-width: 768px) {
+            .bento {
+                flex-direction: column;
+                padding: var(--space-6);
+            }
+            .bento-card {
+                padding: var(--space-8) var(--space-6);
+            }
+        }
+        
+        /* ═══════════════════════════════════════════════════════════════
+           FEATURES
+           ═══════════════════════════════════════════════════════════════ */
+        .features__grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: var(--space-6);
+        }
+        
+        .feature-card {
+            background: var(--color-white);
+            border-radius: var(--radius-2xl);
+            padding: var(--space-8);
+            border: 1px solid var(--color-gray-100);
+            transition: all var(--duration-normal) var(--ease-out);
+        }
+        
+        .feature-card:hover {
+            border-color: var(--color-gray-200);
+            box-shadow: var(--shadow-lg);
+            transform: translateY(-4px);
+        }
+        
+        .feature-card__icon {
+            width: 56px;
+            height: 56px;
+            background: var(--color-yellow-light);
+            border-radius: var(--radius-xl);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: var(--space-5);
+        }
+
+        .feature-card__icon svg {
+            width: 28px;
+            height: 28px;
+        }
+        
+        .feature-card h3 {
+            margin-bottom: var(--space-3);
+        }
+        
+        .feature-card p {
+            font-size: 0.9375rem;
+            color: var(--color-gray-600);
+            line-height: 1.5;
+        }
+        
+        @media (max-width: 1024px) {
+            .features__grid { grid-template-columns: repeat(2, 1fr); }
+        }
+        @media (max-width: 600px) {
+            .features__grid { grid-template-columns: 1fr; }
+        }
+        
+        /* ═══════════════════════════════════════════════════════════════
+           PROCESS
+           ═══════════════════════════════════════════════════════════════ */
+        .process__grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: var(--space-8);
+        }
+        
+        .process-step {
+            position: relative;
+        }
+        
+        .process-step__number {
+            width: 48px;
+            height: 48px;
+            background: var(--color-yellow);
+            border-radius: var(--radius-full);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.125rem;
+            font-weight: 700;
+            margin-bottom: var(--space-5);
+        }
+        
+        .process-step__line {
+            position: absolute;
+            top: 24px;
+            left: 56px;
+            right: -8px;
+            height: 2px;
+            background: var(--color-gray-200);
+        }
+        
+        .process-step:last-child .process-step__line {
+            display: none;
+        }
+        
+        .process-step h3 {
+            margin-bottom: var(--space-2);
+        }
+        
+        .process-step p {
+            font-size: 0.9375rem;
+            color: var(--color-gray-600);
+            line-height: 1.5;
+        }
+        
+        @media (max-width: 900px) {
+            .process__grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: var(--space-10);
+            }
+            .process-step__line { display: none; }
+        }
+        @media (max-width: 600px) {
+            .process__grid { grid-template-columns: 1fr; }
+        }
+        
+        /* ═══════════════════════════════════════════════════════════════
+           PORTFOLIO
+           ═══════════════════════════════════════════════════════════════ */
+        .portfolio__grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: var(--space-6);
+        }
+        
+        .portfolio-item {
+            position: relative;
+            border-radius: var(--radius-2xl);
+            overflow: hidden;
+            aspect-ratio: 16 / 10;
+            background: var(--color-gray-100);
+            transition: all var(--duration-normal) var(--ease-out);
+        }
+        
+        .portfolio-item:hover {
+            transform: scale(1.02);
+            box-shadow: var(--shadow-xl);
+        }
+        
+        .portfolio-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .portfolio-item__overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(29,29,27,0.9) 0%, transparent 50%);
+            display: flex;
+            align-items: flex-end;
+            padding: var(--space-6);
+            opacity: 0;
+            transition: opacity var(--duration-normal);
+        }
+        
+        .portfolio-item:hover .portfolio-item__overlay {
+            opacity: 1;
+        }
+        
+        .portfolio-item__info h3 {
+            color: var(--color-white);
+            margin-bottom: var(--space-1);
+        }
+        
+        .portfolio-item__info p {
+            color: rgba(255,255,255,0.7);
+            font-size: 0.875rem;
+        }
+        
+        .portfolio-item__placeholder {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            color: var(--color-gray-400);
+        }
+        
+        .portfolio-item__placeholder-icon {
+            margin-bottom: var(--space-3);
+        }
+
+        .portfolio-item__placeholder-icon svg {
+            width: 32px;
+            height: 32px;
+        }
+        
+        @media (max-width: 600px) {
+            .portfolio__grid { grid-template-columns: 1fr; }
+        }
+        
+        /* ═══════════════════════════════════════════════════════════════
+           PRICING
+           ═══════════════════════════════════════════════════════════════ */
+        .pricing__grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: var(--space-6);
+            align-items: start;
+        }
+        
+        .pricing-card {
+            background: var(--color-white);
+            border-radius: var(--radius-2xl);
+            padding: var(--space-8);
+            border: 1px solid var(--color-gray-100);
+            position: relative;
+            transition: all var(--duration-normal) var(--ease-out);
+        }
+        
+        .pricing-card:hover {
+            border-color: var(--color-gray-200);
+            box-shadow: var(--shadow-lg);
+        }
+        
+        .pricing-card--popular {
+            border-color: var(--color-yellow);
+            border-width: 2px;
+        }
+        
+        .pricing-card__badge {
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--color-yellow);
+            padding: var(--space-2) var(--space-4);
+            border-radius: var(--radius-full);
+            font-size: 0.6875rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        
+        .pricing-card__name {
+            font-size: 1.125rem;
+            font-weight: 700;
+            margin-bottom: var(--space-1);
+        }
+        
+        .pricing-card__desc {
+            font-size: 0.875rem;
+            color: var(--color-gray-500);
+            margin-bottom: var(--space-6);
+        }
+        
+        .pricing-card__price {
+            margin-bottom: var(--space-6);
+        }
+        
+        .pricing-card__amount {
+            font-size: 2.5rem;
+            font-weight: 800;
+            line-height: 1;
+            letter-spacing: -0.02em;
+        }
+        
+        .pricing-card__period {
+            font-size: 0.875rem;
+            color: var(--color-gray-500);
+        }
+        
+        .pricing-card__features {
+            list-style: none;
+            margin-bottom: var(--space-8);
+        }
+        
+        .pricing-card__features li {
+            display: flex;
+            align-items: flex-start;
+            gap: var(--space-3);
+            padding: var(--space-2) 0;
+            font-size: 0.9375rem;
+            color: var(--color-gray-700);
+        }
+        
+        .pricing-card__features li::before {
+            content: '✓';
+            color: var(--color-success);
+            font-weight: 600;
+        }
+        
+        .pricing-card .btn {
+            width: 100%;
+        }
+        
+        @media (max-width: 900px) {
+            .pricing__grid {
+                grid-template-columns: 1fr;
+                max-width: 400px;
+                margin: 0 auto;
+            }
+        }
+        
+        /* ═══════════════════════════════════════════════════════════════
+           TESTIMONIALS
+           ═══════════════════════════════════════════════════════════════ */
+        .testimonials__logos {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: var(--space-10);
+            margin-bottom: var(--space-12);
+            flex-wrap: wrap;
+        }
+        
+        .testimonials__logos img {
+            height: 32px;
+            opacity: 0.4;
+            transition: opacity var(--duration-fast);
+        }
+        
+        .testimonials__logos img:hover {
+            opacity: 1;
+        }
+        
+        .testimonial-card {
+            background: var(--color-white);
+            border-radius: var(--radius-2xl);
+            padding: var(--space-8);
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--space-8);
+            align-items: center;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        
+        .testimonial-card__content {
+            order: 1;
+        }
+        
+        .testimonial-card__quote {
+            font-size: 1.25rem;
+            line-height: 1.5;
+            margin-bottom: var(--space-6);
+        }
+        
+        .testimonial-card__quote::before { content: '« '; }
+        .testimonial-card__quote::after { content: ' »'; }
+        
+        .testimonial-card__author {
+            display: flex;
+            align-items: center;
+            gap: var(--space-4);
+        }
+        
+        .testimonial-card__avatar {
+            width: 48px;
+            height: 48px;
+            background: var(--color-gray-200);
+            border-radius: var(--radius-full);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            font-size: 0.875rem;
+            color: var(--color-gray-500);
+        }
+        
+        .testimonial-card__name {
+            font-weight: 700;
+            font-size: 0.9375rem;
+        }
+        
+        .testimonial-card__role {
+            font-size: 0.8125rem;
+            color: var(--color-gray-500);
+        }
+        
+        .testimonial-card__image {
+            order: 2;
+            border-radius: var(--radius-xl);
+            overflow: hidden;
+            aspect-ratio: 4/3;
+            background: var(--color-gray-100);
+        }
+        
+        .testimonial-card__image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        @media (max-width: 768px) {
+            .testimonial-card {
+                grid-template-columns: 1fr;
+            }
+            .testimonial-card__image {
+                order: -1;
+            }
+        }
+        
+        /* ═══════════════════════════════════════════════════════════════
+           FAQ
+           ═══════════════════════════════════════════════════════════════ */
+        .faq__list {
+            max-width: 720px;
+            margin: 0 auto;
+        }
+        
+        .faq-item {
+            border-bottom: 1px solid var(--color-gray-200);
+        }
+        
+        .faq-item__question {
+            width: 100%;
+            padding: var(--space-6) 0;
+            font-size: 1rem;
+            font-weight: 600;
+            text-align: left;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: var(--space-4);
+        }
+        
+        .faq-item__icon {
+            width: 28px;
+            height: 28px;
+            background: var(--color-gray-100);
+            border-radius: var(--radius-full);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+            transition: all var(--duration-fast);
+            flex-shrink: 0;
+        }
+        
+        .faq-item.is-active .faq-item__icon {
+            transform: rotate(45deg);
+            background: var(--color-yellow);
+        }
+        
+        .faq-item__answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height var(--duration-slow) var(--ease-out);
+        }
+        
+        .faq-item.is-active .faq-item__answer {
+            max-height: 400px;
+        }
+        
+        .faq-item__answer-inner {
+            padding-bottom: var(--space-6);
+            color: var(--color-gray-600);
+            line-height: 1.7;
+        }
+        
+        /* ═══════════════════════════════════════════════════════════════
+           CTA FINAL
+           ═══════════════════════════════════════════════════════════════ */
+        .cta-final {
+            text-align: center;
+            padding: var(--space-16) 0;
+        }
+        
+        .cta-final h2 {
+            margin-bottom: var(--space-4);
+        }
+        
+        .cta-final .lead {
+            margin-bottom: var(--space-8);
+            color: var(--color-gray-400);
+        }
+        
+        /* ═══════════════════════════════════════════════════════════════
+           FOOTER
+           ═══════════════════════════════════════════════════════════════ */
+        .footer {
+            background: var(--color-black);
+            color: var(--color-white);
+            padding: var(--space-12) 0 var(--space-8);
+        }
+        
+        .footer__top {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: var(--space-12);
+            padding-bottom: var(--space-10);
+            border-bottom: 1px solid var(--color-gray-800);
+            margin-bottom: var(--space-8);
+            flex-wrap: wrap;
+        }
+        
+        .footer__brand {
+            max-width: 280px;
+        }
+        
+        .footer__logo {
+            margin-bottom: var(--space-4);
+        }
+        
+        .footer__logo svg {
+            height: 48px;
+        }
+        
+        .footer__logo svg path {
+            fill: var(--color-white);
+        }
+        
+        .footer__tagline {
+            font-size: 0.9375rem;
+            color: var(--color-gray-400);
+            line-height: 1.6;
+        }
+        
+        .footer__links {
+            display: flex;
+            gap: var(--space-12);
+        }
+        
+        .footer__col h4 {
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--color-gray-500);
+            margin-bottom: var(--space-4);
+        }
+        
+        .footer__col a {
+            display: block;
+            padding: var(--space-2) 0;
+            font-size: 0.9375rem;
+            color: var(--color-gray-300);
+            transition: color var(--duration-fast);
+        }
+        
+        .footer__col a:hover {
+            color: var(--color-white);
+        }
+        
+        .footer__bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: var(--space-4);
+        }
+        
+        .footer__legal {
+            font-size: 0.8125rem;
+            color: var(--color-gray-500);
+        }
+        
+        .footer__legal a {
+            color: var(--color-gray-500);
+            transition: color var(--duration-fast);
+        }
+        
+        .footer__legal a:hover {
+            color: var(--color-white);
+        }
+        
+        @media (max-width: 768px) {
+            .footer__top {
+                flex-direction: column;
+            }
+            .footer__links {
+                flex-wrap: wrap;
+                gap: var(--space-8);
+            }
+        }
+        
+        /* ═══════════════════════════════════════════════════════════════
+           ANIMATIONS
+           ═══════════════════════════════════════════════════════════════ */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .animate-in {
+            animation: fadeInUp 0.7s var(--ease-out) forwards;
+            opacity: 0;
+        }
+        
+        .animate-delay-1 { animation-delay: 0.1s; }
+        .animate-delay-2 { animation-delay: 0.2s; }
+        .animate-delay-3 { animation-delay: 0.3s; }
+        .animate-delay-4 { animation-delay: 0.4s; }
+    </style>
+</head>
+<body>
+    <!-- NAVIGATION -->
+    <nav class="nav" id="nav">
+        <div class="container">
+            <div class="nav__inner">
+                <a href="#" class="nav__logo">
+                    <svg viewBox="0 0 371 235" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M-1.14092e-05 126.364L14.0144 122.51V129.595L35.0361 123.833V109.663L6.96828 117.332V110.247L-0.0389404 112.155V83.8142L6.96828 81.9067V74.8216L42.0433 65.2061V72.2912L49.0506 70.3837V84.5538L35.0361 88.4078V81.3227L14.0144 87.0842V101.254L42.0823 93.5854V100.67L49.0895 98.7629V127.103L42.0823 129.011V136.096L7.00721 145.711V138.626L-1.14092e-05 140.534V126.364Z" fill="#1D1D1B"/>
+                        <path d="M70.1111 71.7462L56.0966 75.6002V61.43L98.1789 49.907V64.0772L84.1644 67.9312V124.573L70.15 128.427V71.7852L70.1111 71.7462Z" fill="#1D1D1B"/>
+                        <path d="M133.254 89.8871L140.261 87.9796V38.423L154.276 34.569V98.2958L147.269 100.203V107.288L112.194 116.904V109.819L105.186 111.726V47.9995L119.201 44.1455V93.7022L126.208 91.7947V98.8797L133.215 96.9722V89.8871H133.254Z" fill="#1D1D1B"/>
+                        <path d="M161.283 32.6226L203.365 21.0996V28.1847L210.372 26.2771V82.9189L203.365 84.8264V91.9115L161.283 103.434V32.6226ZM189.351 74.5102L196.358 72.6027V44.2623L189.351 46.1699V39.0848L175.336 42.9388V85.4103L189.351 81.5564V74.4713V74.5102Z" fill="#1D1D1B"/>
+                        <path d="M217.38 17.2845L231.394 13.4306V84.2424L217.38 88.0964V17.2845Z" fill="#1D1D1B"/>
+                        <path d="M238.44 18.6081L245.448 16.7006V9.61547L280.523 0V7.08508L287.53 5.17756V61.8193L280.523 63.7268V70.8119L245.448 80.4274V73.3423L238.44 75.2498V18.6081ZM266.469 53.4106L273.476 51.5031V23.1628L266.469 25.0703V17.9852L259.462 19.8927V26.9778L252.455 28.8853V57.2257L259.462 55.3181V62.4032L266.469 60.4957V53.4106Z" fill="#1D1D1B"/>
+                        <path d="M85.6439 146.373L362.974 68.6708V146.568L85.6439 224.27V146.373Z" fill="#1D1D1B"/>
+                        <path d="M355.188 78.9091V140.612L93.4296 213.993V152.29L355.188 78.9091ZM370.76 58.3935L77.858 140.456V234.508L370.76 152.446V58.3935Z" fill="#1D1D1B"/>
+                        <path d="M107.133 170.859L128.154 165.098V179.268L107.133 185.029V213.37L93.1182 217.224V146.412L135.2 134.889V149.059L107.133 156.728V170.898V170.859Z" fill="white"/>
+                        <path d="M142.208 154.198L149.215 152.29V145.205L156.222 143.298V136.213L163.229 134.305V127.22L170.236 125.313V132.398L177.244 130.49V137.575L184.251 135.668V142.753L191.258 140.845V190.402L177.244 194.256V180.086L156.222 185.847V200.017L142.208 203.871V154.315V154.198ZM156.222 171.599L177.244 165.838V151.667L170.236 153.575V146.49L163.229 148.397V155.483L156.222 157.39V171.56V171.599Z" fill="white"/>
+                        <path d="M233.341 157.546L247.355 153.692V167.862L240.348 169.769V176.854L205.273 186.47V179.385L198.266 181.292V124.651L205.273 122.743V115.658L240.348 106.043V113.128L247.355 111.22V125.39L233.341 129.244V122.159L219.326 126.013V133.098L212.319 135.006V163.346L219.326 161.439V168.524L233.341 164.67V157.585V157.546Z" fill="white"/>
+                        <path d="M254.401 102.228L268.416 98.3736V169.185L254.401 173.039V102.228Z" fill="white"/>
+                        <path d="M289.437 149.293L310.459 143.531V157.701L275.384 167.317V96.466L289.398 92.6121V149.254L289.437 149.293Z" fill="white"/>
+                        <path d="M331.52 137.77L359.587 130.101V144.271L317.505 155.794V84.9431L359.587 73.4201V87.5902L331.52 95.2593V109.429L352.541 103.668V117.838L331.52 123.6V137.77Z" fill="white"/>
+                    </svg>
+                </a>
+                
+                <div class="nav__menu">
+                    <a href="#features" class="nav__link">Services</a>
+                    <a href="#portfolio" class="nav__link">Portfolio</a>
+                    <a href="#pricing" class="nav__link">Tarifs</a>
+                    <a href="#faq" class="nav__link">FAQ</a>
+                    <a href="#contact" class="btn btn--primary btn--sm nav__cta">Prendre RDV</a>
+                </div>
+                
+                <button class="nav__mobile" aria-label="Menu">
+                    <svg width="20" height="14" viewBox="0 0 20 14" fill="none">
+                        <path d="M1 1H19M1 7H19M1 13H19" stroke="#1D1D1B" stroke-width="2" stroke-linecap="round"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </nav>
+    
+    <!-- HERO -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero__content">
+                <div class="hero__logo animate-in">
+                    <svg viewBox="0 0 371 235" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M-1.14092e-05 126.364L14.0144 122.51V129.595L35.0361 123.833V109.663L6.96828 117.332V110.247L-0.0389404 112.155V83.8142L6.96828 81.9067V74.8216L42.0433 65.2061V72.2912L49.0506 70.3837V84.5538L35.0361 88.4078V81.3227L14.0144 87.0842V101.254L42.0823 93.5854V100.67L49.0895 98.7629V127.103L42.0823 129.011V136.096L7.00721 145.711V138.626L-1.14092e-05 140.534V126.364Z" fill="#1D1D1B"/>
+                        <path d="M70.1111 71.7462L56.0966 75.6002V61.43L98.1789 49.907V64.0772L84.1644 67.9312V124.573L70.15 128.427V71.7852L70.1111 71.7462Z" fill="#1D1D1B"/>
+                        <path d="M133.254 89.8871L140.261 87.9796V38.423L154.276 34.569V98.2958L147.269 100.203V107.288L112.194 116.904V109.819L105.186 111.726V47.9995L119.201 44.1455V93.7022L126.208 91.7947V98.8797L133.215 96.9722V89.8871H133.254Z" fill="#1D1D1B"/>
+                        <path d="M161.283 32.6226L203.365 21.0996V28.1847L210.372 26.2771V82.9189L203.365 84.8264V91.9115L161.283 103.434V32.6226ZM189.351 74.5102L196.358 72.6027V44.2623L189.351 46.1699V39.0848L175.336 42.9388V85.4103L189.351 81.5564V74.4713V74.5102Z" fill="#1D1D1B"/>
+                        <path d="M217.38 17.2845L231.394 13.4306V84.2424L217.38 88.0964V17.2845Z" fill="#1D1D1B"/>
+                        <path d="M238.44 18.6081L245.448 16.7006V9.61547L280.523 0V7.08508L287.53 5.17756V61.8193L280.523 63.7268V70.8119L245.448 80.4274V73.3423L238.44 75.2498V18.6081ZM266.469 53.4106L273.476 51.5031V23.1628L266.469 25.0703V17.9852L259.462 19.8927V26.9778L252.455 28.8853V57.2257L259.462 55.3181V62.4032L266.469 60.4957V53.4106Z" fill="#1D1D1B"/>
+                        <path d="M85.6439 146.373L362.974 68.6708V146.568L85.6439 224.27V146.373Z" fill="#1D1D1B"/>
+                        <path d="M355.188 78.9091V140.612L93.4296 213.993V152.29L355.188 78.9091ZM370.76 58.3935L77.858 140.456V234.508L370.76 152.446V58.3935Z" fill="#1D1D1B"/>
+                        <path d="M107.133 170.859L128.154 165.098V179.268L107.133 185.029V213.37L93.1182 217.224V146.412L135.2 134.889V149.059L107.133 156.728V170.898V170.859Z" fill="white"/>
+                        <path d="M142.208 154.198L149.215 152.29V145.205L156.222 143.298V136.213L163.229 134.305V127.22L170.236 125.313V132.398L177.244 130.49V137.575L184.251 135.668V142.753L191.258 140.845V190.402L177.244 194.256V180.086L156.222 185.847V200.017L142.208 203.871V154.315V154.198ZM156.222 171.599L177.244 165.838V151.667L170.236 153.575V146.49L163.229 148.397V155.483L156.222 157.39V171.56V171.599Z" fill="white"/>
+                        <path d="M233.341 157.546L247.355 153.692V167.862L240.348 169.769V176.854L205.273 186.47V179.385L198.266 181.292V124.651L205.273 122.743V115.658L240.348 106.043V113.128L247.355 111.22V125.39L233.341 129.244V122.159L219.326 126.013V133.098L212.319 135.006V163.346L219.326 161.439V168.524L233.341 164.67V157.585V157.546Z" fill="white"/>
+                        <path d="M254.401 102.228L268.416 98.3736V169.185L254.401 173.039V102.228Z" fill="white"/>
+                        <path d="M289.437 149.293L310.459 143.531V157.701L275.384 167.317V96.466L289.398 92.6121V149.254L289.437 149.293Z" fill="white"/>
+                        <path d="M331.52 137.77L359.587 130.101V144.271L317.505 155.794V84.9431L359.587 73.4201V87.5902L331.52 95.2593V109.429L352.541 103.668V117.838L331.52 123.6V137.77Z" fill="white"/>
+                    </svg>
+                </div>
+                
+                <h1 class="hero__title animate-in animate-delay-1">
+                    Ta landing page<br><span class="serif-accent">livrée en 7 jours</span>
+                </h1>
+                
+                <p class="hero__subtitle animate-in animate-delay-2">
+                    Design sur-mesure, code propre, pensé conversion.<br>Sans les réunions à rallonge.
+                </p>
+                
+                <div class="hero__actions animate-in animate-delay-3">
+                    <a href="#contact" class="btn btn--primary">Tester mon éligibilité</a>
+                    <a href="#features" class="btn btn--secondary">Comment ça marche</a>
+                </div>
+                
+                <!-- Trust badges style Defacto -->
+                <div class="trust-badges animate-in animate-delay-4">
+                    <div class="trust-badge">
+                        <span class="trust-badge__icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"><path d="M10 1C9.44772 1 9 1.44772 9 2C9 2.55228 9.44772 3 10 3H14C14.5523 3 15 2.55228 15 2C15 1.44772 14.5523 1 14 1H10Z" fill="currentColor"/><path fill-rule="evenodd" clip-rule="evenodd" d="M21 13C21 17.9706 16.9706 22 12 22C7.02944 22 3 17.9706 3 13C3 8.02944 7.02944 4 12 4C16.9706 4 21 8.02944 21 13ZM8.29289 10.7071C7.90237 10.3166 7.90237 9.68342 8.29289 9.29289C8.68342 8.90237 9.31658 8.90237 9.70711 9.29289L12.7071 12.2929C13.0976 12.6834 13.0976 13.3166 12.7071 13.7071C12.3166 14.0976 11.6834 14.0976 11.2929 13.7071L8.29289 10.7071Z" fill="currentColor"/></svg></span>
+                        <span class="trust-badge__text">Livré en 7 jours</span>
+                    </div>
+                    <div class="trust-badge">
+                        <span class="trust-badge__icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"><path d="M11 2C11.5523 2 12 2.44772 12 3V4.5C12 5.05228 11.5523 5.5 11 5.5C10.4477 5.5 10 5.05228 10 4.5V3C10 2.44772 10.4477 2 11 2Z" fill="currentColor"/><path d="M17.3634 4.63582C17.7539 5.02634 17.7539 5.65951 17.3634 6.05003L16.3027 7.11069C15.9122 7.50122 15.279 7.50122 14.8885 7.11069C14.498 6.72017 14.498 6.087 14.8885 5.69648L15.9491 4.63582C16.3397 4.24529 16.9728 4.24529 17.3634 4.63582Z" fill="currentColor"/><path d="M7.1114 16.303C7.50193 15.9124 7.50193 15.2793 7.1114 14.8887C6.72088 14.4982 6.08771 14.4982 5.69719 14.8887L4.63653 15.9494C4.24601 16.3399 4.24601 16.9731 4.63653 17.3636C5.02705 17.7541 5.66022 17.7541 6.05074 17.3636L7.1114 16.303Z" fill="currentColor"/><path d="M5.5 11C5.5 11.5523 5.05228 12 4.5 12H3C2.44772 12 2 11.5523 2 11C2 10.4477 2.44772 10 3 10H4.5C5.05228 10 5.5 10.4477 5.5 11Z" fill="currentColor"/><path d="M5.69704 7.1114C6.08756 7.50193 6.72073 7.50193 7.11125 7.1114C7.50178 6.72088 7.50178 6.08771 7.11125 5.69719L6.05059 4.63653C5.66007 4.24601 5.0269 4.24601 4.63638 4.63653C4.24585 5.02705 4.24585 5.66022 4.63638 6.05074L5.69704 7.1114Z" fill="currentColor"/><path d="M10.856 9.56554C10.4878 9.42527 10.0715 9.5143 9.79292 9.79292C9.5143 10.0715 9.42527 10.4878 9.56554 10.856L13.5655 21.356C13.7007 21.7108 14.025 21.9584 14.4029 21.9953C14.7807 22.0322 15.1468 21.8519 15.348 21.53L17.7257 17.7257L21.53 15.348C21.8519 15.1468 22.0322 14.7807 21.9953 14.4029C21.9584 14.025 21.7108 13.7007 21.356 13.5655L10.856 9.56554Z" fill="currentColor"/></svg></span>
+                        <span class="trust-badge__text">Pensé conversion</span>
+                    </div>
+                    <div class="trust-badge">
+                        <span class="trust-badge__icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"><path fill-rule="evenodd" clip-rule="evenodd" d="M3 4C3 3.44772 3.44772 3 4 3H20C20.5523 3 21 3.44772 21 4V20C21 20.5523 20.5523 21 20 21H4C3.44772 21 3 20.5523 3 20V4ZM10.7071 8.79289C11.0976 9.18342 11.0976 9.81658 10.7071 10.2071L8.91421 12L10.7071 13.7929C11.0976 14.1834 11.0976 14.8166 10.7071 15.2071C10.3166 15.5976 9.68342 15.5976 9.29289 15.2071L6.79289 12.7071C6.60536 12.5196 6.5 12.2652 6.5 12C6.5 11.7348 6.60536 11.4804 6.79289 11.2929L9.29289 8.79289C9.68342 8.40237 10.3166 8.40237 10.7071 8.79289ZM14.7071 8.79289C14.3166 8.40237 13.6834 8.40237 13.2929 8.79289C12.9024 9.18342 12.9024 9.81658 13.2929 10.2071L15.0858 12L13.2929 13.7929C12.9024 14.1834 12.9024 14.8166 13.2929 15.2071C13.6834 15.5976 14.3166 15.5976 14.7071 15.2071L17.2071 12.7071C17.3946 12.5196 17.5 12.2652 17.5 12C17.5 11.7348 17.3946 11.4804 17.2071 11.2929L14.7071 8.79289Z" fill="currentColor"/></svg></span>
+                        <span class="trust-badge__text">Code propre</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- STATS -->
+    <section class="stats">
+        <div class="container">
+            <div class="stats__grid">
+                <div class="stat">
+                    <div class="stat__number">50+</div>
+                    <div class="stat__label">landing pages livrées</div>
+                </div>
+                <div class="stat">
+                    <div class="stat__number">7j</div>
+                    <div class="stat__label">délai moyen</div>
+                </div>
+                <div class="stat">
+                    <div class="stat__number">100%</div>
+                    <div class="stat__label">clients satisfaits</div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- BENTO -->
+    <section class="section">
+        <div class="container">
+            <div class="bento">
+                <div class="bento-card">
+                    <div class="bento-card__icon">
+                        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 2L2 7L12 12L22 7L12 2Z"/>
+                            <path d="M2 17L12 22L22 17"/>
+                            <path d="M2 12L12 17L22 12"/>
+                        </svg>
+                    </div>
+                    <div class="bento-card__illustration">
+                        <img src="/mnt/user-data/uploads/1769821249597_image.png" alt="Illustration pixel art" style="max-height: 180px;">
+                    </div>
+                    <p class="bento-card__text">Tu nous brief en 30 min. On revient avec une maquette sous 48h.</p>
+                </div>
+                
+                <div class="bento-card">
+                    <div class="bento-card__icon">
+                        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 2L2 7L12 12L22 7L12 2Z"/>
+                            <path d="M2 17L12 22L22 17"/>
+                            <path d="M2 12L12 17L22 12"/>
+                        </svg>
+                    </div>
+                    <div class="bento-card__illustration">
+                        <img src="/mnt/user-data/uploads/1769821249597_image.png" alt="Illustration pixel art" style="max-height: 180px;">
+                    </div>
+                    <p class="bento-card__text">On code, tu valides. Ta page est en ligne, prête à convertir.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- FEATURES -->
+    <section class="section section--gray" id="features">
+        <div class="container">
+            <div class="section__header">
+                <span class="section__eyebrow">Ce qu'on fait</span>
+                <h2 class="section__title">Des pages qui <span class="serif-accent">convertissent</span></h2>
+                <p class="section__desc">Pas de fioritures. Chaque pixel a une raison d'exister.</p>
+            </div>
+            
+            <div class="features__grid">
+                <div class="feature-card">
+                    <div class="feature-card__icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"><path d="M10 1C9.44772 1 9 1.44772 9 2C9 2.55228 9.44772 3 10 3H14C14.5523 3 15 2.55228 15 2C15 1.44772 14.5523 1 14 1H10Z" fill="#1D1D1B"/><path fill-rule="evenodd" clip-rule="evenodd" d="M21 13C21 17.9706 16.9706 22 12 22C7.02944 22 3 17.9706 3 13C3 8.02944 7.02944 4 12 4C16.9706 4 21 8.02944 21 13ZM8.29289 10.7071C7.90237 10.3166 7.90237 9.68342 8.29289 9.29289C8.68342 8.90237 9.31658 8.90237 9.70711 9.29289L12.7071 12.2929C13.0976 12.6834 13.0976 13.3166 12.7071 13.7071C12.3166 14.0976 11.6834 14.0976 11.2929 13.7071L8.29289 10.7071Z" fill="#1D1D1B"/></svg></div>
+                    <h3>Livré vite</h3>
+                    <p>5 à 10 jours ouvrés. Pas 3 mois de réunions pour choisir une couleur.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-card__icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"><path d="M11 2C11.5523 2 12 2.44772 12 3V4.5C12 5.05228 11.5523 5.5 11 5.5C10.4477 5.5 10 5.05228 10 4.5V3C10 2.44772 10.4477 2 11 2Z" fill="#1D1D1B"/><path d="M17.3634 4.63582C17.7539 5.02634 17.7539 5.65951 17.3634 6.05003L16.3027 7.11069C15.9122 7.50122 15.279 7.50122 14.8885 7.11069C14.498 6.72017 14.498 6.087 14.8885 5.69648L15.9491 4.63582C16.3397 4.24529 16.9728 4.24529 17.3634 4.63582Z" fill="#1D1D1B"/><path d="M7.1114 16.303C7.50193 15.9124 7.50193 15.2793 7.1114 14.8887C6.72088 14.4982 6.08771 14.4982 5.69719 14.8887L4.63653 15.9494C4.24601 16.3399 4.24601 16.9731 4.63653 17.3636C5.02705 17.7541 5.66022 17.7541 6.05074 17.3636L7.1114 16.303Z" fill="#1D1D1B"/><path d="M5.5 11C5.5 11.5523 5.05228 12 4.5 12H3C2.44772 12 2 11.5523 2 11C2 10.4477 2.44772 10 3 10H4.5C5.05228 10 5.5 10.4477 5.5 11Z" fill="#1D1D1B"/><path d="M5.69704 7.1114C6.08756 7.50193 6.72073 7.50193 7.11125 7.1114C7.50178 6.72088 7.50178 6.08771 7.11125 5.69719L6.05059 4.63653C5.66007 4.24601 5.0269 4.24601 4.63638 4.63653C4.24585 5.02705 4.24585 5.66022 4.63638 6.05074L5.69704 7.1114Z" fill="#1D1D1B"/><path d="M10.856 9.56554C10.4878 9.42527 10.0715 9.5143 9.79292 9.79292C9.5143 10.0715 9.42527 10.4878 9.56554 10.856L13.5655 21.356C13.7007 21.7108 14.025 21.9584 14.4029 21.9953C14.7807 22.0322 15.1468 21.8519 15.348 21.53L17.7257 17.7257L21.53 15.348C21.8519 15.1468 22.0322 14.7807 21.9953 14.4029C21.9584 14.025 21.7108 13.7007 21.356 13.5655L10.856 9.56554Z" fill="#1D1D1B"/></svg></div>
+                    <h3>Pensé conversion</h3>
+                    <p>Structure, hiérarchie, CTA. On applique ce qui marche.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-card__icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"><path fill-rule="evenodd" clip-rule="evenodd" d="M3 4C3 3.44772 3.44772 3 4 3H20C20.5523 3 21 3.44772 21 4V20C21 20.5523 20.5523 21 20 21H4C3.44772 21 3 20.5523 3 20V4ZM10.7071 8.79289C11.0976 9.18342 11.0976 9.81658 10.7071 10.2071L8.91421 12L10.7071 13.7929C11.0976 14.1834 11.0976 14.8166 10.7071 15.2071C10.3166 15.5976 9.68342 15.5976 9.29289 15.2071L6.79289 12.7071C6.60536 12.5196 6.5 12.2652 6.5 12C6.5 11.7348 6.60536 11.4804 6.79289 11.2929L9.29289 8.79289C9.68342 8.40237 10.3166 8.40237 10.7071 8.79289ZM14.7071 8.79289C14.3166 8.40237 13.6834 8.40237 13.2929 8.79289C12.9024 9.18342 12.9024 9.81658 13.2929 10.2071L15.0858 12L13.2929 13.7929C12.9024 14.1834 12.9024 14.8166 13.2929 15.2071C13.6834 15.5976 14.3166 15.5976 14.7071 15.2071L17.2071 12.7071C17.3946 12.5196 17.5 12.2652 17.5 12C17.5 11.7348 17.3946 11.4804 17.2071 11.2929L14.7071 8.79289Z" fill="#1D1D1B"/></svg></div>
+                    <h3>Code propre</h3>
+                    <p>Classes rangées, facile à maintenir. Tu reprends la main sans pleurer.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-card__icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"><path fill-rule="evenodd" clip-rule="evenodd" d="M5 2C5 1.44772 5.44772 1 6 1H18C18.5523 1 19 1.44772 19 2V22C19 22.5523 18.5523 23 18 23H6C5.44772 23 5 22.5523 5 22V2ZM10 18C9.44772 18 9 18.4477 9 19C9 19.5523 9.44772 20 10 20H14C14.5523 20 15 19.5523 15 19C15 18.4477 14.5523 18 14 18H10Z" fill="#1D1D1B"/></svg></div>
+                    <h3>Responsive</h3>
+                    <p>Mobile, tablette, desktop. Tes visiteurs convertissent partout.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- PROCESS -->
+    <section class="section">
+        <div class="container">
+            <div class="section__header">
+                <span class="section__eyebrow">Comment ça marche</span>
+                <h2 class="section__title">Un process <span class="serif-accent">simple</span></h2>
+                <p class="section__desc">Pas de bullshit. Du brief à la mise en ligne en quelques jours.</p>
+            </div>
+            
+            <div class="process__grid">
+                <div class="process-step">
+                    <div class="process-step__number">1</div>
+                    <div class="process-step__line"></div>
+                    <h3>Brief</h3>
+                    <p>Call de 30 min. Tu montres des exemples qui te parlent.</p>
+                </div>
+                <div class="process-step">
+                    <div class="process-step__number">2</div>
+                    <div class="process-step__line"></div>
+                    <h3>Maquette</h3>
+                    <p>On te livre une maquette en 48h. Tu valides ou on ajuste.</p>
+                </div>
+                <div class="process-step">
+                    <div class="process-step__number">3</div>
+                    <div class="process-step__line"></div>
+                    <h3>Dev</h3>
+                    <p>On code ta landing. Propre, responsive, optimisée.</p>
+                </div>
+                <div class="process-step">
+                    <div class="process-step__number">4</div>
+                    <h3>Live</h3>
+                    <p>Ta page est en ligne. Tu commences à vendre.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- PORTFOLIO -->
+    <section class="section section--gray" id="portfolio">
+        <div class="container">
+            <div class="section__header">
+                <span class="section__eyebrow">Portfolio</span>
+                <h2 class="section__title">Des pages <span class="serif-accent">en prod</span></h2>
+                <p class="section__desc">Pas des concepts Figma. Des vraies landing pages qui tournent.</p>
+            </div>
+            
+            <div class="portfolio__grid">
+                <div class="portfolio-item">
+                    <div class="portfolio-item__placeholder">
+                        <div class="portfolio-item__placeholder-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"><path d="M5 2C4.44772 2 4 2.44772 4 3V21C4 21.5523 4.44772 22 5 22H19C19.5523 22 20 21.5523 20 21V3C20 2.44772 19.5523 2 19 2H5Z" fill="#ABABAB"/></svg></div>
+                        <span class="text-sm">Projet à venir</span>
+                    </div>
+                </div>
+                <div class="portfolio-item">
+                    <div class="portfolio-item__placeholder">
+                        <div class="portfolio-item__placeholder-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"><path d="M5 2C4.44772 2 4 2.44772 4 3V21C4 21.5523 4.44772 22 5 22H19C19.5523 22 20 21.5523 20 21V3C20 2.44772 19.5523 2 19 2H5Z" fill="#ABABAB"/></svg></div>
+                        <span class="text-sm">Projet à venir</span>
+                    </div>
+                </div>
+                <div class="portfolio-item">
+                    <div class="portfolio-item__placeholder">
+                        <div class="portfolio-item__placeholder-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"><path d="M5 2C4.44772 2 4 2.44772 4 3V21C4 21.5523 4.44772 22 5 22H19C19.5523 22 20 21.5523 20 21V3C20 2.44772 19.5523 2 19 2H5Z" fill="#ABABAB"/></svg></div>
+                        <span class="text-sm">Projet à venir</span>
+                    </div>
+                </div>
+                <div class="portfolio-item">
+                    <div class="portfolio-item__placeholder">
+                        <div class="portfolio-item__placeholder-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"><path d="M5 2C4.44772 2 4 2.44772 4 3V21C4 21.5523 4.44772 22 5 22H19C19.5523 22 20 21.5523 20 21V3C20 2.44772 19.5523 2 19 2H5Z" fill="#ABABAB"/></svg></div>
+                        <span class="text-sm">Projet à venir</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- PRICING -->
+    <section class="section" id="pricing">
+        <div class="container">
+            <div class="section__header">
+                <span class="section__eyebrow">Tarifs</span>
+                <h2 class="section__title">Combien ça <span class="serif-accent">coûte</span></h2>
+                <p class="section__desc">Transparent. Tu sais ce que tu paies avant de signer.</p>
+            </div>
+            
+            <div class="pricing__grid">
+                <div class="pricing-card">
+                    <div class="pricing-card__name">Starter</div>
+                    <div class="pricing-card__desc">Pour tester</div>
+                    <div class="pricing-card__price">
+                        <span class="pricing-card__amount">1 500 €</span>
+                        <span class="pricing-card__period">/ projet</span>
+                    </div>
+                    <ul class="pricing-card__features">
+                        <li>1 landing page</li>
+                        <li>Design sur-mesure</li>
+                        <li>1 révision</li>
+                        <li>Livré en 5 jours</li>
+                    </ul>
+                    <a href="#contact" class="btn btn--secondary">Choisir</a>
+                </div>
+                
+                <div class="pricing-card pricing-card--popular">
+                    <div class="pricing-card__badge">Populaire</div>
+                    <div class="pricing-card__name">Standard</div>
+                    <div class="pricing-card__desc">Le plus demandé</div>
+                    <div class="pricing-card__price">
+                        <span class="pricing-card__amount">2 500 €</span>
+                        <span class="pricing-card__period">/ projet</span>
+                    </div>
+                    <ul class="pricing-card__features">
+                        <li>1 landing complète</li>
+                        <li>Design + composants</li>
+                        <li>2 révisions</li>
+                        <li>Livré en 7 jours</li>
+                        <li>Animations</li>
+                    </ul>
+                    <a href="#contact" class="btn btn--primary">Choisir</a>
+                </div>
+                
+                <div class="pricing-card">
+                    <div class="pricing-card__name">Pro</div>
+                    <div class="pricing-card__desc">Pour scaler</div>
+                    <div class="pricing-card__price">
+                        <span class="pricing-card__amount">4 500 €</span>
+                        <span class="pricing-card__period">/ projet</span>
+                    </div>
+                    <ul class="pricing-card__features">
+                        <li>Jusqu'à 3 pages</li>
+                        <li>Système complet</li>
+                        <li>5 révisions</li>
+                        <li>Livré en 14 jours</li>
+                        <li>Documentation</li>
+                    </ul>
+                    <a href="#contact" class="btn btn--secondary">Choisir</a>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- TESTIMONIAL -->
+    <section class="section section--cream">
+        <div class="container">
+            <div class="section__header">
+                <span class="section__eyebrow">Témoignages</span>
+                <h2 class="section__title">Ce qu'ils en <span class="serif-accent">disent</span></h2>
+            </div>
+            
+            <div class="testimonial-card">
+                <div class="testimonial-card__content">
+                    <p class="testimonial-card__quote">On a lancé notre landing en 4 jours. Le taux de conversion a doublé dès le premier mois. Exactement ce qu'il nous fallait.</p>
+                    <div class="testimonial-card__author">
+                        <div class="testimonial-card__avatar">MD</div>
+                        <div>
+                            <div class="testimonial-card__name">Marie D.</div>
+                            <div class="testimonial-card__role">Fondatrice, Flowbase</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card__image">
+                    <!-- Placeholder image -->
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- FAQ -->
+    <section class="section" id="faq">
+        <div class="container">
+            <div class="section__header">
+                <span class="section__eyebrow">FAQ</span>
+                <h2 class="section__title">Questions <span class="serif-accent">fréquentes</span></h2>
+            </div>
+            
+            <div class="faq__list">
+                <div class="faq-item is-active">
+                    <button class="faq-item__question">
+                        <span>C'est quoi votre stack technique ?</span>
+                        <span class="faq-item__icon">+</span>
+                    </button>
+                    <div class="faq-item__answer">
+                        <div class="faq-item__answer-inner">
+                            Principalement Webflow pour la rapidité et la maintenabilité. React/Next.js si tu as des besoins spécifiques. L'important c'est que tu puisses reprendre la main facilement.
+                        </div>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-item__question">
+                        <span>C'est du sur-mesure ou du template ?</span>
+                        <span class="faq-item__icon">+</span>
+                    </button>
+                    <div class="faq-item__answer">
+                        <div class="faq-item__answer-inner">
+                            Du sur-mesure, mais intelligent. On a un système de composants qu'on adapte à ta marque. C'est ce qui nous permet d'aller vite tout en restant unique.
+                        </div>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-item__question">
+                        <span>Je peux modifier ma landing après ?</span>
+                        <span class="faq-item__icon">+</span>
+                    </button>
+                    <div class="faq-item__answer">
+                        <div class="faq-item__answer-inner">
+                            Oui. On te livre un projet propre avec des classes bien nommées. Tu peux modifier textes, images, couleurs sans nous.
+                        </div>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-item__question">
+                        <span>C'est quoi le process de paiement ?</span>
+                        <span class="faq-item__icon">+</span>
+                    </button>
+                    <div class="faq-item__answer">
+                        <div class="faq-item__answer-inner">
+                            50% à la commande, 50% à la livraison. Paiement par virement ou carte. Facture propre, tout est carré.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- CTA FINAL -->
+    <section class="section section--dark cta-final" id="contact">
+        <div class="container">
+            <h2>Prêt à <span class="serif-accent">lancer</span> ?</h2>
+            <p class="lead">On en discute et on te fait une proposition sous 48h. Sans engagement.</p>
+            <a href="#" class="btn btn--yellow">Booker un call →</a>
+        </div>
+    </section>
+    
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer__top">
+                <div class="footer__brand">
+                    <a href="#" class="footer__logo">
+                        <svg viewBox="0 0 371 235" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M-1.14092e-05 126.364L14.0144 122.51V129.595L35.0361 123.833V109.663L6.96828 117.332V110.247L-0.0389404 112.155V83.8142L6.96828 81.9067V74.8216L42.0433 65.2061V72.2912L49.0506 70.3837V84.5538L35.0361 88.4078V81.3227L14.0144 87.0842V101.254L42.0823 93.5854V100.67L49.0895 98.7629V127.103L42.0823 129.011V136.096L7.00721 145.711V138.626L-1.14092e-05 140.534V126.364Z"/>
+                            <path d="M70.1111 71.7462L56.0966 75.6002V61.43L98.1789 49.907V64.0772L84.1644 67.9312V124.573L70.15 128.427V71.7852L70.1111 71.7462Z"/>
+                            <path d="M133.254 89.8871L140.261 87.9796V38.423L154.276 34.569V98.2958L147.269 100.203V107.288L112.194 116.904V109.819L105.186 111.726V47.9995L119.201 44.1455V93.7022L126.208 91.7947V98.8797L133.215 96.9722V89.8871H133.254Z"/>
+                            <path d="M161.283 32.6226L203.365 21.0996V28.1847L210.372 26.2771V82.9189L203.365 84.8264V91.9115L161.283 103.434V32.6226ZM189.351 74.5102L196.358 72.6027V44.2623L189.351 46.1699V39.0848L175.336 42.9388V85.4103L189.351 81.5564V74.4713V74.5102Z"/>
+                            <path d="M217.38 17.2845L231.394 13.4306V84.2424L217.38 88.0964V17.2845Z"/>
+                            <path d="M238.44 18.6081L245.448 16.7006V9.61547L280.523 0V7.08508L287.53 5.17756V61.8193L280.523 63.7268V70.8119L245.448 80.4274V73.3423L238.44 75.2498V18.6081ZM266.469 53.4106L273.476 51.5031V23.1628L266.469 25.0703V17.9852L259.462 19.8927V26.9778L252.455 28.8853V57.2257L259.462 55.3181V62.4032L266.469 60.4957V53.4106Z"/>
+                            <path d="M85.6439 146.373L362.974 68.6708V146.568L85.6439 224.27V146.373Z"/>
+                            <path d="M355.188 78.9091V140.612L93.4296 213.993V152.29L355.188 78.9091ZM370.76 58.3935L77.858 140.456V234.508L370.76 152.446V58.3935Z"/>
+                        </svg>
+                    </a>
+                    <p class="footer__tagline">Landing pages sur-mesure, livrées en 7 jours. Sans les réunions à rallonge.</p>
+                </div>
+                
+                <div class="footer__links">
+                    <div class="footer__col">
+                        <h4>Navigation</h4>
+                        <a href="#features">Services</a>
+                        <a href="#portfolio">Portfolio</a>
+                        <a href="#pricing">Tarifs</a>
+                        <a href="#faq">FAQ</a>
+                    </div>
+                    <div class="footer__col">
+                        <h4>Contact</h4>
+                        <a href="#contact">Prendre RDV</a>
+                        <a href="mailto:hello@studiofacile.fr">hello@studiofacile.fr</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer__bottom">
+                <div class="footer__legal">
+                    © 2026 Studio Facile · <a href="#">Mentions légales</a> · <a href="#">CGV</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+    
+    <script>
+        // Nav scroll effect
+        const nav = document.getElementById('nav');
+        window.addEventListener('scroll', () => {
+            nav.classList.toggle('is-scrolled', window.scrollY > 50);
+        });
+        
+        // FAQ accordion
+        document.querySelectorAll('.faq-item__question').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const item = btn.parentElement;
+                const isActive = item.classList.contains('is-active');
+                document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('is-active'));
+                if (!isActive) item.classList.add('is-active');
+            });
+        });
+        
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(a => {
+            a.addEventListener('click', e => {
+                e.preventDefault();
+                const target = document.querySelector(a.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+        
+        // Scroll animations
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, { threshold: 0.1, rootMargin: '-50px' });
+        
+        document.querySelectorAll('.feature-card, .pricing-card, .testimonial-card, .process-step, .portfolio-item, .bento-card, .stat').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+            el.style.transition = 'all 0.6s cubic-bezier(0.33, 1, 0.68, 1)';
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
