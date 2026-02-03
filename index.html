@@ -315,69 +315,6 @@
         }
         
         /* ═══════════════════════════════════════════════════════════════
-           STICKY SECTION NAV (Superside-inspired)
-           ═══════════════════════════════════════════════════════════════ */
-        .section-nav {
-            position: fixed;
-            left: var(--space-6);
-            top: 50%;
-            transform: translateY(-50%);
-            z-index: 90;
-            display: flex;
-            flex-direction: column;
-            gap: var(--space-3);
-            opacity: 0;
-            transition: opacity var(--duration-normal);
-        }
-        
-        .section-nav.is-visible {
-            opacity: 1;
-        }
-        
-        .section-nav__item {
-            display: flex;
-            align-items: center;
-            gap: var(--space-3);
-            cursor: pointer;
-            transition: all var(--duration-fast);
-        }
-        
-        .section-nav__dot {
-            width: 10px;
-            height: 10px;
-            border-radius: 50%;
-            background: var(--color-gray-300);
-            transition: all var(--duration-fast);
-        }
-        
-        .section-nav__item:hover .section-nav__dot,
-        .section-nav__item.is-active .section-nav__dot {
-            background: var(--color-yellow);
-            transform: scale(1.3);
-        }
-        
-        .section-nav__label {
-            font-size: 0.75rem;
-            font-weight: 600;
-            color: var(--color-gray-500);
-            opacity: 0;
-            transform: translateX(-8px);
-            transition: all var(--duration-fast);
-            white-space: nowrap;
-        }
-        
-        .section-nav__item:hover .section-nav__label,
-        .section-nav__item.is-active .section-nav__label {
-            opacity: 1;
-            transform: translateX(0);
-            color: var(--color-black);
-        }
-        
-        @media (max-width: 1400px) {
-            .section-nav { display: none; }
-        }
-        
-        /* ═══════════════════════════════════════════════════════════════
            HERO
            ═══════════════════════════════════════════════════════════════ */
         .hero {
@@ -930,140 +867,49 @@
             gap: 80px;
             align-items: center;
         }
-        
-        /* LEFT: Visual placeholder */
-        .process__visual {
-            position: relative;
-            aspect-ratio: 4 / 3;
-            border-radius: var(--radius-3xl);
-            overflow: hidden;
-            background: var(--color-gray-900);
-        }
-        
-        .process__visual-panel {
-            position: absolute;
-            inset: 0;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            padding: 40px;
-            opacity: 0;
-            transform: scale(0.95);
-            transition: all 0.5s cubic-bezier(0.33, 1, 0.68, 1);
-            pointer-events: none;
-        }
-        
-        .process__visual-panel.is-active {
-            opacity: 1;
-            transform: scale(1);
-            pointer-events: auto;
-        }
-        
-        .process__visual-panel-number {
-            font-size: 8rem;
-            font-weight: 800;
-            line-height: 1;
-            color: var(--color-black);
-            opacity: 0.15;
-            position: absolute;
-            top: 20px;
-            left: 30px;
-        }
-        
-        .process__visual-panel-icon {
-            width: 80px;
-            height: 80px;
-            background: var(--color-black);
-            border-radius: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 24px;
-        }
-        
-        .process__visual-panel-icon svg {
-            width: 40px;
-            height: 40px;
-            stroke: var(--color-yellow);
-        }
-        
-        .process__visual-panel-title {
-            font-size: 1.75rem;
-            font-weight: 700;
-            color: var(--color-black);
-            text-align: center;
-            margin-bottom: 8px;
-        }
-        
-        .process__visual-panel-meta {
-            font-size: 1rem;
-            color: var(--color-gray-700);
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-        
-        /* Panel color variations */
-        .process__visual-panel--1 { background: var(--color-yellow); }
-        
-        .process__visual-panel--2 { background: linear-gradient(135deg, #E8F5E9 0%, #C8E6C9 100%); }
-        .process__visual-panel--2 .process__visual-panel-icon { background: #2E7D32; }
-        .process__visual-panel--2 .process__visual-panel-icon svg { stroke: #E8F5E9; }
-        
-        .process__visual-panel--3 { background: linear-gradient(135deg, #E3F2FD 0%, #BBDEFB 100%); }
-        .process__visual-panel--3 .process__visual-panel-icon { background: #1565C0; }
-        .process__visual-panel--3 .process__visual-panel-icon svg { stroke: #E3F2FD; }
-        
-        .process__visual-panel--4 { background: var(--color-black); border: 1px solid var(--color-gray-800); }
-        .process__visual-panel--4 .process__visual-panel-number { color: var(--color-yellow); opacity: 0.1; }
-        .process__visual-panel--4 .process__visual-panel-icon { background: var(--color-yellow); }
-        .process__visual-panel--4 .process__visual-panel-icon svg { stroke: var(--color-black); }
-        .process__visual-panel--4 .process__visual-panel-title { color: var(--color-white); }
-        .process__visual-panel--4 .process__visual-panel-meta { color: var(--color-gray-400); }
-        
-        .process__visual-panel-cta {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            padding: 14px 28px;
-            background: var(--color-yellow);
-            color: var(--color-black);
-            border-radius: 100px;
-            font-size: 0.9375rem;
-            font-weight: 600;
-            margin-top: 24px;
-            text-decoration: none;
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
-        }
-        
-        .process__visual-panel-cta:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 24px rgba(255, 230, 0, 0.3);
-        }
-        
-        /* RIGHT: Steps nav */
+
+        /* LEFT: Steps nav */
         .process__nav {
             display: flex;
             flex-direction: column;
+            order: 1;
+        }
+
+        .process__cta {
+            margin-top: 32px;
+            align-self: flex-start;
+        }
+
+        /* RIGHT: Visual placeholder - white space */
+        .process__visual {
+            position: relative;
+            aspect-ratio: 1 / 1;
+            border-radius: var(--radius-3xl);
+            overflow: hidden;
+            background: var(--color-white);
+            order: 2;
+        }
+
+        .process__visual-panel {
+            display: none;
         }
         
         .process__step {
             padding: 28px 0;
             cursor: pointer;
             position: relative;
-            border-bottom: 2px solid var(--color-gray-800);
+            border-bottom: 1px solid var(--color-gray-800);
             transition: all 0.3s ease;
         }
-        
+
         .process__step::after {
             content: '';
             position: absolute;
-            bottom: -2px;
+            bottom: -1px;
             left: 0;
-            height: 2px;
+            height: 1px;
             width: 0%;
-            background: var(--color-yellow);
+            background: var(--color-gray-400);
         }
         
         .process__step.is-active::after {
@@ -1122,12 +968,11 @@
                 grid-template-columns: 1fr;
                 gap: 48px;
             }
-            
+
             .process__visual {
-                order: -1;
-                aspect-ratio: 16 / 10;
+                aspect-ratio: 1 / 1;
             }
-            
+
             .process__step-title {
                 font-size: 1.25rem;
             }
@@ -1441,34 +1286,6 @@
     </style>
 </head>
 <body>
-    <!-- STICKY SECTION NAV (Superside-inspired) -->
-    <nav class="section-nav" id="sectionNav">
-        <div class="section-nav__item" data-section="hero">
-            <span class="section-nav__dot"></span>
-            <span class="section-nav__label">Accueil</span>
-        </div>
-        <div class="section-nav__item" data-section="rules">
-            <span class="section-nav__dot"></span>
-            <span class="section-nav__label">Pourquoi nous</span>
-        </div>
-        <div class="section-nav__item" data-section="process">
-            <span class="section-nav__dot"></span>
-            <span class="section-nav__label">Process</span>
-        </div>
-        <div class="section-nav__item" data-section="testimonials">
-            <span class="section-nav__dot"></span>
-            <span class="section-nav__label">Témoignages</span>
-        </div>
-        <div class="section-nav__item" data-section="pricing">
-            <span class="section-nav__dot"></span>
-            <span class="section-nav__label">Tarifs</span>
-        </div>
-        <div class="section-nav__item" data-section="contact">
-            <span class="section-nav__dot"></span>
-            <span class="section-nav__label">Contact</span>
-        </div>
-    </nav>
-
     <!-- NAVIGATION -->
     <nav class="nav" id="nav">
         <div class="container">
@@ -1942,6 +1759,7 @@
                         <h3 class="process__step-title">Ta page est live, tu commences à vendre</h3>
                         <p class="process__step-desc">On reste dispo si besoin. Tu te concentres sur ton business.</p>
                     </div>
+                    <a href="#contact" class="btn btn--secondary process__cta"><span class="btn-text-wrap"><span class="btn-text-wrap__main">Booker un call</span><span class="btn-text-wrap__clone">Booker un call</span></span></a>
                 </nav>
             </div>
         </div>
@@ -2125,46 +1943,11 @@
 
         // Nav scroll effect
         const nav = document.getElementById('nav');
-        const sectionNav = document.getElementById('sectionNav');
-        
+
         window.addEventListener('scroll', () => {
             nav.classList.toggle('is-scrolled', window.scrollY > 50);
-            sectionNav.classList.toggle('is-visible', window.scrollY > 400);
         });
-        
-        // Section nav active state
-        const sections = document.querySelectorAll('section[id]');
-        const sectionNavItems = document.querySelectorAll('.section-nav__item');
-        
-        const observerOptions = {
-            root: null,
-            rootMargin: '-40% 0px -40% 0px',
-            threshold: 0
-        };
-        
-        const sectionObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    const id = entry.target.id;
-                    sectionNavItems.forEach(item => {
-                        item.classList.toggle('is-active', item.dataset.section === id);
-                    });
-                }
-            });
-        }, observerOptions);
-        
-        sections.forEach(section => sectionObserver.observe(section));
-        
-        // Section nav click
-        sectionNavItems.forEach(item => {
-            item.addEventListener('click', () => {
-                const section = document.getElementById(item.dataset.section);
-                if (section) {
-                    section.scrollIntoView({ behavior: 'smooth' });
-                }
-            });
-        });
-        
+
         // Process accordion
         const processAccordion = document.getElementById('processAccordion');
         const processSteps = document.querySelectorAll('.process__step');
