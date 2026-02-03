@@ -36,7 +36,7 @@
         :root {
             /* Colors */
             --color-yellow: #FFE600;
-            --color-yellow-light: #FFE600;
+            --color-yellow-light: #FFF9CC;
             --color-yellow-dark: #E6CF00;
             --color-black: #1D1D1B;
             --color-white: #FFFFFF;
@@ -53,15 +53,11 @@
             --color-gray-100: #F5F5F5;
             --color-gray-50: #FAFAFA;
             
-            --color-success: #22C55E;
-            --color-error: #EF4444;
-            
             /* Typography */
             --font-sans: 'Manrope', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
             --font-serif: 'PP Editorial Old', Georgia, serif;
             
-            /* Spacing — Base 8px */
-            --space-0: 0;
+            /* Spacing */
             --space-1: 0.25rem;
             --space-2: 0.5rem;
             --space-3: 0.75rem;
@@ -72,9 +68,7 @@
             --space-8: 2rem;
             --space-9: 2.5rem;
             --space-10: 3rem;
-            --space-11: 3.5rem;
             --space-12: 4rem;
-            --space-13: 5rem;
             --space-14: 6rem;
             --space-15: 8rem;
             --space-16: 10rem;
@@ -99,15 +93,10 @@
             --duration-normal: 250ms;
             --duration-slow: 400ms;
             --ease-out: cubic-bezier(0.33, 1, 0.68, 1);
-            
-            /* Bento */
-            --bento-gap: var(--space-6);
-            --bento-padding: var(--space-9);
-            --bento-radius: var(--radius-3xl);
         }
         
         /* ═══════════════════════════════════════════════════════════════
-           RESET
+           RESET & BASE
            ═══════════════════════════════════════════════════════════════ */
         *, *::before, *::after {
             box-sizing: border-box;
@@ -118,7 +107,6 @@
         html {
             scroll-behavior: smooth;
             -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
         }
         
         body {
@@ -129,36 +117,15 @@
             background: var(--color-white);
         }
         
-        img, svg {
-            display: block;
-            max-width: 100%;
-            height: auto;
-        }
+        img, svg { display: block; max-width: 100%; height: auto; }
+        a { color: inherit; text-decoration: none; }
+        button { font-family: inherit; cursor: pointer; border: none; background: none; }
         
-        a {
-            color: inherit;
-            text-decoration: none;
-        }
-        
-        button {
-            font-family: inherit;
-            cursor: pointer;
-            border: none;
-            background: none;
-        }
-        
-        /* ═══════════════════════════════════════════════════════════════
-           LAYOUT
-           ═══════════════════════════════════════════════════════════════ */
         .container {
             width: 100%;
             max-width: 1200px;
             margin: 0 auto;
             padding: 0 var(--space-6);
-        }
-        
-        .container--narrow {
-            max-width: 800px;
         }
         
         /* ═══════════════════════════════════════════════════════════════
@@ -172,16 +139,16 @@
         }
         
         h1 {
-            font-size: clamp(2.5rem, 5vw, 3.5rem);
+            font-size: clamp(2.5rem, 6vw, 4rem);
             font-weight: 700;
-            line-height: 1.1;
+            line-height: 1.05;
             letter-spacing: -0.03em;
         }
         
         h2 {
-            font-size: clamp(2rem, 4vw, 2.75rem);
+            font-size: clamp(2rem, 4vw, 3rem);
             font-weight: 700;
-            line-height: 1.15;
+            line-height: 1.1;
             letter-spacing: -0.02em;
         }
         
@@ -197,14 +164,6 @@
             color: var(--color-gray-600);
         }
         
-        .text-sm {
-            font-size: 0.875rem;
-        }
-        
-        .text-xs {
-            font-size: 0.75rem;
-        }
-        
         /* ═══════════════════════════════════════════════════════════════
            BUTTONS
            ═══════════════════════════════════════════════════════════════ */
@@ -218,6 +177,7 @@
             font-weight: 600;
             line-height: 1;
             border-radius: var(--radius-full);
+            overflow: hidden;
             transition: all var(--duration-fast) var(--ease-out);
         }
         
@@ -229,6 +189,34 @@
         .btn--primary:hover {
             transform: translateY(-2px);
             box-shadow: var(--shadow-lg);
+        }
+
+        /* Text roll animation */
+        .btn-text-wrap {
+            display: block;
+            position: relative;
+        }
+
+        .btn-text-wrap__main {
+            display: block;
+            transition: transform 0.4s cubic-bezier(0.76, 0, 0.24, 1);
+        }
+
+        .btn-text-wrap__clone {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            transform: translateY(250%);
+            transition: transform 0.4s cubic-bezier(0.76, 0, 0.24, 1);
+        }
+
+        .btn:hover .btn-text-wrap__main {
+            transform: translateY(-250%);
+        }
+
+        .btn:hover .btn-text-wrap__clone {
+            transform: translateY(0);
         }
         
         .btn--secondary {
@@ -251,18 +239,19 @@
             transform: translateY(-2px);
         }
         
+        .btn--sm {
+            padding: var(--space-3) var(--space-5);
+            font-size: 0.8125rem;
+        }
+        
         .btn--ghost {
             background: transparent;
             color: var(--color-black);
+            padding: var(--space-3) var(--space-4);
         }
         
         .btn--ghost:hover {
             background: var(--color-gray-100);
-        }
-        
-        .btn--sm {
-            padding: var(--space-3) var(--space-5);
-            font-size: 0.8125rem;
         }
         
         /* ═══════════════════════════════════════════════════════════════
@@ -279,7 +268,7 @@
         }
         
         .nav.is-scrolled {
-            background: rgba(255, 255, 255, 0.9);
+            background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(12px);
             border-bottom: 1px solid var(--color-gray-100);
             padding: var(--space-4) 0;
@@ -291,11 +280,12 @@
             justify-content: space-between;
         }
         
-        .nav__logo svg {
-            height: 42px;
-            width: auto;
+        .nav__logo {
+            font-size: 1.25rem;
+            font-weight: 800;
+            letter-spacing: -0.02em;
         }
-
+        
         .nav__menu {
             display: flex;
             align-items: center;
@@ -320,53 +310,209 @@
             margin-left: var(--space-4);
         }
         
-        .nav__mobile {
-            display: none;
-        }
-        
         @media (max-width: 768px) {
             .nav__menu { display: none; }
-            .nav__mobile {
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                width: 40px;
-                height: 40px;
-                background: var(--color-gray-100);
-                border-radius: var(--radius-md);
-            }
+        }
+        
+        /* ═══════════════════════════════════════════════════════════════
+           STICKY SECTION NAV (Superside-inspired)
+           ═══════════════════════════════════════════════════════════════ */
+        .section-nav {
+            position: fixed;
+            left: var(--space-6);
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 90;
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-3);
+            opacity: 0;
+            transition: opacity var(--duration-normal);
+        }
+        
+        .section-nav.is-visible {
+            opacity: 1;
+        }
+        
+        .section-nav__item {
+            display: flex;
+            align-items: center;
+            gap: var(--space-3);
+            cursor: pointer;
+            transition: all var(--duration-fast);
+        }
+        
+        .section-nav__dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: var(--color-gray-300);
+            transition: all var(--duration-fast);
+        }
+        
+        .section-nav__item:hover .section-nav__dot,
+        .section-nav__item.is-active .section-nav__dot {
+            background: var(--color-yellow);
+            transform: scale(1.3);
+        }
+        
+        .section-nav__label {
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--color-gray-500);
+            opacity: 0;
+            transform: translateX(-8px);
+            transition: all var(--duration-fast);
+            white-space: nowrap;
+        }
+        
+        .section-nav__item:hover .section-nav__label,
+        .section-nav__item.is-active .section-nav__label {
+            opacity: 1;
+            transform: translateX(0);
+            color: var(--color-black);
+        }
+        
+        @media (max-width: 1400px) {
+            .section-nav { display: none; }
         }
         
         /* ═══════════════════════════════════════════════════════════════
            HERO
            ═══════════════════════════════════════════════════════════════ */
         .hero {
-            padding: calc(var(--space-16) + 40px) 0 var(--space-14);
+            padding: calc(var(--space-16) + 60px) 0 var(--space-14);
             background: var(--color-yellow);
             position: relative;
             overflow: hidden;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
         }
         
         .hero__content {
             text-align: center;
-            max-width: 720px;
+            max-width: 800px;
             margin: 0 auto;
-            position: relative;
-            z-index: 1;
         }
         
+        /* Logo */
         .hero__logo {
             margin-bottom: var(--space-10);
         }
-        
+
         .hero__logo svg {
-            height: 150px;
-            width: auto;
+            width: 100%;
+            max-width: 420px;
+            height: auto;
             margin: 0 auto;
+            animation: logoScalePunch 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        @keyframes logoScalePunch {
+            0% { transform: scale(1.2); }
+            100% { transform: scale(1); }
+        }
+
+        /* Top letters: slam down */
+        .logo-letter.logo-top {
+            opacity: 0;
+            animation: logoSlamDown 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            animation-delay: calc(0.08s + var(--i) * 0.04s);
+        }
+
+        @keyframes logoSlamDown {
+            0% { opacity: 0; transform: translateY(-25px) scale(1.3); }
+            50% { opacity: 1; }
+            100% { opacity: 1; transform: translateY(0) scale(1); }
+        }
+
+        /* Bottom block: fast wipe from left */
+        .logo-block-bg, .logo-block-border {
+            opacity: 0;
+            animation: logoWipeIn 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+        .logo-block-bg { animation-delay: 0.35s; }
+        .logo-block-border { animation-delay: 0.38s; }
+
+        @keyframes logoWipeIn {
+            0% { opacity: 0; clip-path: inset(0 100% 0 0); }
+            30% { opacity: 1; }
+            100% { opacity: 1; clip-path: inset(0 0% 0 0); }
+        }
+
+        /* Bottom letters: snap up */
+        .logo-letter.logo-bottom {
+            opacity: 0;
+            animation: logoSnapUp 0.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            animation-delay: calc(0.5s + var(--i) * 0.03s);
+        }
+
+        @keyframes logoSnapUp {
+            0% { opacity: 0; transform: translateY(12px); }
+            50% { opacity: 1; }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        @media (max-width: 600px) {
+            .hero__logo svg {
+                max-width: 280px;
+            }
+        }
+        
+        /* Trust badge (Superside-inspired) */
+        .hero__badge {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--space-2);
+            padding: var(--space-2) var(--space-4);
+            background: rgba(0, 0, 0, 0.08);
+            border-radius: var(--radius-full);
+            font-size: 0.8125rem;
+            font-weight: 600;
+            margin-bottom: var(--space-8);
+            animation: fadeInUp 0.6s var(--ease-out) forwards;
+        }
+        
+        .hero__badge-icon {
+            font-size: 1rem;
         }
         
         .hero__title {
             margin-bottom: var(--space-6);
+            animation: fadeInUp 0.6s var(--ease-out) 0.1s forwards;
+            opacity: 0;
+            position: relative;
+            cursor: default;
+        }
+
+        .hero__title .serif-accent {
+            display: block;
+            color: var(--color-black);
+        }
+
+        .hero__tooltip {
+            position: absolute;
+            pointer-events: none;
+            background: var(--color-black);
+            color: var(--color-yellow);
+            font-size: 0.8125rem;
+            font-weight: 600;
+            font-style: normal;
+            letter-spacing: 0;
+            padding: 6px 14px;
+            border-radius: var(--radius-full);
+            white-space: nowrap;
+            opacity: 0;
+            transform: scale(0.85);
+            transform-origin: bottom right;
+            transition: opacity 0.25s var(--ease-out), transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+            z-index: 10;
+        }
+
+        .hero__title:hover .hero__tooltip {
+            opacity: 1;
+            transform: scale(1);
         }
         
         .hero__subtitle {
@@ -376,6 +522,8 @@
             max-width: 540px;
             margin-left: auto;
             margin-right: auto;
+            animation: fadeInUp 0.6s var(--ease-out) 0.2s forwards;
+            opacity: 0;
         }
         
         .hero__actions {
@@ -383,54 +531,15 @@
             justify-content: center;
             gap: var(--space-4);
             flex-wrap: wrap;
+            animation: fadeInUp 0.6s var(--ease-out) 0.3s forwards;
+            opacity: 0;
         }
         
         /* ═══════════════════════════════════════════════════════════════
-           TRUST BADGES
-           ═══════════════════════════════════════════════════════════════ */
-        .trust-badges {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: var(--space-8);
-            margin-top: var(--space-12);
-            flex-wrap: wrap;
-        }
-        
-        .trust-badge {
-            display: flex;
-            align-items: center;
-            gap: var(--space-3);
-            padding: var(--space-3) var(--space-5);
-            background: rgba(255, 255, 255, 0.6);
-            border-radius: var(--radius-full);
-            backdrop-filter: blur(8px);
-        }
-        
-        .trust-badge__icon {
-            width: 24px;
-            height: 24px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        
-        .trust-badge__icon svg {
-            width: 20px;
-            height: 20px;
-        }
-        
-        .trust-badge__text {
-            font-size: 0.8125rem;
-            font-weight: 600;
-            color: var(--color-gray-800);
-        }
-        
-        /* ═══════════════════════════════════════════════════════════════
-           STATS
+           STATS with animated counters (Superside-inspired)
            ═══════════════════════════════════════════════════════════════ */
         .stats {
-            padding: var(--space-12) 0;
+            padding: var(--space-14) 0;
             background: var(--color-white);
             border-bottom: 1px solid var(--color-gray-100);
         }
@@ -438,19 +547,27 @@
         .stats__grid {
             display: flex;
             justify-content: center;
-            gap: var(--space-14);
+            gap: var(--space-16);
             flex-wrap: wrap;
         }
         
         .stat {
             text-align: center;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.6s var(--ease-out);
+        }
+        
+        .stat.is-visible {
+            opacity: 1;
+            transform: translateY(0);
         }
         
         .stat__number {
-            font-size: clamp(2.5rem, 5vw, 3.5rem);
+            font-size: clamp(3rem, 6vw, 4.5rem);
             font-weight: 800;
             line-height: 1;
-            letter-spacing: -0.03em;
+            letter-spacing: -0.04em;
             color: var(--color-black);
             margin-bottom: var(--space-2);
         }
@@ -462,10 +579,11 @@
         }
         
         /* ═══════════════════════════════════════════════════════════════
-           SECTION
+           SECTIONS
            ═══════════════════════════════════════════════════════════════ */
         .section {
             padding: var(--space-15) 0;
+            position: relative;
         }
         
         .section--gray {
@@ -511,277 +629,536 @@
             font-size: 1.125rem;
         }
         
-        .section--dark .section__desc {
-            color: var(--color-gray-400);
-        }
-        
         /* ═══════════════════════════════════════════════════════════════
-           BENTO GRID
+           SURVIVAL TIPS / RULES (Superside-inspired)
            ═══════════════════════════════════════════════════════════════ */
-        .bento {
-            display: flex;
-            padding: var(--bento-padding);
-            gap: var(--bento-gap);
-            background: var(--color-gray-100);
-            border-radius: var(--bento-radius);
-        }
-        
-        .bento-card {
-            flex: 1;
-            background: var(--color-white);
-            border-radius: var(--radius-2xl);
-            padding: var(--space-9) var(--space-8);
-            display: flex;
-            flex-direction: column;
-            transition: all var(--duration-normal) var(--ease-out);
-        }
-        
-        .bento-card:hover {
-            transform: translateY(-4px);
-            box-shadow: var(--shadow-lg);
-        }
-        
-        .bento-card__icon {
-            width: 48px;
-            height: 48px;
+        .rules {
+            padding: 0;
             background: var(--color-black);
-            border-radius: var(--radius-lg);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: var(--space-6);
-        }
-        
-        .bento-card__icon svg {
-            width: 24px;
-            height: 24px;
-            stroke: var(--color-white);
-            fill: none;
-            stroke-width: 2;
-        }
-        
-        .bento-card__illustration {
-            flex: 1;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            min-height: 180px;
-            margin-bottom: var(--space-6);
-        }
-        
-        .bento-card__illustration img {
-            max-height: 200px;
-            object-fit: contain;
-            filter: drop-shadow(0 8px 24px rgba(0,0,0,0.1));
-        }
-        
-        .bento-card__text {
-            font-size: 1rem;
-            color: var(--color-gray-600);
-            line-height: 1.5;
-        }
-        
-        @media (max-width: 768px) {
-            .bento {
-                flex-direction: column;
-                padding: var(--space-6);
-            }
-            .bento-card {
-                padding: var(--space-8) var(--space-6);
-            }
-        }
-        
-        /* ═══════════════════════════════════════════════════════════════
-           FEATURES
-           ═══════════════════════════════════════════════════════════════ */
-        .features__grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: var(--space-6);
-        }
-        
-        .feature-card {
-            background: var(--color-white);
-            border-radius: var(--radius-2xl);
-            padding: var(--space-8);
-            border: 1px solid var(--color-gray-100);
-            transition: all var(--duration-normal) var(--ease-out);
-        }
-        
-        .feature-card:hover {
-            border-color: var(--color-gray-200);
-            box-shadow: var(--shadow-lg);
-            transform: translateY(-4px);
-        }
-        
-        .feature-card__icon {
-            width: 56px;
-            height: 56px;
-            background: var(--color-yellow-light);
-            border-radius: var(--radius-xl);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: var(--space-5);
+            color: var(--color-white);
+            position: relative;
         }
 
-        .feature-card__icon svg {
-            width: 28px;
-            height: 28px;
+        .rules .section__header {
+            padding-top: var(--space-15);
+            padding-bottom: 0;
         }
-        
-        .feature-card h3 {
-            margin-bottom: var(--space-3);
+
+        .rules .section__eyebrow {
+            background: rgba(255, 230, 0, 0.125);
+            color: var(--color-yellow);
         }
-        
-        .feature-card p {
-            font-size: 0.9375rem;
-            color: var(--color-gray-600);
-            line-height: 1.5;
+
+        .rules .section__desc {
+            color: var(--color-gray-500);
         }
-        
-        @media (max-width: 1024px) {
-            .features__grid { grid-template-columns: repeat(2, 1fr); }
+
+        .rules__cards {
+            padding-top: var(--space-10);
+            padding-bottom: 10vh;
         }
-        @media (max-width: 600px) {
-            .features__grid { grid-template-columns: 1fr; }
-        }
-        
-        /* ═══════════════════════════════════════════════════════════════
-           PROCESS
-           ═══════════════════════════════════════════════════════════════ */
-        .process__grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: var(--space-8);
-        }
-        
-        .process-step {
-            position: relative;
-        }
-        
-        .process-step__number {
-            width: 48px;
-            height: 48px;
-            background: var(--color-yellow);
-            border-radius: var(--radius-full);
+
+        .rule-card-wrap {
+            position: sticky;
+            top: 140px;
+            padding: 0 var(--space-6);
+            margin-bottom: 140px;
             display: flex;
+            justify-content: center;
+        }
+
+        .rule-card-wrap:nth-child(2) {
+            top: 160px;
+        }
+
+        .rule-card-wrap:nth-child(3) {
+            top: 180px;
+        }
+
+        .rule-card {
+            display: flex;
+            gap: 40px;
+            border-radius: var(--radius-2xl);
+            padding: 48px;
+            height: 560px;
+            width: 1120px;
+            max-width: 100%;
+            will-change: transform, filter;
+            transform-origin: center top;
+        }
+
+        .rule-card--1 {
+            background: var(--color-white);
+            color: var(--color-black);
+            box-shadow: 0 16px 60px rgba(0, 0, 0, 0.35);
+        }
+
+        .rule-card--2 {
+            background: var(--color-white);
+            color: var(--color-black);
+            box-shadow: 0 12px 48px rgba(0, 0, 0, 0.3);
+        }
+
+        .rule-card--3 {
+            background: var(--color-white);
+            color: var(--color-black);
+            box-shadow: 0 8px 40px rgba(0, 0, 0, 0.25);
+        }
+
+        .rule-card__text {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            gap: 16px;
+        }
+
+        .rule-card__label {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 4px 12px;
+            background: var(--color-yellow);
+            border-radius: var(--radius-sm);
+            font-size: 0.8125rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--color-black);
+            width: fit-content;
+        }
+
+        .rule-card__title {
+            font-size: 2.25rem;
+            font-weight: 700;
+            line-height: 1.2;
+        }
+
+        .rule-card__desc {
+            font-size: 1.125rem;
+            line-height: 1.6;
+            color: var(--color-gray-600);
+        }
+
+        .rule-card__icon-box {
+            width: 50%;
+            border-radius: 16px;
+            display: flex;
+            flex-direction: column;
             align-items: center;
             justify-content: center;
-            font-size: 1.125rem;
-            font-weight: 700;
-            margin-bottom: var(--space-5);
+            gap: 16px;
+            flex-shrink: 0;
+            background: rgba(255, 230, 0, 0.125);
         }
-        
-        .process-step__line {
-            position: absolute;
-            top: 24px;
-            left: 56px;
-            right: -8px;
-            height: 2px;
-            background: var(--color-gray-200);
-        }
-        
-        .process-step:last-child .process-step__line {
-            display: none;
-        }
-        
-        .process-step h3 {
-            margin-bottom: var(--space-2);
-        }
-        
-        .process-step p {
-            font-size: 0.9375rem;
-            color: var(--color-gray-600);
-            line-height: 1.5;
-        }
-        
-        @media (max-width: 900px) {
-            .process__grid {
-                grid-template-columns: repeat(2, 1fr);
-                gap: var(--space-10);
-            }
-            .process-step__line { display: none; }
-        }
-        @media (max-width: 600px) {
-            .process__grid { grid-template-columns: 1fr; }
-        }
-        
-        /* ═══════════════════════════════════════════════════════════════
-           PORTFOLIO
-           ═══════════════════════════════════════════════════════════════ */
-        .portfolio__grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: var(--space-6);
-        }
-        
-        .portfolio-item {
-            position: relative;
-            border-radius: var(--radius-2xl);
+
+        .rule-card__video-box {
+            padding: 0;
             overflow: hidden;
-            aspect-ratio: 16 / 10;
-            background: var(--color-gray-100);
-            transition: all var(--duration-normal) var(--ease-out);
+            border-radius: 16px;
+            border: 1px solid var(--color-gray-200);
         }
-        
-        .portfolio-item:hover {
-            transform: scale(1.02);
-            box-shadow: var(--shadow-xl);
-        }
-        
-        .portfolio-item img {
+
+        .rule-card__video-box video {
             width: 100%;
             height: 100%;
             object-fit: cover;
+            border-radius: 15px;
+        }
+
+        .rule-card__icon-num {
+            font-size: 4rem;
+            font-weight: 800;
+            line-height: 1;
+            color: rgba(255, 230, 0, 0.5);
+        }
+
+        @media (max-width: 900px) {
+            .rule-card-wrap,
+            .rule-card-wrap:nth-child(2),
+            .rule-card-wrap:nth-child(3) {
+                position: static;
+                top: auto;
+                padding: 0 var(--space-6);
+                margin-bottom: 24px;
+            }
+            .rules__cards {
+                padding: var(--space-8) 0 var(--space-15);
+            }
+            .rule-card {
+                height: auto;
+                flex-direction: column;
+                transform: none !important;
+            }
+            .rule-card__icon-box {
+                width: 100%;
+                height: 120px;
+            }
+        }
+
+        /* ═══════════════════════════════════════════════════════════════
+           PORTFOLIO
+           ═══════════════════════════════════════════════════════════════ */
+        .testimonials {
+            padding: var(--space-15) 0;
+            background: var(--color-yellow);
+            overflow: hidden;
+        }
+
+        .testimonials__columns {
+            display: flex;
+            justify-content: center;
+            gap: 24px;
+            max-height: 740px;
+            overflow: hidden;
+            -webkit-mask-image: linear-gradient(to bottom, transparent, black 10%, black 90%, transparent);
+            mask-image: linear-gradient(to bottom, transparent, black 10%, black 90%, transparent);
+            margin-top: var(--space-10);
+        }
+
+        .testimonials__column {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+
+        .testimonials__column-inner {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+            animation: scroll-up var(--scroll-duration, 25s) linear infinite;
+        }
+
+        @keyframes scroll-up {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(-50%); }
+        }
+
+        .testimonials__card {
+            background: var(--color-white);
+            border: 1px solid var(--color-gray-200);
+            border-radius: var(--radius-2xl);
+            padding: 32px;
+            max-width: 320px;
+            width: 320px;
+            box-shadow: var(--shadow-sm);
+            transition: transform var(--duration-normal) var(--ease-out), box-shadow var(--duration-normal) var(--ease-out);
+            cursor: default;
+        }
+
+        .testimonials__card:hover {
+            transform: translateY(-6px) scale(1.02);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .testimonials__card-text {
+            font-size: 0.9375rem;
+            line-height: 1.65;
+            color: var(--color-gray-600);
+            margin: 0;
+        }
+
+        .testimonials__card-footer {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-top: 20px;
+        }
+
+        .testimonials__card-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: var(--radius-full);
+            object-fit: cover;
+            border: 2px solid var(--color-gray-100);
+        }
+
+        .testimonials__card-name {
+            font-size: 0.9375rem;
+            font-weight: 700;
+            color: var(--color-gray-900);
+            line-height: 1.3;
+        }
+
+        .testimonials__card-role {
+            font-size: 0.8125rem;
+            color: var(--color-gray-400);
+            line-height: 1.3;
+            margin-top: 1px;
+        }
+
+        .testimonials__column--2 {
+            display: none;
+        }
+        .testimonials__column--3 {
+            display: none;
+        }
+
+        @media (min-width: 768px) {
+            .testimonials__column--2 { display: flex; }
+        }
+        @media (min-width: 1024px) {
+            .testimonials__column--3 { display: flex; }
         }
         
-        .portfolio-item__overlay {
+        /* ═══════════════════════════════════════════════════════════════
+           PROCESS - Kameleoon-style Accordion
+           ═══════════════════════════════════════════════════════════════ */
+        .process {
+            padding: var(--space-15) 0;
+            background: var(--color-black);
+            color: var(--color-white);
+            overflow: hidden;
+        }
+        
+        .process .section__header {
+            margin-bottom: 80px;
+        }
+        
+        .process .section__eyebrow {
+            background: rgba(255, 230, 0, 0.15);
+            color: var(--color-yellow);
+        }
+        
+        .process .section__desc {
+            color: var(--color-gray-400);
+        }
+        
+        .process__accordion {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+        }
+        
+        /* LEFT: Visual placeholder */
+        .process__visual {
+            position: relative;
+            aspect-ratio: 4 / 3;
+            border-radius: var(--radius-3xl);
+            overflow: hidden;
+            background: var(--color-gray-900);
+        }
+        
+        .process__visual-panel {
             position: absolute;
             inset: 0;
-            background: linear-gradient(to top, rgba(29,29,27,0.9) 0%, transparent 50%);
-            display: flex;
-            align-items: flex-end;
-            padding: var(--space-6);
-            opacity: 0;
-            transition: opacity var(--duration-normal);
-        }
-        
-        .portfolio-item:hover .portfolio-item__overlay {
-            opacity: 1;
-        }
-        
-        .portfolio-item__info h3 {
-            color: var(--color-white);
-            margin-bottom: var(--space-1);
-        }
-        
-        .portfolio-item__info p {
-            color: rgba(255,255,255,0.7);
-            font-size: 0.875rem;
-        }
-        
-        .portfolio-item__placeholder {
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            height: 100%;
+            padding: 40px;
+            opacity: 0;
+            transform: scale(0.95);
+            transition: all 0.5s cubic-bezier(0.33, 1, 0.68, 1);
+            pointer-events: none;
+        }
+        
+        .process__visual-panel.is-active {
+            opacity: 1;
+            transform: scale(1);
+            pointer-events: auto;
+        }
+        
+        .process__visual-panel-number {
+            font-size: 8rem;
+            font-weight: 800;
+            line-height: 1;
+            color: var(--color-black);
+            opacity: 0.15;
+            position: absolute;
+            top: 20px;
+            left: 30px;
+        }
+        
+        .process__visual-panel-icon {
+            width: 80px;
+            height: 80px;
+            background: var(--color-black);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 24px;
+        }
+        
+        .process__visual-panel-icon svg {
+            width: 40px;
+            height: 40px;
+            stroke: var(--color-yellow);
+        }
+        
+        .process__visual-panel-title {
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: var(--color-black);
+            text-align: center;
+            margin-bottom: 8px;
+        }
+        
+        .process__visual-panel-meta {
+            font-size: 1rem;
+            color: var(--color-gray-700);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        /* Panel color variations */
+        .process__visual-panel--1 { background: var(--color-yellow); }
+        
+        .process__visual-panel--2 { background: linear-gradient(135deg, #E8F5E9 0%, #C8E6C9 100%); }
+        .process__visual-panel--2 .process__visual-panel-icon { background: #2E7D32; }
+        .process__visual-panel--2 .process__visual-panel-icon svg { stroke: #E8F5E9; }
+        
+        .process__visual-panel--3 { background: linear-gradient(135deg, #E3F2FD 0%, #BBDEFB 100%); }
+        .process__visual-panel--3 .process__visual-panel-icon { background: #1565C0; }
+        .process__visual-panel--3 .process__visual-panel-icon svg { stroke: #E3F2FD; }
+        
+        .process__visual-panel--4 { background: var(--color-black); border: 1px solid var(--color-gray-800); }
+        .process__visual-panel--4 .process__visual-panel-number { color: var(--color-yellow); opacity: 0.1; }
+        .process__visual-panel--4 .process__visual-panel-icon { background: var(--color-yellow); }
+        .process__visual-panel--4 .process__visual-panel-icon svg { stroke: var(--color-black); }
+        .process__visual-panel--4 .process__visual-panel-title { color: var(--color-white); }
+        .process__visual-panel--4 .process__visual-panel-meta { color: var(--color-gray-400); }
+        
+        .process__visual-panel-cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 14px 28px;
+            background: var(--color-yellow);
+            color: var(--color-black);
+            border-radius: 100px;
+            font-size: 0.9375rem;
+            font-weight: 600;
+            margin-top: 24px;
+            text-decoration: none;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        
+        .process__visual-panel-cta:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(255, 230, 0, 0.3);
+        }
+        
+        /* RIGHT: Steps nav */
+        .process__nav {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .process__step {
+            padding: 28px 0;
+            cursor: pointer;
+            position: relative;
+            border-bottom: 2px solid var(--color-gray-800);
+            transition: all 0.3s ease;
+        }
+        
+        .process__step::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            height: 2px;
+            width: 0%;
+            background: var(--color-yellow);
+        }
+        
+        .process__step.is-active::after {
+            animation: processProgressFill 5000ms linear forwards;
+        }
+        
+        .process__step.is-complete::after {
+            width: 100%;
+        }
+        
+        .process__accordion:hover .process__step.is-active::after {
+            animation-play-state: paused;
+        }
+        
+        @keyframes processProgressFill {
+            from { width: 0%; }
+            to { width: 100%; }
+        }
+        
+        .process__step-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--color-gray-500);
+            transition: color 0.3s ease;
+            line-height: 1.3;
+        }
+        
+        .process__step.is-active .process__step-title,
+        .process__step:hover .process__step-title {
+            color: var(--color-white);
+        }
+        
+        .process__step.is-complete .process__step-title {
             color: var(--color-gray-400);
         }
         
-        .portfolio-item__placeholder-icon {
-            margin-bottom: var(--space-3);
-        }
-
-        .portfolio-item__placeholder-icon svg {
-            width: 32px;
-            height: 32px;
+        .process__step-desc {
+            max-height: 0;
+            overflow: hidden;
+            opacity: 0;
+            color: var(--color-gray-400);
+            font-size: 1rem;
+            line-height: 1.6;
+            transition: all 0.4s ease;
+            margin-top: 0;
         }
         
-        @media (max-width: 600px) {
-            .portfolio__grid { grid-template-columns: 1fr; }
+        .process__step.is-active .process__step-desc {
+            max-height: 120px;
+            opacity: 1;
+            margin-top: 12px;
         }
+        
+        @media (max-width: 900px) {
+            .process__accordion {
+                grid-template-columns: 1fr;
+                gap: 48px;
+            }
+            
+            .process__visual {
+                order: -1;
+                aspect-ratio: 16 / 10;
+            }
+            
+            .process__step-title {
+                font-size: 1.25rem;
+            }
+        }
+        
+        /* ═══════════════════════════════════════════════════════════════
+           CONTEXTUAL CTA (Superside-inspired)
+           ═══════════════════════════════════════════════════════════════ */
+        .section-cta {
+            display: flex;
+            justify-content: center;
+            margin-top: var(--space-10);
+        }
+        
+        .section-cta .btn {
+            gap: var(--space-3);
+        }
+        
+        .section-cta .btn svg {
+            width: 16px;
+            height: 16px;
+            transition: transform var(--duration-fast);
+        }
+        
+        .section-cta .btn:hover svg {
+            transform: translateX(4px);
+        }
+        
+        /* ═══════════════════════════════════════════════════════════════
+           TESTIMONIALS (Superside magazine-style)
+           ═══════════════════════════════════════════════════════════════ */
         
         /* ═══════════════════════════════════════════════════════════════
            PRICING
@@ -797,19 +1174,24 @@
             background: var(--color-white);
             border-radius: var(--radius-2xl);
             padding: var(--space-8);
-            border: 1px solid var(--color-gray-100);
+            text-align: center;
             position: relative;
+            border: 2px solid var(--color-gray-100);
             transition: all var(--duration-normal) var(--ease-out);
         }
         
         .pricing-card:hover {
-            border-color: var(--color-gray-200);
+            transform: translateY(-4px);
             box-shadow: var(--shadow-lg);
         }
         
         .pricing-card--popular {
             border-color: var(--color-yellow);
-            border-width: 2px;
+            transform: scale(1.02);
+        }
+        
+        .pricing-card--popular:hover {
+            transform: scale(1.02) translateY(-4px);
         }
         
         .pricing-card__badge {
@@ -817,17 +1199,16 @@
             top: -12px;
             left: 50%;
             transform: translateX(-50%);
-            background: var(--color-yellow);
             padding: var(--space-2) var(--space-4);
+            background: var(--color-yellow);
             border-radius: var(--radius-full);
-            font-size: 0.6875rem;
+            font-size: 0.75rem;
             font-weight: 700;
             text-transform: uppercase;
-            letter-spacing: 0.05em;
         }
         
         .pricing-card__name {
-            font-size: 1.125rem;
+            font-size: 1.25rem;
             font-weight: 700;
             margin-bottom: var(--space-1);
         }
@@ -845,8 +1226,7 @@
         .pricing-card__amount {
             font-size: 2.5rem;
             font-weight: 800;
-            line-height: 1;
-            letter-spacing: -0.02em;
+            letter-spacing: -0.03em;
         }
         
         .pricing-card__period {
@@ -856,22 +1236,23 @@
         
         .pricing-card__features {
             list-style: none;
+            text-align: left;
             margin-bottom: var(--space-8);
         }
         
         .pricing-card__features li {
-            display: flex;
-            align-items: flex-start;
-            gap: var(--space-3);
-            padding: var(--space-2) 0;
+            padding: var(--space-3) 0;
+            border-bottom: 1px solid var(--color-gray-100);
             font-size: 0.9375rem;
-            color: var(--color-gray-700);
+            display: flex;
+            align-items: center;
+            gap: var(--space-3);
         }
         
         .pricing-card__features li::before {
             content: '✓';
-            color: var(--color-success);
-            font-weight: 600;
+            color: var(--color-yellow-dark);
+            font-weight: 700;
         }
         
         .pricing-card .btn {
@@ -879,117 +1260,15 @@
         }
         
         @media (max-width: 900px) {
-            .pricing__grid {
-                grid-template-columns: 1fr;
-                max-width: 400px;
-                margin: 0 auto;
-            }
-        }
-        
-        /* ═══════════════════════════════════════════════════════════════
-           TESTIMONIALS
-           ═══════════════════════════════════════════════════════════════ */
-        .testimonials__logos {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: var(--space-10);
-            margin-bottom: var(--space-12);
-            flex-wrap: wrap;
-        }
-        
-        .testimonials__logos img {
-            height: 32px;
-            opacity: 0.4;
-            transition: opacity var(--duration-fast);
-        }
-        
-        .testimonials__logos img:hover {
-            opacity: 1;
-        }
-        
-        .testimonial-card {
-            background: var(--color-white);
-            border-radius: var(--radius-2xl);
-            padding: var(--space-8);
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: var(--space-8);
-            align-items: center;
-            max-width: 900px;
-            margin: 0 auto;
-        }
-        
-        .testimonial-card__content {
-            order: 1;
-        }
-        
-        .testimonial-card__quote {
-            font-size: 1.25rem;
-            line-height: 1.5;
-            margin-bottom: var(--space-6);
-        }
-        
-        .testimonial-card__quote::before { content: '« '; }
-        .testimonial-card__quote::after { content: ' »'; }
-        
-        .testimonial-card__author {
-            display: flex;
-            align-items: center;
-            gap: var(--space-4);
-        }
-        
-        .testimonial-card__avatar {
-            width: 48px;
-            height: 48px;
-            background: var(--color-gray-200);
-            border-radius: var(--radius-full);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 600;
-            font-size: 0.875rem;
-            color: var(--color-gray-500);
-        }
-        
-        .testimonial-card__name {
-            font-weight: 700;
-            font-size: 0.9375rem;
-        }
-        
-        .testimonial-card__role {
-            font-size: 0.8125rem;
-            color: var(--color-gray-500);
-        }
-        
-        .testimonial-card__image {
-            order: 2;
-            border-radius: var(--radius-xl);
-            overflow: hidden;
-            aspect-ratio: 4/3;
-            background: var(--color-gray-100);
-        }
-        
-        .testimonial-card__image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-        
-        @media (max-width: 768px) {
-            .testimonial-card {
-                grid-template-columns: 1fr;
-            }
-            .testimonial-card__image {
-                order: -1;
-            }
+            .pricing__grid { grid-template-columns: 1fr; max-width: 400px; margin: 0 auto; }
+            .pricing-card--popular { transform: none; }
         }
         
         /* ═══════════════════════════════════════════════════════════════
            FAQ
            ═══════════════════════════════════════════════════════════════ */
-        .faq__list {
-            max-width: 720px;
+        .faq__grid {
+            max-width: 800px;
             margin: 0 auto;
         }
         
@@ -1000,18 +1279,19 @@
         .faq-item__question {
             width: 100%;
             padding: var(--space-6) 0;
-            font-size: 1rem;
-            font-weight: 600;
-            text-align: left;
             display: flex;
-            align-items: center;
             justify-content: space-between;
-            gap: var(--space-4);
+            align-items: center;
+            text-align: left;
+            font-size: 1.0625rem;
+            font-weight: 600;
+            color: var(--color-black);
+            cursor: pointer;
         }
         
         .faq-item__icon {
-            width: 28px;
-            height: 28px;
+            width: 32px;
+            height: 32px;
             background: var(--color-gray-100);
             border-radius: var(--radius-full);
             display: flex;
@@ -1049,6 +1329,8 @@
         .cta-final {
             text-align: center;
             padding: var(--space-16) 0;
+            background: var(--color-black);
+            color: var(--color-white);
         }
         
         .cta-final h2 {
@@ -1077,7 +1359,6 @@
             padding-bottom: var(--space-10);
             border-bottom: 1px solid var(--color-gray-800);
             margin-bottom: var(--space-8);
-            flex-wrap: wrap;
         }
         
         .footer__brand {
@@ -1085,21 +1366,14 @@
         }
         
         .footer__logo {
+            font-size: 1.25rem;
+            font-weight: 800;
             margin-bottom: var(--space-4);
-        }
-        
-        .footer__logo svg {
-            height: 48px;
-        }
-        
-        .footer__logo svg path {
-            fill: var(--color-white);
         }
         
         .footer__tagline {
             font-size: 0.9375rem;
             color: var(--color-gray-400);
-            line-height: 1.6;
         }
         
         .footer__links {
@@ -1129,35 +1403,21 @@
         }
         
         .footer__bottom {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: var(--space-4);
-        }
-        
-        .footer__legal {
             font-size: 0.8125rem;
             color: var(--color-gray-500);
         }
         
-        .footer__legal a {
+        .footer__bottom a {
             color: var(--color-gray-500);
-            transition: color var(--duration-fast);
         }
         
-        .footer__legal a:hover {
+        .footer__bottom a:hover {
             color: var(--color-white);
         }
         
         @media (max-width: 768px) {
-            .footer__top {
-                flex-direction: column;
-            }
-            .footer__links {
-                flex-wrap: wrap;
-                gap: var(--space-8);
-            }
+            .footer__top { flex-direction: column; }
+            .footer__links { flex-wrap: wrap; gap: var(--space-8); }
         }
         
         /* ═══════════════════════════════════════════════════════════════
@@ -1174,126 +1434,129 @@
             }
         }
         
-        .animate-in {
-            animation: fadeInUp 0.7s var(--ease-out) forwards;
-            opacity: 0;
+        @keyframes countUp {
+            from { opacity: 0; transform: scale(0.8); }
+            to { opacity: 1; transform: scale(1); }
         }
-        
-        .animate-delay-1 { animation-delay: 0.1s; }
-        .animate-delay-2 { animation-delay: 0.2s; }
-        .animate-delay-3 { animation-delay: 0.3s; }
-        .animate-delay-4 { animation-delay: 0.4s; }
     </style>
 </head>
 <body>
+    <!-- STICKY SECTION NAV (Superside-inspired) -->
+    <nav class="section-nav" id="sectionNav">
+        <div class="section-nav__item" data-section="hero">
+            <span class="section-nav__dot"></span>
+            <span class="section-nav__label">Accueil</span>
+        </div>
+        <div class="section-nav__item" data-section="rules">
+            <span class="section-nav__dot"></span>
+            <span class="section-nav__label">Pourquoi nous</span>
+        </div>
+        <div class="section-nav__item" data-section="process">
+            <span class="section-nav__dot"></span>
+            <span class="section-nav__label">Process</span>
+        </div>
+        <div class="section-nav__item" data-section="testimonials">
+            <span class="section-nav__dot"></span>
+            <span class="section-nav__label">Témoignages</span>
+        </div>
+        <div class="section-nav__item" data-section="pricing">
+            <span class="section-nav__dot"></span>
+            <span class="section-nav__label">Tarifs</span>
+        </div>
+        <div class="section-nav__item" data-section="contact">
+            <span class="section-nav__dot"></span>
+            <span class="section-nav__label">Contact</span>
+        </div>
+    </nav>
+
     <!-- NAVIGATION -->
     <nav class="nav" id="nav">
         <div class="container">
             <div class="nav__inner">
-                <a href="#" class="nav__logo">
-                    <svg viewBox="0 0 371 235" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M-1.14092e-05 126.364L14.0144 122.51V129.595L35.0361 123.833V109.663L6.96828 117.332V110.247L-0.0389404 112.155V83.8142L6.96828 81.9067V74.8216L42.0433 65.2061V72.2912L49.0506 70.3837V84.5538L35.0361 88.4078V81.3227L14.0144 87.0842V101.254L42.0823 93.5854V100.67L49.0895 98.7629V127.103L42.0823 129.011V136.096L7.00721 145.711V138.626L-1.14092e-05 140.534V126.364Z" fill="#1D1D1B"/>
-                        <path d="M70.1111 71.7462L56.0966 75.6002V61.43L98.1789 49.907V64.0772L84.1644 67.9312V124.573L70.15 128.427V71.7852L70.1111 71.7462Z" fill="#1D1D1B"/>
-                        <path d="M133.254 89.8871L140.261 87.9796V38.423L154.276 34.569V98.2958L147.269 100.203V107.288L112.194 116.904V109.819L105.186 111.726V47.9995L119.201 44.1455V93.7022L126.208 91.7947V98.8797L133.215 96.9722V89.8871H133.254Z" fill="#1D1D1B"/>
-                        <path d="M161.283 32.6226L203.365 21.0996V28.1847L210.372 26.2771V82.9189L203.365 84.8264V91.9115L161.283 103.434V32.6226ZM189.351 74.5102L196.358 72.6027V44.2623L189.351 46.1699V39.0848L175.336 42.9388V85.4103L189.351 81.5564V74.4713V74.5102Z" fill="#1D1D1B"/>
-                        <path d="M217.38 17.2845L231.394 13.4306V84.2424L217.38 88.0964V17.2845Z" fill="#1D1D1B"/>
-                        <path d="M238.44 18.6081L245.448 16.7006V9.61547L280.523 0V7.08508L287.53 5.17756V61.8193L280.523 63.7268V70.8119L245.448 80.4274V73.3423L238.44 75.2498V18.6081ZM266.469 53.4106L273.476 51.5031V23.1628L266.469 25.0703V17.9852L259.462 19.8927V26.9778L252.455 28.8853V57.2257L259.462 55.3181V62.4032L266.469 60.4957V53.4106Z" fill="#1D1D1B"/>
-                        <path d="M85.6439 146.373L362.974 68.6708V146.568L85.6439 224.27V146.373Z" fill="#1D1D1B"/>
-                        <path d="M355.188 78.9091V140.612L93.4296 213.993V152.29L355.188 78.9091ZM370.76 58.3935L77.858 140.456V234.508L370.76 152.446V58.3935Z" fill="#1D1D1B"/>
-                        <path d="M107.133 170.859L128.154 165.098V179.268L107.133 185.029V213.37L93.1182 217.224V146.412L135.2 134.889V149.059L107.133 156.728V170.898V170.859Z" fill="white"/>
-                        <path d="M142.208 154.198L149.215 152.29V145.205L156.222 143.298V136.213L163.229 134.305V127.22L170.236 125.313V132.398L177.244 130.49V137.575L184.251 135.668V142.753L191.258 140.845V190.402L177.244 194.256V180.086L156.222 185.847V200.017L142.208 203.871V154.315V154.198ZM156.222 171.599L177.244 165.838V151.667L170.236 153.575V146.49L163.229 148.397V155.483L156.222 157.39V171.56V171.599Z" fill="white"/>
-                        <path d="M233.341 157.546L247.355 153.692V167.862L240.348 169.769V176.854L205.273 186.47V179.385L198.266 181.292V124.651L205.273 122.743V115.658L240.348 106.043V113.128L247.355 111.22V125.39L233.341 129.244V122.159L219.326 126.013V133.098L212.319 135.006V163.346L219.326 161.439V168.524L233.341 164.67V157.585V157.546Z" fill="white"/>
-                        <path d="M254.401 102.228L268.416 98.3736V169.185L254.401 173.039V102.228Z" fill="white"/>
-                        <path d="M289.437 149.293L310.459 143.531V157.701L275.384 167.317V96.466L289.398 92.6121V149.254L289.437 149.293Z" fill="white"/>
-                        <path d="M331.52 137.77L359.587 130.101V144.271L317.505 155.794V84.9431L359.587 73.4201V87.5902L331.52 95.2593V109.429L352.541 103.668V117.838L331.52 123.6V137.77Z" fill="white"/>
-                    </svg>
-                </a>
-                
+                <a href="#" class="nav__logo">Studio Facile</a>
                 <div class="nav__menu">
-                    <a href="#features" class="nav__link">Services</a>
-                    <a href="#portfolio" class="nav__link">Portfolio</a>
+                    <a href="#rules" class="nav__link">Services</a>
+                    <a href="#process" class="nav__link">Process</a>
                     <a href="#pricing" class="nav__link">Tarifs</a>
                     <a href="#faq" class="nav__link">FAQ</a>
-                    <a href="#contact" class="btn btn--primary btn--sm nav__cta">Prendre RDV</a>
+                    <a href="#contact" class="btn btn--primary btn--sm nav__cta"><span class="btn-text-wrap"><span class="btn-text-wrap__main">Booker un call</span><span class="btn-text-wrap__clone">Booker un call</span></span></a>
                 </div>
-                
-                <button class="nav__mobile" aria-label="Menu">
-                    <svg width="20" height="14" viewBox="0 0 20 14" fill="none">
-                        <path d="M1 1H19M1 7H19M1 13H19" stroke="#1D1D1B" stroke-width="2" stroke-linecap="round"/>
-                    </svg>
-                </button>
             </div>
         </div>
     </nav>
     
     <!-- HERO -->
-    <section class="hero">
+    <section class="hero" id="hero">
         <div class="container">
             <div class="hero__content">
-                <div class="hero__logo animate-in">
+                <!-- Trust badge (Superside-inspired) -->
+                <div class="hero__badge">
+                    <span>+50 pages livrées · Délai moyen 7 jours</span>
+                </div>
+                
+                <!-- Logo -->
+                <div class="hero__logo" id="heroLogo">
                     <svg viewBox="0 0 371 235" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M-1.14092e-05 126.364L14.0144 122.51V129.595L35.0361 123.833V109.663L6.96828 117.332V110.247L-0.0389404 112.155V83.8142L6.96828 81.9067V74.8216L42.0433 65.2061V72.2912L49.0506 70.3837V84.5538L35.0361 88.4078V81.3227L14.0144 87.0842V101.254L42.0823 93.5854V100.67L49.0895 98.7629V127.103L42.0823 129.011V136.096L7.00721 145.711V138.626L-1.14092e-05 140.534V126.364Z" fill="#1D1D1B"/>
-                        <path d="M70.1111 71.7462L56.0966 75.6002V61.43L98.1789 49.907V64.0772L84.1644 67.9312V124.573L70.15 128.427V71.7852L70.1111 71.7462Z" fill="#1D1D1B"/>
-                        <path d="M133.254 89.8871L140.261 87.9796V38.423L154.276 34.569V98.2958L147.269 100.203V107.288L112.194 116.904V109.819L105.186 111.726V47.9995L119.201 44.1455V93.7022L126.208 91.7947V98.8797L133.215 96.9722V89.8871H133.254Z" fill="#1D1D1B"/>
-                        <path d="M161.283 32.6226L203.365 21.0996V28.1847L210.372 26.2771V82.9189L203.365 84.8264V91.9115L161.283 103.434V32.6226ZM189.351 74.5102L196.358 72.6027V44.2623L189.351 46.1699V39.0848L175.336 42.9388V85.4103L189.351 81.5564V74.4713V74.5102Z" fill="#1D1D1B"/>
-                        <path d="M217.38 17.2845L231.394 13.4306V84.2424L217.38 88.0964V17.2845Z" fill="#1D1D1B"/>
-                        <path d="M238.44 18.6081L245.448 16.7006V9.61547L280.523 0V7.08508L287.53 5.17756V61.8193L280.523 63.7268V70.8119L245.448 80.4274V73.3423L238.44 75.2498V18.6081ZM266.469 53.4106L273.476 51.5031V23.1628L266.469 25.0703V17.9852L259.462 19.8927V26.9778L252.455 28.8853V57.2257L259.462 55.3181V62.4032L266.469 60.4957V53.4106Z" fill="#1D1D1B"/>
-                        <path d="M85.6439 146.373L362.974 68.6708V146.568L85.6439 224.27V146.373Z" fill="#1D1D1B"/>
-                        <path d="M355.188 78.9091V140.612L93.4296 213.993V152.29L355.188 78.9091ZM370.76 58.3935L77.858 140.456V234.508L370.76 152.446V58.3935Z" fill="#1D1D1B"/>
-                        <path d="M107.133 170.859L128.154 165.098V179.268L107.133 185.029V213.37L93.1182 217.224V146.412L135.2 134.889V149.059L107.133 156.728V170.898V170.859Z" fill="white"/>
-                        <path d="M142.208 154.198L149.215 152.29V145.205L156.222 143.298V136.213L163.229 134.305V127.22L170.236 125.313V132.398L177.244 130.49V137.575L184.251 135.668V142.753L191.258 140.845V190.402L177.244 194.256V180.086L156.222 185.847V200.017L142.208 203.871V154.315V154.198ZM156.222 171.599L177.244 165.838V151.667L170.236 153.575V146.49L163.229 148.397V155.483L156.222 157.39V171.56V171.599Z" fill="white"/>
-                        <path d="M233.341 157.546L247.355 153.692V167.862L240.348 169.769V176.854L205.273 186.47V179.385L198.266 181.292V124.651L205.273 122.743V115.658L240.348 106.043V113.128L247.355 111.22V125.39L233.341 129.244V122.159L219.326 126.013V133.098L212.319 135.006V163.346L219.326 161.439V168.524L233.341 164.67V157.585V157.546Z" fill="white"/>
-                        <path d="M254.401 102.228L268.416 98.3736V169.185L254.401 173.039V102.228Z" fill="white"/>
-                        <path d="M289.437 149.293L310.459 143.531V157.701L275.384 167.317V96.466L289.398 92.6121V149.254L289.437 149.293Z" fill="white"/>
-                        <path d="M331.52 137.77L359.587 130.101V144.271L317.505 155.794V84.9431L359.587 73.4201V87.5902L331.52 95.2593V109.429L352.541 103.668V117.838L331.52 123.6V137.77Z" fill="white"/>
+                        <g clip-path="url(#clip0_hero)">
+                            <path class="logo-letter logo-top" style="--i:0" d="M-1.14092e-05 126.364L14.0144 122.51V129.595L35.0361 123.833V109.663L6.96828 117.332V110.247L-0.0389404 112.155V83.8142L6.96828 81.9067V74.8216L42.0433 65.2061V72.2912L49.0506 70.3837V84.5538L35.0361 88.4078V81.3227L14.0144 87.0842V101.254L42.0823 93.5854V100.67L49.0895 98.7629V127.103L42.0823 129.011V136.096L7.00721 145.711V138.626L-1.14092e-05 140.534V126.364Z" fill="#1D1D1B"/>
+                            <path class="logo-letter logo-top" style="--i:1" d="M70.1111 71.7462L56.0966 75.6002V61.43L98.1789 49.907V64.0772L84.1644 67.9312V124.573L70.15 128.427V71.7852L70.1111 71.7462Z" fill="#1D1D1B"/>
+                            <path class="logo-letter logo-top" style="--i:2" d="M133.254 89.8871L140.261 87.9796V38.423L154.276 34.569V98.2958L147.269 100.203V107.288L112.194 116.904V109.819L105.186 111.726V47.9995L119.201 44.1455V93.7022L126.208 91.7947V98.8797L133.215 96.9722V89.8871H133.254Z" fill="#1D1D1B"/>
+                            <path class="logo-letter logo-top" style="--i:3" d="M161.283 32.6226L203.365 21.0996V28.1847L210.372 26.2771V82.9189L203.365 84.8264V91.9115L161.283 103.434V32.6226ZM189.351 74.5102L196.358 72.6027V44.2623L189.351 46.1699V39.0848L175.336 42.9388V85.4103L189.351 81.5564V74.4713V74.5102Z" fill="#1D1D1B"/>
+                            <path class="logo-letter logo-top" style="--i:4" d="M217.38 17.2845L231.394 13.4306V84.2424L217.38 88.0964V17.2845Z" fill="#1D1D1B"/>
+                            <path class="logo-letter logo-top" style="--i:5" d="M238.44 18.6081L245.448 16.7006V9.61547L280.523 0V7.08508L287.53 5.17756V61.8193L280.523 63.7268V70.8119L245.448 80.4274V73.3423L238.44 75.2498V18.6081ZM266.469 53.4106L273.476 51.5031V23.1628L266.469 25.0703V17.9852L259.462 19.8927V26.9778L252.455 28.8853V57.2257L259.462 55.3181V62.4032L266.469 60.4957V53.4106Z" fill="#1D1D1B"/>
+                        </g>
+                        <g clip-path="url(#clip1_hero)">
+                            <path class="logo-block-bg" d="M85.6439 146.373L362.974 68.6708V146.568L85.6439 224.27V146.373Z" fill="#1D1D1B"/>
+                            <path class="logo-block-border" d="M355.188 78.9091V140.612L93.4296 213.993V152.29L355.188 78.9091ZM370.76 58.3935L77.858 140.456V234.508L370.76 152.446V58.3935Z" fill="#1D1D1B"/>
+                            <path class="logo-letter logo-bottom" style="--i:0" d="M107.133 170.859L128.154 165.098V179.268L107.133 185.029V213.37L93.1182 217.224V146.412L135.2 134.889V149.059L107.133 156.728V170.898V170.859Z" fill="white"/>
+                            <path class="logo-letter logo-bottom" style="--i:1" d="M142.208 154.198L149.215 152.29V145.205L156.222 143.298V136.213L163.229 134.305V127.22L170.236 125.313V132.398L177.244 130.49V137.575L184.251 135.668V142.753L191.258 140.845V190.402L177.244 194.256V180.086L156.222 185.847V200.017L142.208 203.871V154.315V154.198ZM156.222 171.599L177.244 165.838V151.667L170.236 153.575V146.49L163.229 148.397V155.483L156.222 157.39V171.56V171.599Z" fill="white"/>
+                            <path class="logo-letter logo-bottom" style="--i:2" d="M233.341 157.546L247.355 153.692V167.862L240.348 169.769V176.854L205.273 186.47V179.385L198.266 181.292V124.651L205.273 122.743V115.658L240.348 106.043V113.128L247.355 111.22V125.39L233.341 129.244V122.159L219.326 126.013V133.098L212.319 135.006V163.346L219.326 161.439V168.524L233.341 164.67V157.585V157.546Z" fill="white"/>
+                            <path class="logo-letter logo-bottom" style="--i:3" d="M254.401 102.228L268.416 98.3736V169.185L254.401 173.039V102.228Z" fill="white"/>
+                            <path class="logo-letter logo-bottom" style="--i:4" d="M289.437 149.293L310.459 143.531V157.701L275.384 167.317V96.466L289.398 92.6121V149.254L289.437 149.293Z" fill="white"/>
+                            <path class="logo-letter logo-bottom" style="--i:5" d="M331.52 137.77L359.587 130.101V144.271L317.505 155.794V84.9431L359.587 73.4201V87.5902L331.52 95.2593V109.429L352.541 103.668V117.838L331.52 123.6V137.77Z" fill="white"/>
+                        </g>
+                        <defs>
+                            <clipPath id="clip0_hero">
+                                <rect width="287.491" height="145.672" fill="white"/>
+                            </clipPath>
+                            <clipPath id="clip1_hero">
+                                <rect width="292.902" height="176.115" fill="white" transform="translate(77.858 58.3935)"/>
+                            </clipPath>
+                        </defs>
                     </svg>
                 </div>
                 
-                <h1 class="hero__title animate-in animate-delay-1">
-                    Ta landing page<br><span class="serif-accent">livrée en 7 jours</span>
+                <h1 class="hero__title" id="heroTitle">
+                    Ta landing page<br>
+                    <span class="serif-accent">livrée en 7 jours</span>
+                    <span class="hero__tooltip" id="heroTooltip">On fait aussi les brandings en vrai</span>
                 </h1>
                 
-                <p class="hero__subtitle animate-in animate-delay-2">
+                <p class="hero__subtitle">
                     Design sur-mesure, code propre, pensé conversion.<br>Sans les réunions à rallonge.
                 </p>
                 
-                <div class="hero__actions animate-in animate-delay-3">
-                    <a href="#contact" class="btn btn--primary">Tester mon éligibilité</a>
-                    <a href="#features" class="btn btn--secondary">Comment ça marche</a>
-                </div>
-                
-                <!-- Trust badges style Defacto -->
-                <div class="trust-badges animate-in animate-delay-4">
-                    <div class="trust-badge">
-                        <span class="trust-badge__icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"><path d="M10 1C9.44772 1 9 1.44772 9 2C9 2.55228 9.44772 3 10 3H14C14.5523 3 15 2.55228 15 2C15 1.44772 14.5523 1 14 1H10Z" fill="currentColor"/><path fill-rule="evenodd" clip-rule="evenodd" d="M21 13C21 17.9706 16.9706 22 12 22C7.02944 22 3 17.9706 3 13C3 8.02944 7.02944 4 12 4C16.9706 4 21 8.02944 21 13ZM8.29289 10.7071C7.90237 10.3166 7.90237 9.68342 8.29289 9.29289C8.68342 8.90237 9.31658 8.90237 9.70711 9.29289L12.7071 12.2929C13.0976 12.6834 13.0976 13.3166 12.7071 13.7071C12.3166 14.0976 11.6834 14.0976 11.2929 13.7071L8.29289 10.7071Z" fill="currentColor"/></svg></span>
-                        <span class="trust-badge__text">Livré en 7 jours</span>
-                    </div>
-                    <div class="trust-badge">
-                        <span class="trust-badge__icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"><path d="M11 2C11.5523 2 12 2.44772 12 3V4.5C12 5.05228 11.5523 5.5 11 5.5C10.4477 5.5 10 5.05228 10 4.5V3C10 2.44772 10.4477 2 11 2Z" fill="currentColor"/><path d="M17.3634 4.63582C17.7539 5.02634 17.7539 5.65951 17.3634 6.05003L16.3027 7.11069C15.9122 7.50122 15.279 7.50122 14.8885 7.11069C14.498 6.72017 14.498 6.087 14.8885 5.69648L15.9491 4.63582C16.3397 4.24529 16.9728 4.24529 17.3634 4.63582Z" fill="currentColor"/><path d="M7.1114 16.303C7.50193 15.9124 7.50193 15.2793 7.1114 14.8887C6.72088 14.4982 6.08771 14.4982 5.69719 14.8887L4.63653 15.9494C4.24601 16.3399 4.24601 16.9731 4.63653 17.3636C5.02705 17.7541 5.66022 17.7541 6.05074 17.3636L7.1114 16.303Z" fill="currentColor"/><path d="M5.5 11C5.5 11.5523 5.05228 12 4.5 12H3C2.44772 12 2 11.5523 2 11C2 10.4477 2.44772 10 3 10H4.5C5.05228 10 5.5 10.4477 5.5 11Z" fill="currentColor"/><path d="M5.69704 7.1114C6.08756 7.50193 6.72073 7.50193 7.11125 7.1114C7.50178 6.72088 7.50178 6.08771 7.11125 5.69719L6.05059 4.63653C5.66007 4.24601 5.0269 4.24601 4.63638 4.63653C4.24585 5.02705 4.24585 5.66022 4.63638 6.05074L5.69704 7.1114Z" fill="currentColor"/><path d="M10.856 9.56554C10.4878 9.42527 10.0715 9.5143 9.79292 9.79292C9.5143 10.0715 9.42527 10.4878 9.56554 10.856L13.5655 21.356C13.7007 21.7108 14.025 21.9584 14.4029 21.9953C14.7807 22.0322 15.1468 21.8519 15.348 21.53L17.7257 17.7257L21.53 15.348C21.8519 15.1468 22.0322 14.7807 21.9953 14.4029C21.9584 14.025 21.7108 13.7007 21.356 13.5655L10.856 9.56554Z" fill="currentColor"/></svg></span>
-                        <span class="trust-badge__text">Pensé conversion</span>
-                    </div>
-                    <div class="trust-badge">
-                        <span class="trust-badge__icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"><path fill-rule="evenodd" clip-rule="evenodd" d="M3 4C3 3.44772 3.44772 3 4 3H20C20.5523 3 21 3.44772 21 4V20C21 20.5523 20.5523 21 20 21H4C3.44772 21 3 20.5523 3 20V4ZM10.7071 8.79289C11.0976 9.18342 11.0976 9.81658 10.7071 10.2071L8.91421 12L10.7071 13.7929C11.0976 14.1834 11.0976 14.8166 10.7071 15.2071C10.3166 15.5976 9.68342 15.5976 9.29289 15.2071L6.79289 12.7071C6.60536 12.5196 6.5 12.2652 6.5 12C6.5 11.7348 6.60536 11.4804 6.79289 11.2929L9.29289 8.79289C9.68342 8.40237 10.3166 8.40237 10.7071 8.79289ZM14.7071 8.79289C14.3166 8.40237 13.6834 8.40237 13.2929 8.79289C12.9024 9.18342 12.9024 9.81658 13.2929 10.2071L15.0858 12L13.2929 13.7929C12.9024 14.1834 12.9024 14.8166 13.2929 15.2071C13.6834 15.5976 14.3166 15.5976 14.7071 15.2071L17.2071 12.7071C17.3946 12.5196 17.5 12.2652 17.5 12C17.5 11.7348 17.3946 11.4804 17.2071 11.2929L14.7071 8.79289Z" fill="currentColor"/></svg></span>
-                        <span class="trust-badge__text">Code propre</span>
-                    </div>
+                <div class="hero__actions">
+                    <a href="#contact" class="btn btn--primary"><span class="btn-text-wrap"><span class="btn-text-wrap__main">Booker un call →</span><span class="btn-text-wrap__clone">Booker un call →</span></span></a>
+                    <a href="#process" class="btn btn--secondary"><span class="btn-text-wrap"><span class="btn-text-wrap__main">Comment ça marche</span><span class="btn-text-wrap__clone">Comment ça marche</span></span></a>
                 </div>
             </div>
         </div>
     </section>
     
-    <!-- STATS -->
-    <section class="stats">
+    <!-- STATS with animated counters -->
+    <section class="stats" id="stats">
         <div class="container">
             <div class="stats__grid">
-                <div class="stat">
-                    <div class="stat__number">50+</div>
-                    <div class="stat__label">landing pages livrées</div>
-                </div>
-                <div class="stat">
-                    <div class="stat__number">7j</div>
+                <div class="stat" data-target="7" data-suffix=" jours">
+                    <div class="stat__number">7 jours</div>
                     <div class="stat__label">délai moyen</div>
                 </div>
-                <div class="stat">
+                <div class="stat" data-target="50" data-suffix="+">
+                    <div class="stat__number">50+</div>
+                    <div class="stat__label">pages livrées</div>
+                </div>
+                <div class="stat" data-target="100" data-suffix="%">
                     <div class="stat__number">100%</div>
                     <div class="stat__label">clients satisfaits</div>
                 </div>
@@ -1301,151 +1564,389 @@
         </div>
     </section>
     
-    <!-- BENTO -->
-    <section class="section">
-        <div class="container">
-            <div class="bento">
-                <div class="bento-card" style="position:relative;overflow:hidden;">
-                    <div style="position:absolute;inset:0;background-image:url('design-system/images/studio-facile-fuite.png');background-size:cover;background-position:center;"></div>
-                    <div style="position:absolute;inset:0;background:rgba(0,0,0,0.55);"></div>
-                    <div class="bento-card__icon" style="position:relative;z-index:1;">
-                        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M12 2L2 7L12 12L22 7L12 2Z"/>
-                            <path d="M2 17L12 22L22 17"/>
-                            <path d="M2 12L12 17L22 12"/>
-                        </svg>
-                    </div>
-                    <div class="bento-card__illustration" style="position:relative;z-index:1;">
-                        <img src="/mnt/user-data/uploads/1769821249597_image.png" alt="Illustration pixel art" style="max-height: 180px;">
-                    </div>
-                    <p class="bento-card__text" style="position:relative;z-index:1;color:var(--color-white);">Tu nous brief en 30 min. On revient avec une maquette sous 48h.</p>
-                </div>
-
-                <div class="bento-card">
-                    <div class="bento-card__icon">
-                        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M12 2L2 7L12 12L22 7L12 2Z"/>
-                            <path d="M2 17L12 22L22 17"/>
-                            <path d="M2 12L12 17L22 12"/>
-                        </svg>
-                    </div>
-                    <div class="bento-card__illustration">
-                        <img src="/mnt/user-data/uploads/1769821249597_image.png" alt="Illustration pixel art" style="max-height: 180px;">
-                    </div>
-                    <p class="bento-card__text">On code, tu valides. Ta page est en ligne, prête à convertir.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-    
-    <!-- FEATURES -->
-    <section class="section section--gray" id="features">
+    <!-- RULES (Scroll-Stacking Cards) -->
+    <section class="rules" id="rules">
         <div class="container">
             <div class="section__header">
-                <span class="section__eyebrow">Ce qu'on fait</span>
-                <h2 class="section__title">Des pages qui <span class="serif-accent">convertissent</span></h2>
-                <p class="section__desc">Pas de fioritures. Chaque pixel a une raison d'exister.</p>
+                <span class="section__eyebrow">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z"/></svg>
+                    NOS 3 RÈGLES D'OR
+                </span>
+                <h2 class="section__title">Pourquoi ça <span class="serif-accent">marche</span></h2>
+                <p class="section__desc">Pas de bullshit. Juste ce qui compte vraiment.</p>
             </div>
-            
-            <div class="features__grid">
-                <div class="feature-card">
-                    <div class="feature-card__icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"><path d="M10 1C9.44772 1 9 1.44772 9 2C9 2.55228 9.44772 3 10 3H14C14.5523 3 15 2.55228 15 2C15 1.44772 14.5523 1 14 1H10Z" fill="#1D1D1B"/><path fill-rule="evenodd" clip-rule="evenodd" d="M21 13C21 17.9706 16.9706 22 12 22C7.02944 22 3 17.9706 3 13C3 8.02944 7.02944 4 12 4C16.9706 4 21 8.02944 21 13ZM8.29289 10.7071C7.90237 10.3166 7.90237 9.68342 8.29289 9.29289C8.68342 8.90237 9.31658 8.90237 9.70711 9.29289L12.7071 12.2929C13.0976 12.6834 13.0976 13.3166 12.7071 13.7071C12.3166 14.0976 11.6834 14.0976 11.2929 13.7071L8.29289 10.7071Z" fill="#1D1D1B"/></svg></div>
-                    <h3>Livré vite</h3>
-                    <p>5 à 10 jours ouvrés. Pas 3 mois de réunions pour choisir une couleur.</p>
+        </div>
+
+        <div class="rules__cards" id="rulesCards">
+            <!-- Card 1 -->
+            <div class="rule-card-wrap" data-index="0">
+                <div class="rule-card rule-card--1">
+                    <div class="rule-card__text">
+                        <span class="rule-card__label">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+                            RÈGLE #1
+                        </span>
+                        <h3 class="rule-card__title">Livré <span class="serif-accent">vite</span></h3>
+                        <p class="rule-card__desc">5 à 10 jours ouvrés. Pas de planning à 6 mois. Tu as ta page, tu commences à vendre.</p>
+                    </div>
+                    <div class="rule-card__icon-box rule-card__video-box">
+                        <video autoplay loop muted playsinline>
+                            <source src="./images/livre-vite.webm" type="video/webm">
+                        </video>
+                    </div>
                 </div>
-                <div class="feature-card">
-                    <div class="feature-card__icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"><path d="M11 2C11.5523 2 12 2.44772 12 3V4.5C12 5.05228 11.5523 5.5 11 5.5C10.4477 5.5 10 5.05228 10 4.5V3C10 2.44772 10.4477 2 11 2Z" fill="#1D1D1B"/><path d="M17.3634 4.63582C17.7539 5.02634 17.7539 5.65951 17.3634 6.05003L16.3027 7.11069C15.9122 7.50122 15.279 7.50122 14.8885 7.11069C14.498 6.72017 14.498 6.087 14.8885 5.69648L15.9491 4.63582C16.3397 4.24529 16.9728 4.24529 17.3634 4.63582Z" fill="#1D1D1B"/><path d="M7.1114 16.303C7.50193 15.9124 7.50193 15.2793 7.1114 14.8887C6.72088 14.4982 6.08771 14.4982 5.69719 14.8887L4.63653 15.9494C4.24601 16.3399 4.24601 16.9731 4.63653 17.3636C5.02705 17.7541 5.66022 17.7541 6.05074 17.3636L7.1114 16.303Z" fill="#1D1D1B"/><path d="M5.5 11C5.5 11.5523 5.05228 12 4.5 12H3C2.44772 12 2 11.5523 2 11C2 10.4477 2.44772 10 3 10H4.5C5.05228 10 5.5 10.4477 5.5 11Z" fill="#1D1D1B"/><path d="M5.69704 7.1114C6.08756 7.50193 6.72073 7.50193 7.11125 7.1114C7.50178 6.72088 7.50178 6.08771 7.11125 5.69719L6.05059 4.63653C5.66007 4.24601 5.0269 4.24601 4.63638 4.63653C4.24585 5.02705 4.24585 5.66022 4.63638 6.05074L5.69704 7.1114Z" fill="#1D1D1B"/><path d="M10.856 9.56554C10.4878 9.42527 10.0715 9.5143 9.79292 9.79292C9.5143 10.0715 9.42527 10.4878 9.56554 10.856L13.5655 21.356C13.7007 21.7108 14.025 21.9584 14.4029 21.9953C14.7807 22.0322 15.1468 21.8519 15.348 21.53L17.7257 17.7257L21.53 15.348C21.8519 15.1468 22.0322 14.7807 21.9953 14.4029C21.9584 14.025 21.7108 13.7007 21.356 13.5655L10.856 9.56554Z" fill="#1D1D1B"/></svg></div>
-                    <h3>Pensé conversion</h3>
-                    <p>Structure, hiérarchie, CTA. On applique ce qui marche.</p>
+            </div>
+
+            <!-- Card 2 -->
+            <div class="rule-card-wrap" data-index="1">
+                <div class="rule-card rule-card--2">
+                    <div class="rule-card__text">
+                        <span class="rule-card__label">RÈGLE #2</span>
+                        <h3 class="rule-card__title">Code <span class="serif-accent">propre</span></h3>
+                        <p class="rule-card__desc">Classes rangées, facile à maintenir. Tu reprends la main sans pleurer.</p>
+                    </div>
+                    <div class="rule-card__icon-box rule-card__video-box">
+                        <video autoplay loop muted playsinline>
+                            <source src="./images/code-propre.webm" type="video/webm">
+                        </video>
+                    </div>
                 </div>
-                <div class="feature-card">
-                    <div class="feature-card__icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"><path fill-rule="evenodd" clip-rule="evenodd" d="M3 4C3 3.44772 3.44772 3 4 3H20C20.5523 3 21 3.44772 21 4V20C21 20.5523 20.5523 21 20 21H4C3.44772 21 3 20.5523 3 20V4ZM10.7071 8.79289C11.0976 9.18342 11.0976 9.81658 10.7071 10.2071L8.91421 12L10.7071 13.7929C11.0976 14.1834 11.0976 14.8166 10.7071 15.2071C10.3166 15.5976 9.68342 15.5976 9.29289 15.2071L6.79289 12.7071C6.60536 12.5196 6.5 12.2652 6.5 12C6.5 11.7348 6.60536 11.4804 6.79289 11.2929L9.29289 8.79289C9.68342 8.40237 10.3166 8.40237 10.7071 8.79289ZM14.7071 8.79289C14.3166 8.40237 13.6834 8.40237 13.2929 8.79289C12.9024 9.18342 12.9024 9.81658 13.2929 10.2071L15.0858 12L13.2929 13.7929C12.9024 14.1834 12.9024 14.8166 13.2929 15.2071C13.6834 15.5976 14.3166 15.5976 14.7071 15.2071L17.2071 12.7071C17.3946 12.5196 17.5 12.2652 17.5 12C17.5 11.7348 17.3946 11.4804 17.2071 11.2929L14.7071 8.79289Z" fill="#1D1D1B"/></svg></div>
-                    <h3>Code propre</h3>
-                    <p>Classes rangées, facile à maintenir. Tu reprends la main sans pleurer.</p>
+            </div>
+
+            <!-- Card 3 -->
+            <div class="rule-card-wrap" data-index="2">
+                <div class="rule-card rule-card--3">
+                    <div class="rule-card__text">
+                        <span class="rule-card__label">RÈGLE #3</span>
+                        <h3 class="rule-card__title">Pensé <span class="serif-accent">conversion</span></h3>
+                        <p class="rule-card__desc">On applique ce qui marche. Pas des tendances design, des patterns qui convertissent.</p>
+                    </div>
+                    <div class="rule-card__icon-box rule-card__video-box">
+                        <video autoplay loop muted playsinline>
+                            <source src="./images/conversion.webm" type="video/webm">
+                        </video>
+                    </div>
                 </div>
-                <div class="feature-card">
-                    <div class="feature-card__icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"><path fill-rule="evenodd" clip-rule="evenodd" d="M5 2C5 1.44772 5.44772 1 6 1H18C18.5523 1 19 1.44772 19 2V22C19 22.5523 18.5523 23 18 23H6C5.44772 23 5 22.5523 5 22V2ZM10 18C9.44772 18 9 18.4477 9 19C9 19.5523 9.44772 20 10 20H14C14.5523 20 15 19.5523 15 19C15 18.4477 14.5523 18 14 18H10Z" fill="#1D1D1B"/></svg></div>
-                    <h3>Responsive</h3>
-                    <p>Mobile, tablette, desktop. Tes visiteurs convertissent partout.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- TESTIMONIALS -->
+    <section class="testimonials" id="portfolio">
+        <div class="container">
+            <div class="section__header">
+                <span class="section__eyebrow" style="background: var(--color-black); color: var(--color-yellow);">TÉMOIGNAGES</span>
+                <h2 class="section__title">Ce qu'ils en <span class="serif-accent">disent</span></h2>
+                <p class="section__desc">Des entrepreneurs qui nous ont fait confiance. Et qui recommandent.</p>
+            </div>
+
+            <div class="testimonials__columns">
+                <!-- Column 1 -->
+                <div class="testimonials__column testimonials__column--1">
+                    <div class="testimonials__column-inner" style="--scroll-duration: 30s;">
+                        <div class="testimonials__card">
+                            <p class="testimonials__card-text">"On avait besoin d'une landing page qui convertit, pas juste d'un joli design. Résultat : +140% de leads en 3 semaines."</p>
+                            <div class="testimonials__card-footer">
+                                <img class="testimonials__card-avatar" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&q=80&w=150&h=150" alt="Camille Renaud">
+                                <div>
+                                    <div class="testimonials__card-name">Camille Renaud</div>
+                                    <div class="testimonials__card-role">CEO, Bloom Studio</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="testimonials__card">
+                            <p class="testimonials__card-text">"Livré en 5 jours. Le code est propre, rapide, et on a pu itérer sans refaire tout le site. Exactement ce qu'on cherchait."</p>
+                            <div class="testimonials__card-footer">
+                                <img class="testimonials__card-avatar" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&q=80&w=150&h=150" alt="Thomas Girard">
+                                <div>
+                                    <div class="testimonials__card-name">Thomas Girard</div>
+                                    <div class="testimonials__card-role">CTO, FastTrack</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="testimonials__card">
+                            <p class="testimonials__card-text">"Le process est limpide. Brief, maquette, code, live. Pas de réunions inutiles, pas de surprises sur la facture."</p>
+                            <div class="testimonials__card-footer">
+                                <img class="testimonials__card-avatar" src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&q=80&w=150&h=150" alt="Sophie Marchand">
+                                <div>
+                                    <div class="testimonials__card-name">Sophie Marchand</div>
+                                    <div class="testimonials__card-role">Fondatrice, FitPulse</div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Duplicated for infinite scroll -->
+                        <div class="testimonials__card">
+                            <p class="testimonials__card-text">"On avait besoin d'une landing page qui convertit, pas juste d'un joli design. Résultat : +140% de leads en 3 semaines."</p>
+                            <div class="testimonials__card-footer">
+                                <img class="testimonials__card-avatar" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&q=80&w=150&h=150" alt="Camille Renaud">
+                                <div>
+                                    <div class="testimonials__card-name">Camille Renaud</div>
+                                    <div class="testimonials__card-role">CEO, Bloom Studio</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="testimonials__card">
+                            <p class="testimonials__card-text">"Livré en 5 jours. Le code est propre, rapide, et on a pu itérer sans refaire tout le site. Exactement ce qu'on cherchait."</p>
+                            <div class="testimonials__card-footer">
+                                <img class="testimonials__card-avatar" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&q=80&w=150&h=150" alt="Thomas Girard">
+                                <div>
+                                    <div class="testimonials__card-name">Thomas Girard</div>
+                                    <div class="testimonials__card-role">CTO, FastTrack</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="testimonials__card">
+                            <p class="testimonials__card-text">"Le process est limpide. Brief, maquette, code, live. Pas de réunions inutiles, pas de surprises sur la facture."</p>
+                            <div class="testimonials__card-footer">
+                                <img class="testimonials__card-avatar" src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&q=80&w=150&h=150" alt="Sophie Marchand">
+                                <div>
+                                    <div class="testimonials__card-name">Sophie Marchand</div>
+                                    <div class="testimonials__card-role">Fondatrice, FitPulse</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Column 2 -->
+                <div class="testimonials__column testimonials__column--2">
+                    <div class="testimonials__column-inner" style="--scroll-duration: 38s;">
+                        <div class="testimonials__card">
+                            <p class="testimonials__card-text">"Notre taux de conversion a doublé. La page est pensée pour vendre, pas juste pour être jolie. C'est exactement la différence."</p>
+                            <div class="testimonials__card-footer">
+                                <img class="testimonials__card-avatar" src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=150&h=150" alt="Mehdi Bensalem">
+                                <div>
+                                    <div class="testimonials__card-name">Mehdi Bensalem</div>
+                                    <div class="testimonials__card-role">CMO, NeoBank</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="testimonials__card">
+                            <p class="testimonials__card-text">"J'ai bossé avec des agences à 15k€. Ici c'est mieux, plus rapide, et sans le bullshit. Je recommande les yeux fermés."</p>
+                            <div class="testimonials__card-footer">
+                                <img class="testimonials__card-avatar" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=150&h=150" alt="Léa Fontaine">
+                                <div>
+                                    <div class="testimonials__card-name">Léa Fontaine</div>
+                                    <div class="testimonials__card-role">Directrice, Le Comptoir</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="testimonials__card">
+                            <p class="testimonials__card-text">"Score Lighthouse 98. Temps de chargement sous la seconde. Et surtout : les visiteurs restent et achètent."</p>
+                            <div class="testimonials__card-footer">
+                                <img class="testimonials__card-avatar" src="https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&q=80&w=150&h=150" alt="Inès Dupont">
+                                <div>
+                                    <div class="testimonials__card-name">Inès Dupont</div>
+                                    <div class="testimonials__card-role">Growth Lead, Finway</div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Duplicated for infinite scroll -->
+                        <div class="testimonials__card">
+                            <p class="testimonials__card-text">"Notre taux de conversion a doublé. La page est pensée pour vendre, pas juste pour être jolie. C'est exactement la différence."</p>
+                            <div class="testimonials__card-footer">
+                                <img class="testimonials__card-avatar" src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=150&h=150" alt="Mehdi Bensalem">
+                                <div>
+                                    <div class="testimonials__card-name">Mehdi Bensalem</div>
+                                    <div class="testimonials__card-role">CMO, NeoBank</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="testimonials__card">
+                            <p class="testimonials__card-text">"J'ai bossé avec des agences à 15k€. Ici c'est mieux, plus rapide, et sans le bullshit. Je recommande les yeux fermés."</p>
+                            <div class="testimonials__card-footer">
+                                <img class="testimonials__card-avatar" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=150&h=150" alt="Léa Fontaine">
+                                <div>
+                                    <div class="testimonials__card-name">Léa Fontaine</div>
+                                    <div class="testimonials__card-role">Directrice, Le Comptoir</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="testimonials__card">
+                            <p class="testimonials__card-text">"Score Lighthouse 98. Temps de chargement sous la seconde. Et surtout : les visiteurs restent et achètent."</p>
+                            <div class="testimonials__card-footer">
+                                <img class="testimonials__card-avatar" src="https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&q=80&w=150&h=150" alt="Inès Dupont">
+                                <div>
+                                    <div class="testimonials__card-name">Inès Dupont</div>
+                                    <div class="testimonials__card-role">Growth Lead, Finway</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Column 3 -->
+                <div class="testimonials__column testimonials__column--3">
+                    <div class="testimonials__column-inner" style="--scroll-duration: 34s;">
+                        <div class="testimonials__card">
+                            <p class="testimonials__card-text">"Ils ont compris notre besoin en 30 minutes de brief. Deux jours après, la maquette était parfaite. Aucune retouche."</p>
+                            <div class="testimonials__card-footer">
+                                <img class="testimonials__card-avatar" src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&q=80&w=150&h=150" alt="Antoine Moreau">
+                                <div>
+                                    <div class="testimonials__card-name">Antoine Moreau</div>
+                                    <div class="testimonials__card-role">Fondateur, Kairos</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="testimonials__card">
+                            <p class="testimonials__card-text">"On a lancé notre SaaS avec leur landing page. 200 inscrits beta en une semaine. Le ROI est immédiat."</p>
+                            <div class="testimonials__card-footer">
+                                <img class="testimonials__card-avatar" src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&q=80&w=150&h=150" alt="Clara Vidal">
+                                <div>
+                                    <div class="testimonials__card-name">Clara Vidal</div>
+                                    <div class="testimonials__card-role">Product Manager, Hive</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="testimonials__card">
+                            <p class="testimonials__card-text">"Le SEO technique est impeccable dès la livraison. Pas besoin de repasser derrière. C'est rare et appréciable."</p>
+                            <div class="testimonials__card-footer">
+                                <img class="testimonials__card-avatar" src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&q=80&w=150&h=150" alt="Yann Lefèvre">
+                                <div>
+                                    <div class="testimonials__card-name">Yann Lefèvre</div>
+                                    <div class="testimonials__card-role">SEO Lead, Rankify</div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Duplicated for infinite scroll -->
+                        <div class="testimonials__card">
+                            <p class="testimonials__card-text">"Ils ont compris notre besoin en 30 minutes de brief. Deux jours après, la maquette était parfaite. Aucune retouche."</p>
+                            <div class="testimonials__card-footer">
+                                <img class="testimonials__card-avatar" src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&q=80&w=150&h=150" alt="Antoine Moreau">
+                                <div>
+                                    <div class="testimonials__card-name">Antoine Moreau</div>
+                                    <div class="testimonials__card-role">Fondateur, Kairos</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="testimonials__card">
+                            <p class="testimonials__card-text">"On a lancé notre SaaS avec leur landing page. 200 inscrits beta en une semaine. Le ROI est immédiat."</p>
+                            <div class="testimonials__card-footer">
+                                <img class="testimonials__card-avatar" src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&q=80&w=150&h=150" alt="Clara Vidal">
+                                <div>
+                                    <div class="testimonials__card-name">Clara Vidal</div>
+                                    <div class="testimonials__card-role">Product Manager, Hive</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="testimonials__card">
+                            <p class="testimonials__card-text">"Le SEO technique est impeccable dès la livraison. Pas besoin de repasser derrière. C'est rare et appréciable."</p>
+                            <div class="testimonials__card-footer">
+                                <img class="testimonials__card-avatar" src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&q=80&w=150&h=150" alt="Yann Lefèvre">
+                                <div>
+                                    <div class="testimonials__card-name">Yann Lefèvre</div>
+                                    <div class="testimonials__card-role">SEO Lead, Rankify</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
     
-    <!-- PROCESS -->
-    <section class="section">
+    <!-- PROCESS - Accordion -->
+    <section class="process" id="process">
         <div class="container">
             <div class="section__header">
                 <span class="section__eyebrow">Comment ça marche</span>
-                <h2 class="section__title">Un process <span class="serif-accent">simple</span></h2>
-                <p class="section__desc">Pas de bullshit. Du brief à la mise en ligne en quelques jours.</p>
+                <h2 class="section__title">Du brief au <span class="serif-accent">live</span></h2>
+                <p class="section__desc">Pas de bullshit. Un process en 4 étapes, transparent et rapide.</p>
             </div>
             
-            <div class="process__grid">
-                <div class="process-step">
-                    <div class="process-step__number">1</div>
-                    <div class="process-step__line"></div>
-                    <h3>Brief</h3>
-                    <p>Call de 30 min. Tu montres des exemples qui te parlent.</p>
+            <div class="process__accordion" id="processAccordion">
+                <!-- LEFT: Visual panels (placeholder for images) -->
+                <div class="process__visual">
+                    <div class="process__visual-panel process__visual-panel--1 is-active" data-panel="0">
+                        <span class="process__visual-panel-number">01</span>
+                        <div class="process__visual-panel-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.362 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.338 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/>
+                            </svg>
+                        </div>
+                        <h4 class="process__visual-panel-title">Brief</h4>
+                        <span class="process__visual-panel-meta">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"/>
+                                <polyline points="12 6 12 12 16 14"/>
+                            </svg>
+                            30 minutes
+                        </span>
+                    </div>
+                    
+                    <div class="process__visual-panel process__visual-panel--2" data-panel="1">
+                        <span class="process__visual-panel-number">02</span>
+                        <div class="process__visual-panel-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+                                <circle cx="8.5" cy="8.5" r="1.5"/>
+                                <polyline points="21 15 16 10 5 21"/>
+                            </svg>
+                        </div>
+                        <h4 class="process__visual-panel-title">Maquette</h4>
+                        <span class="process__visual-panel-meta">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"/>
+                                <polyline points="12 6 12 12 16 14"/>
+                            </svg>
+                            48 heures
+                        </span>
+                    </div>
+                    
+                    <div class="process__visual-panel process__visual-panel--3" data-panel="2">
+                        <span class="process__visual-panel-number">03</span>
+                        <div class="process__visual-panel-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                <polyline points="16 18 22 12 16 6"/>
+                                <polyline points="8 6 2 12 8 18"/>
+                            </svg>
+                        </div>
+                        <h4 class="process__visual-panel-title">Développement</h4>
+                        <span class="process__visual-panel-meta">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"/>
+                                <polyline points="12 6 12 12 16 14"/>
+                            </svg>
+                            5 jours
+                        </span>
+                    </div>
+                    
+                    <div class="process__visual-panel process__visual-panel--4" data-panel="3">
+                        <span class="process__visual-panel-number">04</span>
+                        <div class="process__visual-panel-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                <polyline points="22 4 12 14.01 9 11.01"/>
+                            </svg>
+                        </div>
+                        <h4 class="process__visual-panel-title">C'est live 🚀</h4>
+                        <a href="#contact" class="process__visual-panel-cta">Lancer mon projet →</a>
+                    </div>
                 </div>
-                <div class="process-step">
-                    <div class="process-step__number">2</div>
-                    <div class="process-step__line"></div>
-                    <h3>Maquette</h3>
-                    <p>On te livre une maquette en 48h. Tu valides ou on ajuste.</p>
-                </div>
-                <div class="process-step">
-                    <div class="process-step__number">3</div>
-                    <div class="process-step__line"></div>
-                    <h3>Dev</h3>
-                    <p>On code ta landing. Propre, responsive, optimisée.</p>
-                </div>
-                <div class="process-step">
-                    <div class="process-step__number">4</div>
-                    <h3>Live</h3>
-                    <p>Ta page est en ligne. Tu commences à vendre.</p>
-                </div>
+                
+                <!-- RIGHT: Steps nav -->
+                <nav class="process__nav">
+                    <div class="process__step is-active" data-step="0">
+                        <h3 class="process__step-title">On se parle, tu nous montres ce qui t'inspire</h3>
+                        <p class="process__step-desc">Un call de 30 min pour comprendre ton business, tes objectifs, et ce qui te fait vibrer.</p>
+                    </div>
+                    <div class="process__step" data-step="1">
+                        <h3 class="process__step-title">On te livre une maquette en 48h</h3>
+                        <p class="process__step-desc">Tu valides ou on ajuste — pas de ping-pong infini, juste ce qu'il faut.</p>
+                    </div>
+                    <div class="process__step" data-step="2">
+                        <h3 class="process__step-title">On code, propre et responsive</h3>
+                        <p class="process__step-desc">Du code que tu peux reprendre sans pleurer — ou qu'on héberge pour toi.</p>
+                    </div>
+                    <div class="process__step" data-step="3">
+                        <h3 class="process__step-title">Ta page est live, tu commences à vendre</h3>
+                        <p class="process__step-desc">On reste dispo si besoin. Tu te concentres sur ton business.</p>
+                    </div>
+                </nav>
             </div>
         </div>
     </section>
     
-    <!-- PORTFOLIO -->
-    <section class="section section--gray" id="portfolio">
-        <div class="container">
-            <div class="section__header">
-                <span class="section__eyebrow">Portfolio</span>
-                <h2 class="section__title">Des pages <span class="serif-accent">en prod</span></h2>
-                <p class="section__desc">Pas des concepts Figma. Des vraies landing pages qui tournent.</p>
-            </div>
-            
-            <div class="portfolio__grid">
-                <div class="portfolio-item">
-                    <div class="portfolio-item__placeholder">
-                        <div class="portfolio-item__placeholder-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"><path d="M5 2C4.44772 2 4 2.44772 4 3V21C4 21.5523 4.44772 22 5 22H19C19.5523 22 20 21.5523 20 21V3C20 2.44772 19.5523 2 19 2H5Z" fill="#ABABAB"/></svg></div>
-                        <span class="text-sm">Projet à venir</span>
-                    </div>
-                </div>
-                <div class="portfolio-item">
-                    <div class="portfolio-item__placeholder">
-                        <div class="portfolio-item__placeholder-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"><path d="M5 2C4.44772 2 4 2.44772 4 3V21C4 21.5523 4.44772 22 5 22H19C19.5523 22 20 21.5523 20 21V3C20 2.44772 19.5523 2 19 2H5Z" fill="#ABABAB"/></svg></div>
-                        <span class="text-sm">Projet à venir</span>
-                    </div>
-                </div>
-                <div class="portfolio-item">
-                    <div class="portfolio-item__placeholder">
-                        <div class="portfolio-item__placeholder-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"><path d="M5 2C4.44772 2 4 2.44772 4 3V21C4 21.5523 4.44772 22 5 22H19C19.5523 22 20 21.5523 20 21V3C20 2.44772 19.5523 2 19 2H5Z" fill="#ABABAB"/></svg></div>
-                        <span class="text-sm">Projet à venir</span>
-                    </div>
-                </div>
-                <div class="portfolio-item">
-                    <div class="portfolio-item__placeholder">
-                        <div class="portfolio-item__placeholder-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"><path d="M5 2C4.44772 2 4 2.44772 4 3V21C4 21.5523 4.44772 22 5 22H19C19.5523 22 20 21.5523 20 21V3C20 2.44772 19.5523 2 19 2H5Z" fill="#ABABAB"/></svg></div>
-                        <span class="text-sm">Projet à venir</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
     
     <!-- PRICING -->
     <section class="section" id="pricing">
@@ -1470,9 +1971,9 @@
                         <li>1 révision</li>
                         <li>Livré en 5 jours</li>
                     </ul>
-                    <a href="#contact" class="btn btn--secondary">Choisir</a>
+                    <a href="#contact" class="btn btn--secondary"><span class="btn-text-wrap"><span class="btn-text-wrap__main">Choisir</span><span class="btn-text-wrap__clone">Choisir</span></span></a>
                 </div>
-                
+
                 <div class="pricing-card pricing-card--popular">
                     <div class="pricing-card__badge">Populaire</div>
                     <div class="pricing-card__name">Standard</div>
@@ -1488,7 +1989,7 @@
                         <li>Livré en 7 jours</li>
                         <li>Animations</li>
                     </ul>
-                    <a href="#contact" class="btn btn--primary">Choisir</a>
+                    <a href="#contact" class="btn btn--primary"><span class="btn-text-wrap"><span class="btn-text-wrap__main">Choisir</span><span class="btn-text-wrap__clone">Choisir</span></span></a>
                 </div>
                 
                 <div class="pricing-card">
@@ -1499,61 +2000,35 @@
                         <span class="pricing-card__period">/ projet</span>
                     </div>
                     <ul class="pricing-card__features">
-                        <li>Jusqu'à 3 pages</li>
-                        <li>Système complet</li>
-                        <li>5 révisions</li>
-                        <li>Livré en 14 jours</li>
-                        <li>Documentation</li>
+                        <li>Landing + 3 pages</li>
+                        <li>Design system complet</li>
+                        <li>Révisions illimitées</li>
+                        <li>Livré en 10 jours</li>
+                        <li>Support 30 jours</li>
                     </ul>
-                    <a href="#contact" class="btn btn--secondary">Choisir</a>
-                </div>
-            </div>
-        </div>
-    </section>
-    
-    <!-- TESTIMONIAL -->
-    <section class="section section--cream">
-        <div class="container">
-            <div class="section__header">
-                <span class="section__eyebrow">Témoignages</span>
-                <h2 class="section__title">Ce qu'ils en <span class="serif-accent">disent</span></h2>
-            </div>
-            
-            <div class="testimonial-card">
-                <div class="testimonial-card__content">
-                    <p class="testimonial-card__quote">On a lancé notre landing en 4 jours. Le taux de conversion a doublé dès le premier mois. Exactement ce qu'il nous fallait.</p>
-                    <div class="testimonial-card__author">
-                        <div class="testimonial-card__avatar">MD</div>
-                        <div>
-                            <div class="testimonial-card__name">Marie D.</div>
-                            <div class="testimonial-card__role">Fondatrice, Flowbase</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="testimonial-card__image">
-                    <!-- Placeholder image -->
+                    <a href="#contact" class="btn btn--secondary"><span class="btn-text-wrap"><span class="btn-text-wrap__main">Choisir</span><span class="btn-text-wrap__clone">Choisir</span></span></a>
                 </div>
             </div>
         </div>
     </section>
     
     <!-- FAQ -->
-    <section class="section" id="faq">
+    <section class="section section--gray" id="faq">
         <div class="container">
             <div class="section__header">
                 <span class="section__eyebrow">FAQ</span>
                 <h2 class="section__title">Questions <span class="serif-accent">fréquentes</span></h2>
             </div>
             
-            <div class="faq__list">
-                <div class="faq-item is-active">
+            <div class="faq__grid">
+                <div class="faq-item">
                     <button class="faq-item__question">
-                        <span>C'est quoi votre stack technique ?</span>
+                        <span>C'est quoi la stack technique ?</span>
                         <span class="faq-item__icon">+</span>
                     </button>
                     <div class="faq-item__answer">
                         <div class="faq-item__answer-inner">
-                            Principalement Webflow pour la rapidité et la maintenabilité. React/Next.js si tu as des besoins spécifiques. L'important c'est que tu puisses reprendre la main facilement.
+                            HTML/CSS vanilla ou Webflow selon tes besoins. React/Next.js si tu as des besoins spécifiques. L'important c'est que tu puisses reprendre la main facilement.
                         </div>
                     </div>
                 </div>
@@ -1595,11 +2070,11 @@
     </section>
     
     <!-- CTA FINAL -->
-    <section class="section section--dark cta-final" id="contact">
+    <section class="cta-final" id="contact">
         <div class="container">
             <h2>Prêt à <span class="serif-accent">lancer</span> ?</h2>
             <p class="lead">On en discute et on te fait une proposition sous 48h. Sans engagement.</p>
-            <a href="#" class="btn btn--yellow">Booker un call →</a>
+            <a href="#" class="btn btn--yellow"><span class="btn-text-wrap"><span class="btn-text-wrap__main">Booker un call →</span><span class="btn-text-wrap__clone">Booker un call →</span></span></a>
         </div>
     </section>
     
@@ -1608,26 +2083,15 @@
         <div class="container">
             <div class="footer__top">
                 <div class="footer__brand">
-                    <a href="#" class="footer__logo">
-                        <svg viewBox="0 0 371 235" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M-1.14092e-05 126.364L14.0144 122.51V129.595L35.0361 123.833V109.663L6.96828 117.332V110.247L-0.0389404 112.155V83.8142L6.96828 81.9067V74.8216L42.0433 65.2061V72.2912L49.0506 70.3837V84.5538L35.0361 88.4078V81.3227L14.0144 87.0842V101.254L42.0823 93.5854V100.67L49.0895 98.7629V127.103L42.0823 129.011V136.096L7.00721 145.711V138.626L-1.14092e-05 140.534V126.364Z"/>
-                            <path d="M70.1111 71.7462L56.0966 75.6002V61.43L98.1789 49.907V64.0772L84.1644 67.9312V124.573L70.15 128.427V71.7852L70.1111 71.7462Z"/>
-                            <path d="M133.254 89.8871L140.261 87.9796V38.423L154.276 34.569V98.2958L147.269 100.203V107.288L112.194 116.904V109.819L105.186 111.726V47.9995L119.201 44.1455V93.7022L126.208 91.7947V98.8797L133.215 96.9722V89.8871H133.254Z"/>
-                            <path d="M161.283 32.6226L203.365 21.0996V28.1847L210.372 26.2771V82.9189L203.365 84.8264V91.9115L161.283 103.434V32.6226ZM189.351 74.5102L196.358 72.6027V44.2623L189.351 46.1699V39.0848L175.336 42.9388V85.4103L189.351 81.5564V74.4713V74.5102Z"/>
-                            <path d="M217.38 17.2845L231.394 13.4306V84.2424L217.38 88.0964V17.2845Z"/>
-                            <path d="M238.44 18.6081L245.448 16.7006V9.61547L280.523 0V7.08508L287.53 5.17756V61.8193L280.523 63.7268V70.8119L245.448 80.4274V73.3423L238.44 75.2498V18.6081ZM266.469 53.4106L273.476 51.5031V23.1628L266.469 25.0703V17.9852L259.462 19.8927V26.9778L252.455 28.8853V57.2257L259.462 55.3181V62.4032L266.469 60.4957V53.4106Z"/>
-                            <path d="M85.6439 146.373L362.974 68.6708V146.568L85.6439 224.27V146.373Z"/>
-                            <path d="M355.188 78.9091V140.612L93.4296 213.993V152.29L355.188 78.9091ZM370.76 58.3935L77.858 140.456V234.508L370.76 152.446V58.3935Z"/>
-                        </svg>
-                    </a>
+                    <div class="footer__logo">Studio Facile</div>
                     <p class="footer__tagline">Landing pages sur-mesure, livrées en 7 jours. Sans les réunions à rallonge.</p>
                 </div>
                 
                 <div class="footer__links">
                     <div class="footer__col">
                         <h4>Navigation</h4>
-                        <a href="#features">Services</a>
-                        <a href="#portfolio">Portfolio</a>
+                        <a href="#rules">Services</a>
+                        <a href="#process">Process</a>
                         <a href="#pricing">Tarifs</a>
                         <a href="#faq">FAQ</a>
                     </div>
@@ -1640,19 +2104,133 @@
             </div>
             
             <div class="footer__bottom">
-                <div class="footer__legal">
-                    © 2026 Studio Facile · <a href="#">Mentions légales</a> · <a href="#">CGV</a>
-                </div>
+                © 2026 Studio Facile · <a href="#">Mentions légales</a> · <a href="#">CGV</a>
             </div>
         </div>
     </footer>
     
     <script>
+        // Hero title tooltip follows cursor
+        const heroTitle = document.getElementById('heroTitle');
+        const heroTooltip = document.getElementById('heroTooltip');
+        if (heroTitle && heroTooltip) {
+            heroTitle.addEventListener('mousemove', (e) => {
+                const rect = heroTitle.getBoundingClientRect();
+                const tw = heroTooltip.offsetWidth;
+                const th = heroTooltip.offsetHeight;
+                heroTooltip.style.left = (e.clientX - rect.left - tw) + 'px';
+                heroTooltip.style.top = (e.clientY - rect.top - th) + 'px';
+            });
+        }
+
         // Nav scroll effect
         const nav = document.getElementById('nav');
+        const sectionNav = document.getElementById('sectionNav');
+        
         window.addEventListener('scroll', () => {
             nav.classList.toggle('is-scrolled', window.scrollY > 50);
+            sectionNav.classList.toggle('is-visible', window.scrollY > 400);
         });
+        
+        // Section nav active state
+        const sections = document.querySelectorAll('section[id]');
+        const sectionNavItems = document.querySelectorAll('.section-nav__item');
+        
+        const observerOptions = {
+            root: null,
+            rootMargin: '-40% 0px -40% 0px',
+            threshold: 0
+        };
+        
+        const sectionObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const id = entry.target.id;
+                    sectionNavItems.forEach(item => {
+                        item.classList.toggle('is-active', item.dataset.section === id);
+                    });
+                }
+            });
+        }, observerOptions);
+        
+        sections.forEach(section => sectionObserver.observe(section));
+        
+        // Section nav click
+        sectionNavItems.forEach(item => {
+            item.addEventListener('click', () => {
+                const section = document.getElementById(item.dataset.section);
+                if (section) {
+                    section.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+        
+        // Process accordion
+        const processAccordion = document.getElementById('processAccordion');
+        const processSteps = document.querySelectorAll('.process__step');
+        const processPanels = document.querySelectorAll('.process__visual-panel');
+        
+        let processCurrentStep = 0;
+        let processTimer = null;
+        let processIsPaused = false;
+        const PROCESS_DURATION = 5000;
+        
+        function goToProcessStep(index) {
+            processSteps.forEach((step, i) => {
+                step.classList.remove('is-active', 'is-complete');
+                if (i < index) step.classList.add('is-complete');
+            });
+            
+            processPanels.forEach(panel => panel.classList.remove('is-active'));
+            
+            processSteps[index].classList.add('is-active');
+            processPanels[index].classList.add('is-active');
+            
+            processCurrentStep = index;
+        }
+        
+        function nextProcessStep() {
+            const next = (processCurrentStep + 1) % processSteps.length;
+            if (next === 0) {
+                processSteps.forEach(step => step.classList.remove('is-complete'));
+            }
+            goToProcessStep(next);
+        }
+        
+        function startProcessTimer() {
+            stopProcessTimer();
+            processTimer = setTimeout(() => {
+                if (!processIsPaused) {
+                    nextProcessStep();
+                    startProcessTimer();
+                }
+            }, PROCESS_DURATION);
+        }
+        
+        function stopProcessTimer() {
+            if (processTimer) {
+                clearTimeout(processTimer);
+                processTimer = null;
+            }
+        }
+        
+        processSteps.forEach((step, index) => {
+            step.addEventListener('click', () => {
+                goToProcessStep(index);
+                startProcessTimer();
+            });
+        });
+        
+        if (processAccordion) {
+            processAccordion.addEventListener('mouseenter', () => processIsPaused = true);
+            processAccordion.addEventListener('mouseleave', () => {
+                processIsPaused = false;
+                startProcessTimer();
+            });
+            
+            goToProcessStep(0);
+            startProcessTimer();
+        }
         
         // FAQ accordion
         document.querySelectorAll('.faq-item__question').forEach(btn => {
@@ -1664,7 +2242,7 @@
             });
         });
         
-        // Smooth scroll
+        // Smooth scroll for anchor links
         document.querySelectorAll('a[href^="#"]').forEach(a => {
             a.addEventListener('click', e => {
                 e.preventDefault();
@@ -1676,21 +2254,96 @@
         });
         
         // Scroll animations
-        const observer = new IntersectionObserver(entries => {
+        const animateOnScroll = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
-                    entry.target.style.opacity = '1';
-                    entry.target.style.transform = 'translateY(0)';
+                    entry.target.classList.add('is-visible');
                 }
             });
         }, { threshold: 0.1, rootMargin: '-50px' });
         
-        document.querySelectorAll('.feature-card, .pricing-card, .testimonial-card, .process-step, .portfolio-item, .bento-card, .stat').forEach(el => {
-            el.style.opacity = '0';
-            el.style.transform = 'translateY(30px)';
-            el.style.transition = 'all 0.6s cubic-bezier(0.33, 1, 0.68, 1)';
-            observer.observe(el);
+        document.querySelectorAll('.stat, .process-step, .rule-card, .testimonial-card, .pricing-card').forEach(el => {
+            animateOnScroll.observe(el);
         });
+        
+        // Animated counter for stats
+        const animateCounter = (el, target, suffix = '') => {
+            let current = 0;
+            const increment = target / 40;
+            const timer = setInterval(() => {
+                current += increment;
+                if (current >= target) {
+                    current = target;
+                    clearInterval(timer);
+                }
+                el.textContent = Math.floor(current) + suffix;
+            }, 30);
+        };
+        
+        const statsObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting && !entry.target.dataset.animated) {
+                    entry.target.dataset.animated = 'true';
+                    const numberEl = entry.target.querySelector('.stat__number');
+                    const target = parseInt(entry.target.dataset.target);
+                    const suffix = entry.target.dataset.suffix || '';
+                    animateCounter(numberEl, target, suffix);
+                }
+            });
+        }, { threshold: 0.5 });
+        
+        document.querySelectorAll('.stat').forEach(stat => statsObserver.observe(stat));
+
+        // Rules: stacking cards on scroll (creme.digital style)
+        // Each card is sticky with incremental top offsets.
+        // When a later card becomes sticky, previous cards scale down and dim.
+        if (window.innerWidth > 900) {
+            const ruleWraps = document.querySelectorAll('.rule-card-wrap');
+            const totalCards = ruleWraps.length;
+            const SCALE_PER_LEVEL = 0.05;
+            const DIM_PER_LEVEL = 0.25;
+
+            function updateStackingCards() {
+                // For each card, measure how close the NEXT card is to covering it.
+                // We use the distance between the next card's current top and its sticky top.
+                // When that distance is large, progress=0. When 0, progress=1 (fully covered).
+                const approachProgress = []; // how much card[i+1] is approaching card[i]
+
+                ruleWraps.forEach((wrap, i) => {
+                    if (i < totalCards - 1) {
+                        const nextWrap = ruleWraps[i + 1];
+                        const nextRect = nextWrap.getBoundingClientRect();
+                        const nextStickyTop = parseFloat(getComputedStyle(nextWrap).top);
+                        // Distance the next card still has to travel before becoming sticky
+                        const distanceToStick = nextRect.top - nextStickyTop;
+                        // Use 1.8x card height so shrink starts earlier (as soon as next card enters view)
+                        const cardHeight = wrap.querySelector('.rule-card').offsetHeight;
+                        const progress = Math.max(0, Math.min(1, 1 - distanceToStick / (cardHeight * 1.8)));
+                        approachProgress.push(progress);
+                    } else {
+                        approachProgress.push(0);
+                    }
+                });
+
+                ruleWraps.forEach((wrap, i) => {
+                    const card = wrap.querySelector('.rule-card');
+
+                    // Total effect = direct approach from next card + full levels from cards beyond
+                    let totalEffect = 0;
+                    for (let j = i; j < totalCards - 1; j++) {
+                        totalEffect += approachProgress[j];
+                    }
+
+                    const scale = 1 - SCALE_PER_LEVEL * totalEffect;
+                    const brightness = 1 - DIM_PER_LEVEL * totalEffect;
+                    card.style.transform = `scale(${Math.max(0.85, scale)})`;
+                    card.style.filter = `brightness(${Math.max(0.35, brightness)})`;
+                });
+            }
+
+            window.addEventListener('scroll', updateStackingCards, { passive: true });
+            updateStackingCards();
+        }
     </script>
 </body>
 </html>
